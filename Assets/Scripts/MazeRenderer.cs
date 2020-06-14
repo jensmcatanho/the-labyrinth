@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class MazeRenderer : MonoBehaviour {
 
-	[SerializeField]
-	private GameObject _maze;
-
 	public GameObject _wallPrefab;
 	public GameObject _chestPrefab;
 
-	void Awake() {
-		GetComponent<MazeLogic>()._mazeCreatedEvent.AddListener(RenderMaze);
-	}
+	private GameObject _maze;
 
-    void RenderMaze(Maze<Cell> maze) {
+	public void Render(Maze<Cell> maze) {
+		_maze = transform.parent.gameObject;
+
 		InstantiateFloor(maze);
-
 
 		for (int i = 0; i < maze.Length; i++) {
 			if (maze[i, i].HasWall(Wall.Left))
@@ -64,7 +60,7 @@ public class MazeRenderer : MonoBehaviour {
 		//Core.EventManager.Instance.QueueEvent(new Events.MazeRendered(mazeObject.GetComponent<Maze>()));
 	}
 
-	void InstantiateFloor(Maze<Cell> maze) {
+	private void InstantiateFloor(Maze<Cell> maze) {
 		GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
 
 		floor.transform.parent = _maze.transform;
@@ -72,7 +68,7 @@ public class MazeRenderer : MonoBehaviour {
 		floor.transform.position = new Vector3(maze.Length * maze.CellSize, 0, maze.Width * maze.CellSize);
 	}
 
-	void InstantiateWall(Maze<Cell> maze, Vector3 position, Vector3 rotation) {
+	private void InstantiateWall(Maze<Cell> maze, Vector3 position, Vector3 rotation) {
 		Quaternion r = Quaternion.identity;
 		r.eulerAngles = rotation;
 
