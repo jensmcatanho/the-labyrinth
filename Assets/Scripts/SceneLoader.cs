@@ -9,6 +9,7 @@ enum GameScene {
 
 public class SceneLoader : MonoBehaviour, IEventListener {
 
+    #region public methods
     public void AddListeners() {
         EventManager.Instance.AddListener<Events.StartButtonClicked>(LoadGame);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -17,7 +18,9 @@ public class SceneLoader : MonoBehaviour, IEventListener {
     public void RemoveListeners() {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
+    #endregion
 
+    #region private methods
     private void Awake() {
         AddListeners();
     }
@@ -47,6 +50,7 @@ public class SceneLoader : MonoBehaviour, IEventListener {
                 break;
         }
     }
+    #endregion
 }
 
 namespace Events {

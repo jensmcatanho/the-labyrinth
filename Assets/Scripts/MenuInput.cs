@@ -7,6 +7,7 @@ public class MenuInput : IEventListener {
 
     [SerializeField] private Button _startButton;
 
+    #region constructor
     public MenuInput(Button startButton) {
         _startButton = startButton;
 
@@ -16,7 +17,9 @@ public class MenuInput : IEventListener {
     ~MenuInput() {
         RemoveListeners();
     }
+    #endregion
 
+    #region public methods
     public void AddListeners() {
         _startButton.onClick.AddListener(OnStartButtonClicked);
     }
@@ -24,11 +27,13 @@ public class MenuInput : IEventListener {
     public void RemoveListeners() {
         _startButton.onClick.RemoveListener(OnStartButtonClicked);
     }
+    #endregion
 
+    #region private methods
     private void OnStartButtonClicked() {
         EventManager.Instance.QueueEvent(new Events.StartButtonClicked());
     }
-
+    #endregion
 }
 
 namespace Events {

@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class MazeRenderer : MonoBehaviour {
 
-	public GameObject _wallPrefab;
+    #region public variables
+    public GameObject _wallPrefab;
+
 	public GameObject _chestPrefab;
+    #endregion
 
-	private GameObject _maze;
+    private GameObject _maze;
 
-	public void Render(Maze<Cell> maze) {
+    #region public methods
+    public void Render(Maze<Cell> maze) {
 		_maze = transform.parent.gameObject;
 
 		InstantiateFloor(maze);
@@ -59,8 +63,10 @@ public class MazeRenderer : MonoBehaviour {
 		//CreateFinish(maze);
 		//Core.EventManager.Instance.QueueEvent(new Events.MazeRendered(mazeObject.GetComponent<Maze>()));
 	}
+    #endregion
 
-	private void InstantiateFloor(Maze<Cell> maze) {
+    #region private methods
+    private void InstantiateFloor(Maze<Cell> maze) {
 		GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
 
 		floor.transform.parent = _maze.transform;
@@ -76,6 +82,7 @@ public class MazeRenderer : MonoBehaviour {
 		wall.transform.parent = _maze.transform;
 		wall.transform.localScale *= maze.CellSize;
 	}
+    #endregion
 }
 
 

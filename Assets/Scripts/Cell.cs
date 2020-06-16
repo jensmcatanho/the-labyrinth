@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Numerics;
 
+#region enums
 [System.Flags]
 public enum Wall {
 	None = 0,
@@ -16,14 +17,19 @@ public enum CellType {
 	Entrance = 1 << 0,
 	Exit = 1 << 1
 }
+#endregion
 
 public abstract class Cell {
-	private CellType _type;
+
+    #region private variables
+    private CellType _type;
 
 	private Wall _walls;
 
 	private Vector2 _position;
+    #endregion
 
+    #region constructor
     public Cell(int x, int y, int size) {
 		_position = new Vector2(x, y);
 		Size = size;
@@ -31,7 +37,9 @@ public abstract class Cell {
 
 		SetAllWalls();
 	}
+	#endregion
 
+	#region public methods
 	public void SetAllWalls() {
 		SetWall(Wall.Left);
 		SetWall(Wall.Up);
@@ -114,4 +122,5 @@ public abstract class Cell {
 
 		return numWalls == 3;
 	}
+	#endregion
 }

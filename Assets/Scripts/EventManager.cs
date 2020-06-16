@@ -2,22 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
-
 public class EventManager : MonoBehaviour {
+
+    #region singleton
     static EventManager _instance = null;
-
-    public bool _limitQueueProcessing = false;
-    public float _queueProcessTime = 0.0f;
-    
-    private Queue _eventQueue = new Queue();
-
-    public delegate void EventDelegate<T>(T e) where T : GameEvent;
-    delegate void EventDelegate(GameEvent e);
-
-    Dictionary<System.Type, EventDelegate> _delegates = new Dictionary<System.Type, EventDelegate>();
-    Dictionary<System.Delegate, EventDelegate> _delegateLookup = new Dictionary<System.Delegate, EventDelegate>();
-    Dictionary<System.Delegate, System.Delegate> _onceLookups = new Dictionary<System.Delegate, System.Delegate>();
 
     public static EventManager Instance {
         get {
@@ -27,24 +15,27 @@ public class EventManager : MonoBehaviour {
             return _instance;
         }
     }
+    #endregion
 
-    private EventDelegate AddDelegate<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
-        // Check if this delegate is already registered
-        if (_delegateLookup.ContainsKey(eventDelegate))
-            return null;
+    public delegate void EventDelegate<T>(T e) where T : GameEvent;
 
-        // Create a new non-generic delegate which calls our generic one. This is the delegate we actually invoke.
-        EventDelegate internalDelegate = (e) => eventDelegate((T)e);
-        _delegateLookup[eventDelegate] = internalDelegate;
+    #region private members
+    [SerializeField] private bool _limitQueueProcessing = false;
 
-        if (_delegates.TryGetValue(typeof(T), out EventDelegate tempDelegate))
-            _delegates[typeof(T)] = tempDelegate += internalDelegate;
-        else
-            _delegates[typeof(T)] = internalDelegate;
+    [SerializeField] private float _queueProcessTime = 0.0f;
 
-        return internalDelegate;
-    }
+    private Dictionary<System.Type, EventDelegate> _delegates = new Dictionary<System.Type, EventDelegate>();
 
+    private Dictionary<System.Delegate, EventDelegate> _delegateLookup = new Dictionary<System.Delegate, EventDelegate>();
+    
+    private Dictionary<System.Delegate, System.Delegate> _onceLookups = new Dictionary<System.Delegate, System.Delegate>();
+    
+    private Queue _eventQueue = new Queue();
+
+    private delegate void EventDelegate(GameEvent e);
+    #endregion
+
+    #region public methods
     public void AddListener<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
         AddDelegate<T>(eventDelegate);
     }
@@ -121,6 +112,25 @@ public class EventManager : MonoBehaviour {
         _eventQueue.Enqueue(eventToQueue);
         return true;
     }
+    #endregion
+
+    #region private methods
+    private EventDelegate AddDelegate<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
+        // Check if this delegate is already registered
+        if (_delegateLookup.ContainsKey(eventDelegate))
+            return null;
+
+        // Create a new non-generic delegate which calls our generic one. This is the delegate we actually invoke.
+        EventDelegate internalDelegate = (e) => eventDelegate((T)e);
+        _delegateLookup[eventDelegate] = internalDelegate;
+
+        if (_delegates.TryGetValue(typeof(T), out EventDelegate tempDelegate))
+            _delegates[typeof(T)] = tempDelegate += internalDelegate;
+        else
+            _delegates[typeof(T)] = internalDelegate;
+
+        return internalDelegate;
+    }
 
     private void Awake() {
         if (_instance == null) {
@@ -155,4 +165,5 @@ public class EventManager : MonoBehaviour {
         _eventQueue.Clear();
         _instance = null;
     }
+    #endregion
 }
