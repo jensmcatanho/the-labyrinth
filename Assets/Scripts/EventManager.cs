@@ -57,6 +57,9 @@ public class EventManager : MonoBehaviour {
     }
 
     public void RemoveListener<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
+        if (_delegateLookup.Count == 0)
+            return;
+
         if (_delegateLookup.TryGetValue(eventDelegate, out EventDelegate internalDelegate)) {
             if (_delegates.TryGetValue(typeof(T), out EventDelegate tempDelegate)) {
                 tempDelegate -= internalDelegate;
@@ -117,6 +120,16 @@ public class EventManager : MonoBehaviour {
 
         _eventQueue.Enqueue(eventToQueue);
         return true;
+    }
+
+    private void Awake() {
+        if (_instance == null) {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        } else {
+            DestroyImmediate(gameObject);
+        }
     }
 
     //Every update cycle the queue is processed, if the queue processing is limited,

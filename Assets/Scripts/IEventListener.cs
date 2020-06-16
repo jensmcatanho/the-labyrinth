@@ -1,3 +1,4 @@
 ﻿public interface IEventListener {
-    void SetListeners();
+    void AddListeners();
+    void RemoveListeners();
 }

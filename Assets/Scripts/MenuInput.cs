@@ -10,19 +10,29 @@ public class MenuInput : IEventListener {
     public MenuInput(Button startButton) {
         _startButton = startButton;
 
-        SetListeners();
+        AddListeners();
     }
 
-    public void SetListeners() {
+    ~MenuInput() {
+        RemoveListeners();
+    }
+
+    public void AddListeners() {
         _startButton.onClick.AddListener(OnStartButtonClicked);
     }
 
+    public void RemoveListeners() {
+        _startButton.onClick.RemoveListener(OnStartButtonClicked);
+    }
+
     private void OnStartButtonClicked() {
-        EventManager.Instance.QueueEvent(new StartButtonClicked());
+        EventManager.Instance.QueueEvent(new Events.StartButtonClicked());
     }
 
 }
 
-public class StartButtonClicked : GameEvent {
-    public StartButtonClicked() { }
+namespace Events {
+    public class StartButtonClicked : GameEvent {
+        public StartButtonClicked() { }
+    }
 }
