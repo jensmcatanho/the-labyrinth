@@ -12,56 +12,26 @@ public class MazeRenderer : MonoBehaviour {
 
     private GameObject _maze;
 
-    #region public methods
-    public void Render(Maze<Cell> maze) {
+	#region private variables
+	private readonly Quaternion _leftWallRotation = Quaternion.Euler(90f, 90f, 0f);
+
+	private readonly Quaternion _downWallRotation = Quaternion.Euler(90f, 0f, 0f);
+
+	private readonly Quaternion _upWallRotation = Quaternion.Euler(90f, 0f, 180f);
+
+	private readonly Quaternion _rightWallRotation = Quaternion.Euler(90f, -90f, 0f);
+
+	#endregion
+
+	#region public methods
+
+
+	public void Render(Maze<Cell> maze) {
 		_maze = transform.parent.gameObject;
 
 		InstantiateFloor(maze);
-
-		for (int i = 0; i < maze.Length; i++) {
-			if (maze[i, i].HasWall(Wall.Left))
-				InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), new Vector3(90.0f, 90.0f, 0.0f));
-
-			if (maze[i, i].HasWall(Wall.Down))
-				InstantiateWall(maze, new Vector3((2 * i + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), new Vector3(90.0f, 0.0f, 0.0f));
-
-			if (maze[i, i].HasWall(Wall.Up))
-				InstantiateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), new Vector3(90.0f, 0.0f, 180.0f));
-
-			if (maze[i, i].HasWall(Wall.Right))
-				InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * i + 2) * maze.CellSize), new Vector3(90.0f, -90.0f, 0.0f));
-		}
-
-		for (int i = 0; i < maze.Length; i++)
-		{
-			for (int j = i + 1; j < maze.Width; j++)
-			{
-				// Create walls and chests in the lower triangular part of the maze.
-				if (maze[j, i].HasWall(Wall.Left))
-					InstantiateWall(maze, new Vector3((2 * j + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), new Vector3(90.0f, 90.0f, 0.0f));
-
-				if (maze[j, i].HasWall(Wall.Down))
-					InstantiateWall(maze, new Vector3((2 * j + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), new Vector3(90.0f, 0.0f, 0.0f));
-
-				if (maze[j, i].HasChest) {
-					//CreateChest(maze, j, i);
-				}
-
-				// Create walls in the upper triangular part of the maze.
-				if (maze[i, j].HasWall(Wall.Up))
-					InstantiateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * j + 1) * maze.CellSize), new Vector3(90.0f, 0.0f, 180.0f));
-
-				if (maze[i, j].HasWall(Wall.Right))
-					InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * j + 2) * maze.CellSize), new Vector3(90.0f, -90.0f, 0.0f));
-
-				if (maze[i, j].HasChest) {
-					//CreateChest(maze, i, j);
-				}
-			}
-		}
-
+		InstantiateWalls(maze);
 		InstantiateFinishTrigger(maze);
-		//Core.EventManager.Instance.QueueEvent(new Events.MazeRendered(mazeObject.GetComponent<Maze>()));
 	}
     #endregion
 
@@ -74,16 +44,96 @@ public class MazeRenderer : MonoBehaviour {
 		floor.transform.position = new Vector3(maze.Length * maze.CellSize, 0, maze.Width * maze.CellSize);
 	}
 
-	private void InstantiateWall(Maze<Cell> maze, Vector3 position, Vector3 rotation) {
-		Quaternion r = Quaternion.identity;
-		r.eulerAngles = rotation;
+	private void InstantiateWalls(Maze<Cell> maze) { 
+		/*
+		 *  Note that the maze matrix is not traversed like we normally would do. Instead of instantiating every cell of each row in order, we
+		 *  first instatiate cells from the diagonal. Next, we instantiate cells from the lower and upper triangular parts of the maze separately.
+		 *  This way we ensure that we are not instantiating a wall south of the cell on the same place we have already instantiated a wall north
+		 *  of the cell right below.
+		 */
+		for (int i = 0; i < maze.Length; i++) {
+			if (maze[i, i].HasWall(Wall.Left))
+				InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), _leftWallRotation);
 
-		GameObject wall = Instantiate(_wallPrefab, position, r) as GameObject;
+			if (maze[i, i].HasWall(Wall.Down))
+				InstantiateWall(maze, new Vector3((2 * i + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _downWallRotation);
+
+			if (maze[i, i].HasWall(Wall.Up))
+				InstantiateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _upWallRotation);
+
+			if (maze[i, i].HasWall(Wall.Right))
+				InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * i + 2) * maze.CellSize), _rightWallRotation);
+		}
+
+		for (int i = 0; i < maze.Length; i++) {
+			for (int j = i + 1; j < maze.Width; j++) {
+				// Lower triangular part of the maze.
+				if (maze[j, i].HasWall(Wall.Left))
+					InstantiateWall(maze, new Vector3((2 * j + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), _leftWallRotation);
+
+				if (maze[j, i].HasWall(Wall.Down))
+					InstantiateWall(maze, new Vector3((2 * j + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _downWallRotation);
+
+				if (maze[j, i].HasChest) {
+					InstantiateChest(maze, j, i);
+				}
+
+				// Upper triangular part of the maze.
+				if (maze[i, j].HasWall(Wall.Up))
+					InstantiateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * j + 1) * maze.CellSize), _upWallRotation);
+
+				if (maze[i, j].HasWall(Wall.Right))
+					InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * j + 2) * maze.CellSize), _rightWallRotation);
+
+				if (maze[i, j].HasChest) {
+					InstantiateChest(maze, i, j);
+				}
+			}
+		}
+	}
+
+	private void InstantiateWall(Maze<Cell> maze, Vector3 position, Quaternion rotation) {
+		GameObject wall = Instantiate(_wallPrefab, position, rotation);
+
 		wall.transform.parent = _maze.transform;
 		wall.transform.localScale *= maze.CellSize;
 	}
 
-	void InstantiateFinishTrigger(Maze<Cell> maze) {
+    private void InstantiateChest(Maze<Cell> maze, int row, int col) {
+		Vector3 chestPosition = new Vector3((2 * row + 1) * maze.CellSize, 0.0f, (2 * col + 1) * maze.CellSize);
+		Quaternion chestRotation = GetChestRotation(maze[row, col]);
+
+		GameObject chest = Instantiate(_chestPrefab, chestPosition, chestRotation);
+		chest.transform.parent = _maze.transform;
+	}
+
+	private Quaternion GetChestRotation(Cell cell) {
+		switch (cell.DeadEndOpening()) {
+			case Wall.Left:
+				return Quaternion.Euler(0f, 180f, 0f);
+
+			case Wall.Up:
+				return Quaternion.Euler(0f, -90f, 0f);
+
+			case Wall.Down:
+				return Quaternion.Euler(0f, 90f, 0f);
+
+			default:
+				return Quaternion.identity;
+		}
+
+		/*
+		 * Switch expressions are not yet supported by the Unity C# compiler. :(
+        return (cell.DeadEndOpening()) switch {
+            Wall.Left => Quaternion.Euler(0f, 180f, 0f),
+            Wall.Up => Quaternion.Euler(0f, -90f, 0f),
+            Wall.Down => Quaternion.Euler(0f, 90f, 0f),
+            _ => Quaternion.identity
+        };
+		*/
+    }
+
+	private void InstantiateFinishTrigger(Maze<Cell> maze) {
 		GameObject finishTrigger = new GameObject("Finish Trigger");
 		finishTrigger.AddComponent<FinishTrigger>();
 		finishTrigger.AddComponent<BoxCollider>().isTrigger = true;
@@ -91,173 +141,12 @@ public class MazeRenderer : MonoBehaviour {
 
 		if (maze.Exit.Position.X >= maze.Exit.Position.Y) {
 			finishTrigger.transform.position = new Vector3 ((2 * maze.Exit.Position.X + 4) * maze.CellSize - 2 * maze.CellSize, 1.0f, (2 * maze.Exit.Position.Y + 1) * maze.CellSize);
-			finishTrigger.transform.localScale = new Vector3(.5f * maze.CellSize, 2.0f * maze.CellSize, 1.5f * maze.CellSize);
+			finishTrigger.transform.localScale = new Vector3(.5f * maze.CellSize, 2f * maze.CellSize, 1.5f * maze.CellSize);
 
 		} else {
 			finishTrigger.transform.position = new Vector3 ((2 * maze.Exit.Position.X + 1) * maze.CellSize, 1.0f, (2 * maze.Exit.Position.Y + 4) * maze.CellSize - 2 * maze.CellSize);
-			finishTrigger.transform.localScale = new Vector3(1.5f * maze.CellSize, 2.0f * maze.CellSize, maze.CellSize * 0.5f);
+			finishTrigger.transform.localScale = new Vector3(2f * maze.CellSize, 2.0f * maze.CellSize, maze.CellSize * 0.5f);
 		}
 	}
     #endregion
 }
-
-
-/*
-	public void RenderMaze(Gameplay.Events.MazeGenerated e)
-	{
-		CreateMaze(e.m_Maze);
-#if UNITY_EDITOR
-		ASCIIFactory.Render(e.m_Maze, "x");
-#endif
-	}
-
-	void CreateMaze(Gameplay.Maze<Gameplay.Cell> maze)
-	{
-		mazeObject = new GameObject("Labyrinth");
-		mazeObject.AddComponent<Maze>();
-		CreateFloor(maze);
-
-		// Create walls in the diagonal part of the maze.
-		for (int i = 0; i < maze.Length; i++)
-		{
-			if (maze[i, i].HasWall(Gameplay.Wall.Left))
-				CreateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), new Vector3(90.0f, 90.0f, 0.0f));
-
-			if (maze[i, i].HasWall(Gameplay.Wall.Down))
-				CreateWall(maze, new Vector3((2 * i + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), new Vector3(90.0f, 0.0f, 0.0f));
-
-			if (maze[i, i].HasWall(Gameplay.Wall.Up))
-				CreateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), new Vector3(90.0f, 0.0f, 180.0f));
-
-			if (maze[i, i].HasWall(Gameplay.Wall.Right))
-				CreateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * i + 2) * maze.CellSize), new Vector3(90.0f, -90.0f, 0.0f));
-		}
-
-		for (int i = 0; i < maze.Length; i++)
-		{
-			for (int j = i + 1; j < maze.Width; j++)
-			{
-				// Create walls and chests in the lower triangular part of the maze.
-				if (maze[j, i].HasWall(Gameplay.Wall.Left))
-					CreateWall(maze, new Vector3((2 * j + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), new Vector3(90.0f, 90.0f, 0.0f));
-
-				if (maze[j, i].HasWall(Gameplay.Wall.Down))
-					CreateWall(maze, new Vector3((2 * j + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), new Vector3(90.0f, 0.0f, 0.0f));
-
-				if (maze[j, i].HasChest)
-				{
-					CreateChest(maze, j, i);
-					mazeObject.GetComponent<Maze>().NChests++;
-				}
-
-				// Create walls in the upper triangular part of the maze.
-				if (maze[i, j].HasWall(Gameplay.Wall.Up))
-					CreateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * j + 1) * maze.CellSize), new Vector3(90.0f, 0.0f, 180.0f));
-
-				if (maze[i, j].HasWall(Gameplay.Wall.Right))
-					CreateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * j + 2) * maze.CellSize), new Vector3(90.0f, -90.0f, 0.0f));
-
-				if (maze[i, j].HasChest)
-				{
-					CreateChest(maze, i, j);
-					mazeObject.GetComponent<Maze>().NChests++;
-				}
-			}
-		}
-
-		CreateFinish(maze);
-		Core.EventManager.Instance.QueueEvent(new Events.MazeRendered(mazeObject.GetComponent<Maze>()));
-		GameObject.Destroy(gameObject);
-	}
-
-	void CreateFloor(Gameplay.Maze<Gameplay.Cell> maze)
-	{
-		GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
-		floor.transform.parent = mazeObject.transform;
-		floor.transform.localScale = new Vector3(maze.Length * 0.2f * maze.CellSize, 1, maze.Width * 0.2f * maze.CellSize);
-		floor.transform.position = new Vector3(maze.Length * maze.CellSize, 0, maze.Width * maze.CellSize);
-	}
-
-	void CreateWall(Gameplay.Maze<Gameplay.Cell> maze, Vector3 position, Vector3 rotation)
-	{
-		Quaternion r = Quaternion.identity;
-		r.eulerAngles = rotation;
-
-		GameObject wall = Instantiate(wallPrefab, position, r) as GameObject;
-		wall.transform.parent = mazeObject.transform;
-		wall.transform.localScale *= maze.CellSize;
-	}
-
-	void CreateChest(Gameplay.Maze<Gameplay.Cell> maze, int row, int col)
-	{
-		Quaternion r = Quaternion.identity;
-		Vector3 chestPosition = new Vector3((2 * row + 1) * maze.CellSize, 0.0f, (2 * col + 1) * maze.CellSize);
-		Vector3 chestRotation = new Vector3();
-
-		// Check which direction the chest is facing (which direction of the cell is open).
-		switch (maze[row, col].DeadEndOpening())
-		{
-			case Gameplay.Wall.Left:
-				chestRotation = new Vector3(0.0f, 180.0f, 0.0f);
-				break;
-
-			case Gameplay.Wall.Up:
-				chestRotation = new Vector3(0.0f, -90.0f, 0.0f);
-				break;
-
-			case Gameplay.Wall.Right:
-				chestRotation = new Vector3(0.0f, 0.0f, 0.0f);
-				break;
-
-			case Gameplay.Wall.Down:
-				chestRotation = new Vector3(0.0f, 90.0f, 0.0f);
-				break;
-
-		}
-
-		r.eulerAngles = chestRotation;
-		GameObject chest = Instantiate(chestPrefab, chestPosition, r);
-		chest.transform.parent = mazeObject.transform;
-	}
-
-	void CreateFinish(Gameplay.Maze<Gameplay.Cell> maze)
-	{
-		GameObject finishTrigger = new GameObject("FinishTrigger");
-		finishTrigger.AddComponent<FinishPoint>();
-		finishTrigger.AddComponent<BoxCollider>().isTrigger = true;
-		finishTrigger.transform.parent = mazeObject.transform;
-
-		if (maze.Exit.Position.x >= maze.Exit.Position.y)
-		{
-			finishTrigger.transform.position = new Vector3((2 * maze.Exit.Position.x + 4) * maze.CellSize - 2 * maze.CellSize, 1.0f, (2 * maze.Exit.Position.y + 1) * maze.CellSize);
-			finishTrigger.transform.localScale = new Vector3(.5f * maze.CellSize, 2.0f * maze.CellSize, 1.5f * maze.CellSize);
-
-		}
-		else
-		{
-			finishTrigger.transform.position = new Vector3((2 * maze.Exit.Position.x + 1) * maze.CellSize, 1.0f, (2 * maze.Exit.Position.y + 4) * maze.CellSize - 2 * maze.CellSize);
-			finishTrigger.transform.localScale = new Vector3(1.5f * maze.CellSize, 2.0f * maze.CellSize, maze.CellSize * 0.5f);
-		}
-	}
-}
-
-namespace Events
-{
-	public class MazeRendered : Core.Events.GameEvent
-	{
-		public Maze maze
-		{
-			get;
-			private set;
-		}
-
-		public MazeRendered(Maze m)
-		{
-			maze = m;
-		}
-	}
-}
-
-}
-
-*/

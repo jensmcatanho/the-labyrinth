@@ -8,7 +8,6 @@ public enum Wall {
 	Up = 1 << 1,
 	Right = 1 << 2,
 	Down = 1 << 3
-
 }
 
 [System.Flags]
