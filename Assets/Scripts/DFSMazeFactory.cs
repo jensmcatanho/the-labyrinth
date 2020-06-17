@@ -113,7 +113,9 @@ public class DFSMazeFactory {
 	}
 
 	private void CreateExit(Maze<DFSCell> maze) {
-		Vector2 exitPosition = new Vector2(RandomFloat(maze.Length * 0.5f, maze.Length), RandomFloat(maze.Width * 0.5f, maze.Width));
+		Random rand = new Random();
+
+		Vector2 exitPosition = new Vector2(rand.Range(maze.Length * 0.5f, maze.Length), rand.Range(maze.Width * 0.5f, maze.Width));
 		
 		if (exitPosition.X > exitPosition.Y) {
 			exitPosition.Y = maze.Width - 1;
@@ -138,12 +140,6 @@ public class DFSMazeFactory {
 				maze[row, col] = dfsMaze[row, col];
 
 		return maze;
-	}
-
-	// Probably should leave this class
-	private float RandomFloat(float min, float max) {
-		Random rand = new Random();
-		return (float)rand.NextDouble() * (max - min) + min;
 	}
 #endregion
 }
