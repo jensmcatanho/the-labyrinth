@@ -60,7 +60,7 @@ public class MazeRenderer : MonoBehaviour {
 			}
 		}
 
-		//CreateFinish(maze);
+		InstantiateFinishTrigger(maze);
 		//Core.EventManager.Instance.QueueEvent(new Events.MazeRendered(mazeObject.GetComponent<Maze>()));
 	}
     #endregion
@@ -81,6 +81,22 @@ public class MazeRenderer : MonoBehaviour {
 		GameObject wall = Instantiate(_wallPrefab, position, r) as GameObject;
 		wall.transform.parent = _maze.transform;
 		wall.transform.localScale *= maze.CellSize;
+	}
+
+	void InstantiateFinishTrigger(Maze<Cell> maze) {
+		GameObject finishTrigger = new GameObject("Finish Trigger");
+		finishTrigger.AddComponent<FinishTrigger>();
+		finishTrigger.AddComponent<BoxCollider>().isTrigger = true;
+		finishTrigger.transform.parent = _maze.transform;
+
+		if (maze.Exit.Position.X >= maze.Exit.Position.Y) {
+			finishTrigger.transform.position = new Vector3 ((2 * maze.Exit.Position.X + 4) * maze.CellSize - 2 * maze.CellSize, 1.0f, (2 * maze.Exit.Position.Y + 1) * maze.CellSize);
+			finishTrigger.transform.localScale = new Vector3(.5f * maze.CellSize, 2.0f * maze.CellSize, 1.5f * maze.CellSize);
+
+		} else {
+			finishTrigger.transform.position = new Vector3 ((2 * maze.Exit.Position.X + 1) * maze.CellSize, 1.0f, (2 * maze.Exit.Position.Y + 4) * maze.CellSize - 2 * maze.CellSize);
+			finishTrigger.transform.localScale = new Vector3(1.5f * maze.CellSize, 2.0f * maze.CellSize, maze.CellSize * 0.5f);
+		}
 	}
     #endregion
 }

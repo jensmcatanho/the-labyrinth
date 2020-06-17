@@ -4,9 +4,11 @@ public class PlayerBehaviour : MonoBehaviour, IEventListener {
 
     [SerializeField] private GameObject _playerPrefab;
 
+    private GameObject _playerObject;
+
     #region public methods
     public void AddListeners() {
-        EventManager.Instance.AddListener<Events.GameSceneLoaded>(OnSceneLoaded);
+        EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnSceneLoaded);
     }
 
     public void RemoveListeners() {
@@ -22,6 +24,7 @@ public class PlayerBehaviour : MonoBehaviour, IEventListener {
     }
 
     private void OnDestroy() {
+        DestroyImmediate(_playerObject);
         RemoveListeners();
     }
 
@@ -30,8 +33,8 @@ public class PlayerBehaviour : MonoBehaviour, IEventListener {
     }
 
     private void InstantiatePlayer() {
-		GameObject playerController = Instantiate(_playerPrefab, new Vector3 (5.0f, 1.0f, 1.0f), Quaternion.identity);
-        playerController.transform.parent = this.transform;
+		_playerObject = Instantiate(_playerPrefab, new Vector3 (5.0f, 1.0f, 1.0f), Quaternion.identity);
+        _playerObject.transform.parent = this.transform;
     }
     #endregion
 }

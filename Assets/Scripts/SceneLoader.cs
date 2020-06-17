@@ -9,9 +9,23 @@ enum GameScene {
 
 public class SceneLoader : MonoBehaviour, IEventListener {
 
+    #region singleton
+    static SceneLoader _instance = null;
+
+    public static SceneLoader Instance {
+        get {
+            if (_instance == null)
+                _instance = FindObjectOfType(typeof(SceneLoader)) as SceneLoader;
+
+            return _instance;
+        }
+    }
+    #endregion
+
     #region public methods
     public void AddListeners() {
         EventManager.Instance.AddListener<Events.StartButtonClicked>(LoadGame);
+        EventManager.Instance.AddListener<Events.MazeFinished>(LoadMenu);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -22,6 +36,14 @@ public class SceneLoader : MonoBehaviour, IEventListener {
 
     #region private methods
     private void Awake() {
+        if (_instance == null) {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        } else {
+            DestroyImmediate(gameObject);
+        }
+
         AddListeners();
     }
     
@@ -33,11 +55,16 @@ public class SceneLoader : MonoBehaviour, IEventListener {
         SceneManager.LoadScene((int)GameScene.Game);
     }
 
+    private void LoadMenu(Events.MazeFinished e) {
+        SceneManager.LoadScene((int)GameScene.Menu);
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         GameScene sceneIndex = (GameScene)scene.buildIndex;
 
         switch (sceneIndex) {
             case GameScene.Menu:
+                Cursor.visible = true;
                 EventManager.Instance.QueueEvent(new MenuSceneLoaded());
                 break;
 

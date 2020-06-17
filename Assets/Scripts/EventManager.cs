@@ -82,9 +82,6 @@ public class EventManager : MonoBehaviour {
 
         if (_delegates.TryGetValue(e.GetType(), out EventDelegate eventDelegate)) {
             eventDelegate.Invoke(e);
-#if UNITY_EDITOR
-            Debug.Log("Listener " + eventDelegate.Target.ToString().Split('[', ']')[1] + " invoked.");
-#endif
 
             // Remove listeners which should only be called once
             foreach (EventDelegate k in _delegates[e.GetType()].GetInvocationList())
