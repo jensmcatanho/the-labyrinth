@@ -369,6 +369,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 893142233419282673, guid: 1fa526959d5e69043bfb08f201ec6345,
+        type: 3}
+      propertyPath: _mazeSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 90fb0ee5b3d85a94ea6269ad82fa1ee4,
+        type: 2}
     - target: {fileID: 1136132450504109175, guid: 1fa526959d5e69043bfb08f201ec6345,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -429,9 +435,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Labyrinth
       objectReference: {fileID: 0}
+    - target: {fileID: 8220453624249686523, guid: 1fa526959d5e69043bfb08f201ec6345,
+        type: 3}
+      propertyPath: _chestPrefab
+      value: 
+      objectReference: {fileID: 1000012773638022, guid: 8982a22a414f86a4fb6f48905e0a97a8,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fa526959d5e69043bfb08f201ec6345, type: 3}
---- !u!1001 &1734509365747941586
+--- !u!1001 &1980614906
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -476,7 +488,7 @@ PrefabInstance:
     - target: {fileID: 1734509366080646914, guid: 5452a7f4df73ff34a8d5514afdb2f113,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1734509366080646914, guid: 5452a7f4df73ff34a8d5514afdb2f113,
         type: 3}
@@ -497,6 +509,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509366662315663, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509366662315663, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509366662315663, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509366662315663, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509367079490697, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509367079490697, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509367079490697, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509367079490697, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1734509367079490697, guid: 5452a7f4df73ff34a8d5514afdb2f113,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5452a7f4df73ff34a8d5514afdb2f113, type: 3}
@@ -550,7 +607,7 @@ PrefabInstance:
     - target: {fileID: 7467698291545171998, guid: 8520143ca314c7346b27ad95633a23d4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7467698291545171998, guid: 8520143ca314c7346b27ad95633a23d4,
         type: 3}

@@ -3,21 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuInput : IEventListener {
+public class MenuInput : MonoBehaviour, IEventListener {
 
     [SerializeField] private Button _startButton;
-
-    #region constructor
-    public MenuInput(Button startButton) {
-        _startButton = startButton;
-
-        AddListeners();
-    }
-
-    ~MenuInput() {
-        RemoveListeners();
-    }
-    #endregion
 
     #region public methods
     public void AddListeners() {
@@ -30,6 +18,15 @@ public class MenuInput : IEventListener {
     #endregion
 
     #region private methods
+
+    private void Awake() {
+        AddListeners();
+    }
+
+    private void OnDestroy() {
+        RemoveListeners();
+    }
+
     private void OnStartButtonClicked() {
         EventManager.Instance.QueueEvent(new Events.StartButtonClicked());
     }

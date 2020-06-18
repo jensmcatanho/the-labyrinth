@@ -156,7 +156,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -355,5 +355,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Labyrinth
       objectReference: {fileID: 0}
+    - target: {fileID: 8220453624249686523, guid: 1fa526959d5e69043bfb08f201ec6345,
+        type: 3}
+      propertyPath: _chestPrefab
+      value: 
+      objectReference: {fileID: 1000012773638022, guid: 8982a22a414f86a4fb6f48905e0a97a8,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fa526959d5e69043bfb08f201ec6345, type: 3}
