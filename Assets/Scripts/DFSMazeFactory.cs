@@ -10,7 +10,7 @@ public class DFSMazeFactory {
 	private readonly float _probabilityOfChests = 0.5f;
     #endregion
 
-    #region constructor
+    #region public methods
     public Maze<Cell> CreateMaze(int length, int width, int cellSize) {
 		Maze<DFSCell> dfsMaze = new Maze<DFSCell>(length, width, cellSize);
 
