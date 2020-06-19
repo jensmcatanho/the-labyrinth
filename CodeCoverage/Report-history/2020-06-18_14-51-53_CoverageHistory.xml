@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2020-06-18_14-51-53" tag="">
+  <assembly name="Scripts">
+    <class name="Cell" coveredlines="17" coverablelines="38" totallines="82" coveredbranches="0" totalbranches="0" />
+    <class name="DFSCell" coveredlines="0" coverablelines="5" totallines="17" coveredbranches="0" totalbranches="0" />
+    <class name="DFSMazeFactory" coveredlines="0" coverablelines="84" totallines="143" coveredbranches="0" totalbranches="0" />
+    <class name="EventManager" coveredlines="6" coverablelines="99" totallines="166" coveredbranches="0" totalbranches="0" />
+    <class name="Events.GameSceneLoaded" coveredlines="0" coverablelines="1" totallines="93" coveredbranches="0" totalbranches="0" />
+    <class name="Events.MazeFinished" coveredlines="0" coverablelines="1" totallines="19" coveredbranches="0" totalbranches="0" />
+    <class name="Events.MenuSceneLoaded" coveredlines="0" coverablelines="1" totallines="93" coveredbranches="0" totalbranches="0" />
+    <class name="Events.StartButtonClicked" coveredlines="0" coverablelines="1" totallines="40" coveredbranches="0" totalbranches="0" />
+    <class name="FinishTrigger" coveredlines="0" coverablelines="3" totallines="19" coveredbranches="0" totalbranches="0" />
+    <class name="Maze[T]" coveredlines="0" coverablelines="14" totallines="52" coveredbranches="0" totalbranches="0" />
+    <class name="MazeBehaviour" coveredlines="0" coverablelines="8" totallines="26" coveredbranches="0" totalbranches="0" />
+    <class name="MazeRenderer" coveredlines="4" coverablelines="77" totallines="152" coveredbranches="0" totalbranches="0" />
+    <class name="MazeSettings" coveredlines="0" coverablelines="6" totallines="18" coveredbranches="0" totalbranches="0" />
+    <class name="MenuBehaviour" coveredlines="0" coverablelines="2" totallines="18" coveredbranches="0" totalbranches="0" />
+    <class name="MenuInput" coveredlines="0" coverablelines="15" totallines="40" coveredbranches="0" totalbranches="0" />
+    <class name="PlayerBehaviour" coveredlines="0" coverablelines="20" totallines="38" coveredbranches="0" totalbranches="0" />
+    <class name="RandomExtensions" coveredlines="0" coverablelines="3" totallines="7" coveredbranches="0" totalbranches="0" />
+    <class name="SceneLoader" coveredlines="0" coverablelines="43" totallines="93" coveredbranches="0" totalbranches="0" />
+  </assembly>
+</coverage>

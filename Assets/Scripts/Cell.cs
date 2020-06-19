@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 #region enums
 [System.Flags]
@@ -9,20 +10,11 @@ public enum Wall {
 	Right = 1 << 2,
 	Down = 1 << 3
 }
-
-[System.Flags]
-public enum CellType {
-	None = 0,
-	Entrance = 1 << 0,
-	Exit = 1 << 1
-}
 #endregion
 
 public abstract class Cell {
 
     #region private variables
-    private CellType _type;
-
 	private Wall _walls;
 
 	private Vector2 _position;
@@ -32,7 +24,6 @@ public abstract class Cell {
     public Cell(int x, int y, int size) {
 		_position = new Vector2(x, y);
 		Size = size;
-		_type = CellType.None;
 
 		SetAllWalls();
 	}
@@ -40,10 +31,11 @@ public abstract class Cell {
 
 	#region public methods
 	public void SetAllWalls() {
-		SetWall(Wall.Left);
-		SetWall(Wall.Up);
-		SetWall(Wall.Right);
-		SetWall(Wall.Down);
+		SetWall(Wall.Left | Wall.Up | Wall.Right | Wall.Down);
+	}
+
+	public void UnsetAllWalls() {
+		UnsetWall(Wall.Left | Wall.Up | Wall.Right | Wall.Down);
 	}
 
 	public Vector2 Position {
@@ -71,18 +63,6 @@ public abstract class Cell {
 		return (_walls & target) == target;
 	}
 
-	public void SetType(CellType target) {
-		_type |= target;
-	}
-
-	public void UnsetType(CellType target) {
-		_type &= (~target);
-	}
-
-	public void ToggleType(CellType target) {
-		_type ^= target;
-	}
-
 	public Wall DeadEndOpening() {
 		if (!IsDeadEnd()) {
 			return Wall.None;
@@ -96,12 +76,9 @@ public abstract class Cell {
 
 		} else if (!HasWall(Wall.Right)) {
 			return Wall.Right;
-
-		} else if (!HasWall(Wall.Down)) {
-			return Wall.Down;
 		}
-
-		return Wall.None;
+		
+		return Wall.Down;
 	}
 
 	public bool IsDeadEnd() {

@@ -97,7 +97,6 @@ public class DFSMazeFactory {
 
 		// 7. Open an entrance and a exit to the maze.
 		maze.Entrance = maze[0, 0];
-		maze.Entrance.SetType(CellType.Entrance);
 		maze[0, 0].ToggleWall(Wall.Left);
 
 		CreateExit(maze);
@@ -127,7 +126,6 @@ public class DFSMazeFactory {
 		}
 
 		maze.Exit = maze[(int)exitPosition.X, (int)exitPosition.Y];
-		maze.Exit.SetType(CellType.Exit);
 	}
 
 	private Maze<Cell> DFSMazeToMaze(Maze<DFSCell> dfsMaze) {
