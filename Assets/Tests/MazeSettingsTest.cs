@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
+﻿using NUnit.Framework;
 
-namespace Tests
-{
+namespace Tests {
     public class MazeSettingsTest {
 
         [Test]

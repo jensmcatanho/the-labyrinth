@@ -31,7 +31,7 @@ public class PlayerBehaviour : MonoBehaviour, IEventListener {
     }
 
     private void InstantiatePlayer() {
-		_playerObject = Instantiate(_playerPrefab, new Vector3 (5.0f, 1.0f, 1.0f), Quaternion.identity);
+        _playerObject = Instantiate(_playerPrefab, new Vector3(5.0f, 1.0f, 1.0f), Quaternion.identity);
         _playerObject.transform.parent = this.transform;
     }
     #endregion

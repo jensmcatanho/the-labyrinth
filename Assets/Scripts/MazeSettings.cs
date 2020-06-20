@@ -11,8 +11,20 @@ public class MazeSettings : ScriptableObject {
     #endregion
 
     #region public methods
-    public int Width { get { return _width; } }
-    public int Height { get { return _height; } }
-    public int CellSize { get { return _cellSize; } }
+    public int Width {
+        get {
+            return _width;
+        }
+    }
+    public int Height {
+        get {
+            return _height;
+        }
+    }
+    public int CellSize {
+        get {
+            return _cellSize;
+        }
+    }
     #endregion
 }

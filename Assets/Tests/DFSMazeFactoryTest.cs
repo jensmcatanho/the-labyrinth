@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
 
 namespace Tests {
     public class DFSMazeFactoryTest {
@@ -21,8 +20,8 @@ namespace Tests {
 
                 Maze<Cell> maze = DFSMazeFactory.CreateMaze(length, width, 1);
 
-		        for (int row = 0; row < length; row++)
-			        for (int col = 0; col < width; col++)
+                for (int row = 0; row < length; row++)
+                    for (int col = 0; col < width; col++)
                         numberOfDeadEnds += maze[row, col].IsDeadEnd() ? 1 : 0;
 
                 float percentageOfDeadEnds = numberOfDeadEnds / (float)numberOfCells;
@@ -45,7 +44,7 @@ namespace Tests {
                 Maze<Cell> maze = DFSMazeFactory.CreateMaze(length, width, 1);
 
                 for (int row = 0; row < length; row++)
-			        for (int col = 0; col < width; col++) {
+                    for (int col = 0; col < width; col++) {
                         numberOfDeadEnds += maze[row, col].IsDeadEnd() ? 1 : 0;
                         numberOfChests += maze[row, col].HasChest ? 1 : 0;
                     }
@@ -56,7 +55,7 @@ namespace Tests {
         }
 
         [Test]
-        public void Test_CreateMaze_MazeCellsShouldHaveTheSameSize() {            
+        public void Test_CreateMaze_MazeCellsShouldHaveTheSameSize() {
             int length = 20;
             int width = 20;
             int cellSize = 2;
@@ -69,7 +68,7 @@ namespace Tests {
         }
 
         [Test]
-        public void Test_CreateMaze_MazeShouldHaveAnEntrance() {            
+        public void Test_CreateMaze_MazeShouldHaveAnEntrance() {
 
             Maze<Cell> maze = DFSMazeFactory.CreateMaze(20, 20, 1);
 
@@ -77,7 +76,7 @@ namespace Tests {
         }
 
         [Test]
-        public void Test_CreateMaze_MazeShouldHaveAnExit() {            
+        public void Test_CreateMaze_MazeShouldHaveAnExit() {
 
             Maze<Cell> maze = DFSMazeFactory.CreateMaze(20, 20, 1);
 
@@ -85,7 +84,7 @@ namespace Tests {
         }
 
         [Test]
-        public void Test_CreateMaze_MazeSizeShouldMatchArguments() {            
+        public void Test_CreateMaze_MazeSizeShouldMatchArguments() {
             int length = 20;
             int width = 20;
             int cellSize = 2;
@@ -97,7 +96,7 @@ namespace Tests {
         }
 
         [Test]
-        public void Test_CreateMaze_MazeShouldHaveASolution() {            
+        public void Test_CreateMaze_MazeShouldHaveASolution() {
             int length = 20;
             int width = 20;
             int cellSize = 2;
@@ -112,7 +111,7 @@ namespace Tests {
         }
 
         [Test]
-        public void Test_CreateMaze_MazeShoulNotHaveCellsWithFourWalls() {            
+        public void Test_CreateMaze_MazeShoulNotHaveCellsWithFourWalls() {
             int length = 20;
             int width = 20;
             int cellSize = 2;
@@ -132,7 +131,7 @@ namespace Tests {
         }
 
         [Test]
-        public void Test_CreateMaze_MazeShoulNotHaveCellsWithoutWalls() {            
+        public void Test_CreateMaze_MazeShoulNotHaveCellsWithoutWalls() {
             int length = 20;
             int width = 20;
             int cellSize = 2;

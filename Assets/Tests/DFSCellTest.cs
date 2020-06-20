@@ -2,7 +2,7 @@
 
 namespace Tests {
     public class DFSCellTest {
-        
+
         [Test]
         public void Test_Constructor() {
             int x = 1;

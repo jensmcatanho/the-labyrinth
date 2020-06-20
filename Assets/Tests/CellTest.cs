@@ -6,7 +6,7 @@ namespace Tests {
         public class CellMock : Cell {
             public CellMock(int x, int y, int size)
                 : base(x, y, size) {
-            
+
             }
         }
 
@@ -133,7 +133,7 @@ namespace Tests {
             cell.SetWall(Wall.Right);
         }
 
-                [Test]
+        [Test]
         public void Test_DeadEndOpening_WhenCellIsNotDeadEnd() {
             Cell cell = new CellMock(1, 1, 5);
 

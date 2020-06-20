@@ -2,7 +2,7 @@
 
 namespace Tests {
     public class RandomExtensionsTest {
-        
+
         [Test]
         public void Test_Range_WhenNoArgumentsArePassed() {
             System.Random rand = new System.Random();

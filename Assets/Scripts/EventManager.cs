@@ -27,9 +27,9 @@ public class EventManager : MonoBehaviour {
     private Dictionary<System.Type, EventDelegate> _delegates = new Dictionary<System.Type, EventDelegate>();
 
     private Dictionary<System.Delegate, EventDelegate> _delegateLookup = new Dictionary<System.Delegate, EventDelegate>();
-    
+
     private Dictionary<System.Delegate, System.Delegate> _onceLookups = new Dictionary<System.Delegate, System.Delegate>();
-    
+
     private Queue _eventQueue = new Queue();
 
     private delegate void EventDelegate(GameEvent e);

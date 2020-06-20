@@ -46,7 +46,7 @@ public class SceneLoader : MonoBehaviour, IEventListener {
 
         AddListeners();
     }
-    
+
     private void OnDestroy() {
         RemoveListeners();
     }
@@ -83,11 +83,13 @@ public class SceneLoader : MonoBehaviour, IEventListener {
 namespace Events {
 
     public class MenuSceneLoaded : GameEvent {
-        public MenuSceneLoaded() { }
+        public MenuSceneLoaded() {
+        }
     }
 
     public class GameSceneLoaded : GameEvent {
-        public GameSceneLoaded() { }
+        public GameSceneLoaded() {
+        }
     }
 
 }

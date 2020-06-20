@@ -13,7 +13,8 @@ public class FinishTrigger : MonoBehaviour {
 namespace Events {
 
     public class MazeFinished : GameEvent {
-        public MazeFinished() { }
+        public MazeFinished() {
+        }
     }
 
 }

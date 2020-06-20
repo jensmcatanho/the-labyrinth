@@ -15,7 +15,7 @@ namespace Tests {
             Assert.NotNull(evt);
         }
 
-                [Test]
+        [Test]
         public void Test_GameEvent_MenuSceneLoaded() {
             Events.MenuSceneLoaded evt = new Events.MenuSceneLoaded();
             Assert.NotNull(evt);

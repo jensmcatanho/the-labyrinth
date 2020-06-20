@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuInput : MonoBehaviour, IEventListener {
@@ -35,6 +33,7 @@ public class MenuInput : MonoBehaviour, IEventListener {
 
 namespace Events {
     public class StartButtonClicked : GameEvent {
-        public StartButtonClicked() { }
+        public StartButtonClicked() {
+        }
     }
 }
