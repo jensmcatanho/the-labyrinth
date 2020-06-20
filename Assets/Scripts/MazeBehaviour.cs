@@ -13,8 +13,7 @@ public class MazeBehaviour : MonoBehaviour {
 
     #region private methods
     private void Awake() {
-        DFSMazeFactory mazeFactory = new DFSMazeFactory();
-        _maze = mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
+        _maze = DFSMazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
 
         _renderer = transform.GetComponentInChildren<MazeRenderer>();
     }

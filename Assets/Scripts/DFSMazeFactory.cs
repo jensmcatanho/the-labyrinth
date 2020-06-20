@@ -2,16 +2,15 @@
 using System.Collections;
 using System.Numerics;
 
-public class DFSMazeFactory {
+public static class DFSMazeFactory {
 
-    #region private variables
-    private readonly float _probabilityOfDeadEnds = 0.1f;
+	#region private variables
 
-	private readonly float _probabilityOfChests = 0.5f;
+	private static readonly float _probabilityOfChests = 0.5f;
     #endregion
 
     #region public methods
-    public Maze<Cell> CreateMaze(int length, int width, int cellSize) {
+    public static Maze<Cell> CreateMaze(int length, int width, int cellSize) {
 		Maze<DFSCell> dfsMaze = new Maze<DFSCell>(length, width, cellSize);
 
 		for (int row = 0; row < length; row++)
@@ -20,13 +19,15 @@ public class DFSMazeFactory {
 
 		CreatePath(dfsMaze);
 		CreateChests(dfsMaze);
+		CreateEntrance(dfsMaze);
+		CreateExit(dfsMaze);
 
 		return DFSMazeToMaze(dfsMaze);
 	}
     #endregion
 
     #region private methods
-    private void CreatePath(Maze<DFSCell> maze) {
+    private static void CreatePath(Maze<DFSCell> maze) {
 		ArrayList history = new ArrayList();
 		ArrayList neighbors = new ArrayList();
 		Random rand = new Random();
@@ -59,7 +60,7 @@ public class DFSMazeFactory {
 			// 5a. If there is a neighbor not yet visited, choose one randomly to connect to the current cell. 
 			if (neighbors.Count > 0) {
 				history.Add(new Vector2(row, col));
-				char direction = System.Convert.ToChar(neighbors[rand.Next(0, neighbors.Count)]);
+				char direction = Convert.ToChar(neighbors[rand.Next(0, neighbors.Count)]);
 
 				switch (direction) {
 					case 'L':
@@ -94,15 +95,9 @@ public class DFSMazeFactory {
 
 			// 6. If there are still cells in the history list, go back to step 3.
 		}
-
-		// 7. Open an entrance and a exit to the maze.
-		maze.Entrance = maze[0, 0];
-		maze[0, 0].ToggleWall(Wall.Left);
-
-		CreateExit(maze);
 	}
 
-	private void CreateChests(Maze<DFSCell> maze) {
+	private static void CreateChests(Maze<DFSCell> maze) {
 		Random rand = new Random();
 
 		for (int row = 0; row < maze.Length; row++)
@@ -111,7 +106,12 @@ public class DFSMazeFactory {
 					maze[row, col].HasChest = true;
 	}
 
-	private void CreateExit(Maze<DFSCell> maze) {
+	private static void CreateEntrance(Maze<DFSCell> maze) {
+		maze.Entrance = maze[0, 0];
+		maze[0, 0].ToggleWall(Wall.Left);
+	}
+
+	private static void CreateExit(Maze<DFSCell> maze) {
 		Random rand = new Random();
 
 		Vector2 exitPosition = new Vector2(rand.Range(maze.Length * 0.5f, maze.Length), rand.Range(maze.Width * 0.5f, maze.Width));
@@ -128,7 +128,7 @@ public class DFSMazeFactory {
 		maze.Exit = maze[(int)exitPosition.X, (int)exitPosition.Y];
 	}
 
-	private Maze<Cell> DFSMazeToMaze(Maze<DFSCell> dfsMaze) {
+	private static Maze<Cell> DFSMazeToMaze(Maze<DFSCell> dfsMaze) {
 		Maze<Cell> maze = new Maze<Cell>(dfsMaze.Length, dfsMaze.Width, dfsMaze.CellSize);
 		maze.Entrance = dfsMaze.Entrance;
 		maze.Exit = dfsMaze.Exit;

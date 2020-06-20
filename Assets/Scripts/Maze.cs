@@ -18,6 +18,8 @@ public class Maze<T> where T : Cell {
 		_length = length;
 		_width = width;
 		_cells = new T[length, width];
+		_entrance = null;
+		_exit = null;
 	}
     #endregion
 
