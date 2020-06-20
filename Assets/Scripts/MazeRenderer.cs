@@ -44,55 +44,58 @@ public class MazeRenderer : MonoBehaviour {
 		floor.transform.position = new Vector3(maze.Length * maze.CellSize, 0, maze.Width * maze.CellSize);
 	}
 
-	private void InstantiateWalls(Maze<Cell> maze) { 
-		/*
+	private void InstantiateWalls(Maze<Cell> maze) {
+        /*
 		 *  Note that the maze matrix is not traversed like we normally would do. Instead of instantiating every cell of each row in order, we
 		 *  first instatiate cells from the diagonal. Next, we instantiate cells from the lower and upper triangular parts of the maze separately.
 		 *  This way we ensure that we are not instantiating a wall south of the cell on the same place we have already instantiated a wall north
 		 *  of the cell right below.
 		 */
-		for (int i = 0; i < maze.Length; i++) {
-			if (maze[i, i].HasWall(Wall.Left))
-				InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), _leftWallRotation);
+        InstantiateDiagonal(maze);
 
-			if (maze[i, i].HasWall(Wall.Down))
-				InstantiateWall(maze, new Vector3((2 * i + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _downWallRotation);
+        for (int i = 0; i < maze.Length; i++)
+            for (int j = i + 1; j < maze.Width; j++) {
+                InstantiateLowerTriangular(maze, i, j);
+                InstantiateChest(maze, j, i);
 
-			if (maze[i, i].HasWall(Wall.Up))
-				InstantiateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _upWallRotation);
+                InstantiateUpperTriangular(maze, i, j);
+				InstantiateChest(maze, i, j);
+            }
+    }
 
-			if (maze[i, i].HasWall(Wall.Right))
-				InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * i + 2) * maze.CellSize), _rightWallRotation);
-		}
+    private void InstantiateUpperTriangular(Maze<Cell> maze, int i, int j) {
+        if (maze[i, j].HasWall(Wall.Up))
+            InstantiateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * j + 1) * maze.CellSize), _upWallRotation);
 
-		for (int i = 0; i < maze.Length; i++) {
-			for (int j = i + 1; j < maze.Width; j++) {
-				// Lower triangular part of the maze.
-				if (maze[j, i].HasWall(Wall.Left))
-					InstantiateWall(maze, new Vector3((2 * j + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), _leftWallRotation);
+        if (maze[i, j].HasWall(Wall.Right))
+            InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * j + 2) * maze.CellSize), _rightWallRotation);
+    }
 
-				if (maze[j, i].HasWall(Wall.Down))
-					InstantiateWall(maze, new Vector3((2 * j + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _downWallRotation);
+    private void InstantiateLowerTriangular(Maze<Cell> maze, int i, int j) {
+        if (maze[j, i].HasWall(Wall.Left))
+            InstantiateWall(maze, new Vector3((2 * j + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), _leftWallRotation);
 
-				if (maze[j, i].HasChest) {
-					InstantiateChest(maze, j, i);
-				}
+        if (maze[j, i].HasWall(Wall.Down))
+            InstantiateWall(maze, new Vector3((2 * j + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _downWallRotation);
+    }
 
-				// Upper triangular part of the maze.
-				if (maze[i, j].HasWall(Wall.Up))
-					InstantiateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * j + 1) * maze.CellSize), _upWallRotation);
+    private void InstantiateDiagonal(Maze<Cell> maze) {
+        for (int i = 0; i < maze.Length; i++) {
+            if (maze[i, i].HasWall(Wall.Left))
+                InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, 2 * i * maze.CellSize), _leftWallRotation);
 
-				if (maze[i, j].HasWall(Wall.Right))
-					InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * j + 2) * maze.CellSize), _rightWallRotation);
+            if (maze[i, i].HasWall(Wall.Down))
+                InstantiateWall(maze, new Vector3((2 * i + 2) * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _downWallRotation);
 
-				if (maze[i, j].HasChest) {
-					InstantiateChest(maze, i, j);
-				}
-			}
-		}
-	}
+            if (maze[i, i].HasWall(Wall.Up))
+                InstantiateWall(maze, new Vector3(2 * i * maze.CellSize, 2.0f, (2 * i + 1) * maze.CellSize), _upWallRotation);
 
-	private void InstantiateWall(Maze<Cell> maze, Vector3 position, Quaternion rotation) {
+            if (maze[i, i].HasWall(Wall.Right))
+                InstantiateWall(maze, new Vector3((2 * i + 1) * maze.CellSize, 2.0f, (2 * i + 2) * maze.CellSize), _rightWallRotation);
+        }
+    }
+
+    private void InstantiateWall(Maze<Cell> maze, Vector3 position, Quaternion rotation) {
 		GameObject wall = Instantiate(_wallPrefab, position, rotation);
 
 		wall.transform.parent = _maze.transform;
@@ -100,6 +103,9 @@ public class MazeRenderer : MonoBehaviour {
 	}
 
     private void InstantiateChest(Maze<Cell> maze, int row, int col) {
+		if (!maze[row, col].HasChest)
+			return;
+
 		Vector3 chestPosition = new Vector3((2 * row + 1) * maze.CellSize, 0.0f, (2 * col + 1) * maze.CellSize);
 		Quaternion chestRotation = GetChestRotation(maze[row, col]);
 
