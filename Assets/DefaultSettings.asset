@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f09c7eb12b59e459ca4eb04a5bd417, type: 3}
   m_Name: DefaultSettings
   m_EditorClassIdentifier: 
-  _width: 10
-  _height: 10
+  _width: 50
+  _height: 50
   _cellSize: 2

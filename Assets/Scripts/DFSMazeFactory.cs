@@ -2,15 +2,14 @@
 using System.Collections;
 using System.Numerics;
 
-public static class DFSMazeFactory {
+public class DFSMazeFactory : IMazeFactory {
 
     #region private variables
-
-    private static readonly float _probabilityOfChests = 0.5f;
+    private readonly float _probabilityOfChests = 0.5f;
     #endregion
 
     #region public methods
-    public static Maze<Cell> CreateMaze(int length, int width, int cellSize) {
+    public Maze<Cell> CreateMaze(int length, int width, int cellSize) {
         Maze<DFSCell> dfsMaze = new Maze<DFSCell>(length, width, cellSize);
 
         for (int row = 0; row < length; row++)
@@ -27,7 +26,7 @@ public static class DFSMazeFactory {
     #endregion
 
     #region private methods
-    private static void CreatePath(Maze<DFSCell> maze) {
+    private void CreatePath(Maze<DFSCell> maze) {
         ArrayList history = new ArrayList();
         ArrayList neighbors = new ArrayList();
         Random rand = new Random();
@@ -97,7 +96,7 @@ public static class DFSMazeFactory {
         }
     }
 
-    private static void CreateChests(Maze<DFSCell> maze) {
+    private void CreateChests(Maze<DFSCell> maze) {
         Random rand = new Random();
 
         for (int row = 0; row < maze.Length; row++)
@@ -106,14 +105,13 @@ public static class DFSMazeFactory {
                     maze[row, col].HasChest = true;
     }
 
-    private static void CreateEntrance(Maze<DFSCell> maze) {
+    private void CreateEntrance(Maze<DFSCell> maze) {
         maze.Entrance = maze[0, 0];
         maze[0, 0].ToggleWall(Wall.Left);
     }
 
-    private static void CreateExit(Maze<DFSCell> maze) {
+    private void CreateExit(Maze<DFSCell> maze) {
         Random rand = new Random();
-
         Vector2 exitPosition = new Vector2(rand.Range(maze.Length * 0.5f, maze.Length), rand.Range(maze.Width * 0.5f, maze.Width));
 
         if (exitPosition.X > exitPosition.Y) {
@@ -128,10 +126,11 @@ public static class DFSMazeFactory {
         maze.Exit = maze[(int)exitPosition.X, (int)exitPosition.Y];
     }
 
-    private static Maze<Cell> DFSMazeToMaze(Maze<DFSCell> dfsMaze) {
-        Maze<Cell> maze = new Maze<Cell>(dfsMaze.Length, dfsMaze.Width, dfsMaze.CellSize);
-        maze.Entrance = dfsMaze.Entrance;
-        maze.Exit = dfsMaze.Exit;
+    private Maze<Cell> DFSMazeToMaze(Maze<DFSCell> dfsMaze) {
+        Maze<Cell> maze = new Maze<Cell>(dfsMaze.Length, dfsMaze.Width, dfsMaze.CellSize) {
+            Entrance = dfsMaze.Entrance,
+            Exit = dfsMaze.Exit
+        };
 
         for (int row = 0; row < maze.Length; row++)
             for (int col = 0; col < maze.Width; col++)

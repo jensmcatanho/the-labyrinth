@@ -8,10 +8,10 @@ namespace Tests {
         private readonly float _probabilityOfChests = 0.14f;
 
         [Test]
-        public void Test_CreateMaze_ApproximateDeadEndsPercentageShouldMatchTheExpectedForDFSAlgorithm() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+        public void Test_CreateMaze_ApproximateDeadEndsPercentageShouldMatchTheExpectedForPrimAlgorithm() {
+            IMazeFactory primFactory = new PrimMazeFactory();
             int maxSize = 50;
-            float delta = 0.05f;
+            float delta = 0.1f;
 
             for (int size = 10; size < maxSize; size += 10) {
                 int length = size;
@@ -19,7 +19,7 @@ namespace Tests {
                 int numberOfCells = length * width;
                 int numberOfDeadEnds = 0;
 
-                Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, 1);
+                Maze<Cell> maze = primFactory.CreateMaze(length, width, 1);
 
                 for (int row = 0; row < length; row++)
                     for (int col = 0; col < width; col++)
@@ -32,7 +32,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_NumberOfChestsShouldMatchTheExpectedProbability() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory primFactory = new PrimMazeFactory();
             int maxSize = 50;
             float delta = 0.5f;
 
@@ -43,7 +43,7 @@ namespace Tests {
                 int numberOfDeadEnds = 0;
                 int numberOfChests = 0;
 
-                Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, 1);
+                Maze<Cell> maze = primFactory.CreateMaze(length, width, 1);
 
                 for (int row = 0; row < length; row++)
                     for (int col = 0; col < width; col++) {
@@ -58,12 +58,12 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeCellsShouldHaveTheSameSize() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory primFactory = new PrimMazeFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
 
-            Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, cellSize);
+            Maze<Cell> maze = primFactory.CreateMaze(length, width, cellSize);
 
             for (int row = 0; row < length; row++)
                 for (int col = 0; col < width; col++)
@@ -72,30 +72,30 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveAnEntrance() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory primFactory = new PrimMazeFactory();
 
-            Maze<Cell> maze = dfsMazeFactory.CreateMaze(20, 20, 1);
+            Maze<Cell> maze = primFactory.CreateMaze(20, 20, 1);
 
             Assert.IsNotNull(maze.Entrance);
         }
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveAnExit() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory primFactory = new PrimMazeFactory();
 
-            Maze<Cell> maze = dfsMazeFactory.CreateMaze(20, 20, 1);
+            Maze<Cell> maze = primFactory.CreateMaze(20, 20, 1);
 
             Assert.IsNotNull(maze.Exit);
         }
 
         [Test]
         public void Test_CreateMaze_MazeSizeShouldMatchArguments() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory primFactory = new PrimMazeFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
 
-            Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, cellSize);
+            Maze<Cell> maze = primFactory.CreateMaze(length, width, cellSize);
 
             Assert.AreEqual(length, maze.Length);
             Assert.AreEqual(width, maze.Width);
@@ -103,12 +103,12 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveASolution() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory primFactory = new PrimMazeFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
 
-            Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, cellSize);
+            Maze<Cell> maze = primFactory.CreateMaze(length, width, cellSize);
 
             /*
              * Implement MazeSolver class
@@ -119,12 +119,12 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShoulNotHaveCellsWithFourWalls() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory primFactory = new PrimMazeFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
 
-            Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, cellSize);
+            Maze<Cell> maze = primFactory.CreateMaze(length, width, cellSize);
 
             for (int row = 0; row < length; row++)
                 for (int col = 0; col < width; col++) {
@@ -133,27 +133,6 @@ namespace Tests {
                         cell.HasWall(Wall.Left) &&
                         cell.HasWall(Wall.Up) &&
                         cell.HasWall(Wall.Down) &&
-                        cell.HasWall(Wall.Right)
-                    );
-                }
-        }
-
-        [Test]
-        public void Test_CreateMaze_MazeShoulNotHaveCellsWithoutWalls() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
-            int length = 20;
-            int width = 20;
-            int cellSize = 2;
-
-            Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, cellSize);
-
-            for (int row = 0; row < length; row++)
-                for (int col = 0; col < width; col++) {
-                    Cell cell = maze[row, col];
-                    Assert.True(
-                        cell.HasWall(Wall.Left) ||
-                        cell.HasWall(Wall.Up) ||
-                        cell.HasWall(Wall.Down) ||
                         cell.HasWall(Wall.Right)
                     );
                 }
