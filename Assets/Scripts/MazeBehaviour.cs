@@ -5,6 +5,8 @@ public class MazeBehaviour : MonoBehaviour {
     #region private variables
     [SerializeField] private MazeSettings _mazeSettings;
 
+    private IMazeFactory _mazeFactory;
+
     private MazeRenderer _renderer;
 
     private Maze<Cell> _maze;
@@ -12,7 +14,10 @@ public class MazeBehaviour : MonoBehaviour {
 
     #region private methods
     private void Awake() {
-        _maze = DFSMazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
+        _mazeFactory = new PrimMazeFactory();
+        _maze = _mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
+
+        //ASCIIFactory.Render(_maze, "*");
 
         _renderer = transform.GetComponentInChildren<MazeRenderer>();
     }

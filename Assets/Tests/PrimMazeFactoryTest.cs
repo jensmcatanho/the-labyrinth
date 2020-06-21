@@ -1,11 +1,11 @@
 ﻿using NUnit.Framework;
 
 namespace Tests {
-    public class DFSMazeFactoryTest {
+    public class PrimMazeFactoryTest {
 
-        private readonly float _probabilityOfDeadEnds = 0.1f;
+        private readonly float _probabilityOfDeadEnds = 0.3f;
 
-        private readonly float _probabilityOfChests = 0.5f;
+        private readonly float _probabilityOfChests = 0.14f;
 
         [Test]
         public void Test_CreateMaze_ApproximateDeadEndsPercentageShouldMatchTheExpectedForDFSAlgorithm() {
