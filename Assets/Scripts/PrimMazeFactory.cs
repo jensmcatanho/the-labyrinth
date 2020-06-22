@@ -6,9 +6,9 @@ using UnityEditor.Experimental.GraphView;
 public class PrimMazeFactory : IMazeFactory {
 
     #region private variables
-    private readonly float _probabilityOfChests = 0.14f;
-
     private Maze<PrimCell> _maze;
+
+    private readonly float _probabilityOfChests = 0.14f;
 
     private readonly ArrayList _frontier = new ArrayList();
 

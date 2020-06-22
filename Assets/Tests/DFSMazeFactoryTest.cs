@@ -137,26 +137,5 @@ namespace Tests {
                     );
                 }
         }
-
-        [Test]
-        public void Test_CreateMaze_MazeShoulNotHaveCellsWithoutWalls() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
-            int length = 20;
-            int width = 20;
-            int cellSize = 2;
-
-            Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, cellSize);
-
-            for (int row = 0; row < length; row++)
-                for (int col = 0; col < width; col++) {
-                    Cell cell = maze[row, col];
-                    Assert.True(
-                        cell.HasWall(Wall.Left) ||
-                        cell.HasWall(Wall.Up) ||
-                        cell.HasWall(Wall.Down) ||
-                        cell.HasWall(Wall.Right)
-                    );
-                }
-        }
     }
 }

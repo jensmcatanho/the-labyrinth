@@ -14,7 +14,7 @@ public class MazeBehaviour : MonoBehaviour {
 
     #region private methods
     private void Awake() {
-        _mazeFactory = new PrimMazeFactory();
+        _mazeFactory = new DFSMazeFactory();
         _maze = _mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
 
         //ASCIIFactory.Render(_maze, "*");

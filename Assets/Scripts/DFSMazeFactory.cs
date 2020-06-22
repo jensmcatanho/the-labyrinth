@@ -5,136 +5,152 @@ using System.Numerics;
 public class DFSMazeFactory : IMazeFactory {
 
     #region private variables
+    private Maze<DFSCell> _maze;
+
     private readonly float _probabilityOfChests = 0.5f;
+
+    private readonly ArrayList _history = new ArrayList();
+
+    private static readonly Random random = new Random();
     #endregion
 
     #region public methods
     public Maze<Cell> CreateMaze(int length, int width, int cellSize) {
-        Maze<DFSCell> dfsMaze = new Maze<DFSCell>(length, width, cellSize);
+        _maze = new Maze<DFSCell>(length, width, cellSize);
 
         for (int row = 0; row < length; row++)
             for (int col = 0; col < width; col++)
-                dfsMaze[row, col] = new DFSCell(row, col, cellSize);
+                _maze[row, col] = new DFSCell(row, col, cellSize);
 
-        CreatePath(dfsMaze);
-        CreateChests(dfsMaze);
-        CreateEntrance(dfsMaze);
-        CreateExit(dfsMaze);
+        CreatePath();
+        CreateChests();
+        CreateEntrance();
+        CreateExit();
 
-        return DFSMazeToMaze(dfsMaze);
+        return DFSMazeToMaze();
     }
     #endregion
 
     #region private methods
-    private void CreatePath(Maze<DFSCell> maze) {
-        ArrayList history = new ArrayList();
-        ArrayList neighbors = new ArrayList();
-        Random rand = new Random();
 
-        // 1. Start in the first cell.
-        int row = 0;
-        int col = 0;
+    private void CreatePath() {
+        DFSCell currentCell = _maze[0, 0];
+        _history.Add(currentCell);
 
-        // 2. Add it to the history stack.
-        history.Add(new Vector2(row, col));
+        while (_history.Count > 0) {
+            MarkAsVisited(currentCell);
+            Wall neighborDirection = GetNeighborNotVisited(currentCell);
 
-        while (history.Count > 0) {
-            // 3. Mark it as visited.
-            maze[row, col].IsVisited = true;
-
-            // 4. Check which of its neighbors were not yet visited.
-            neighbors.Clear();
-            if (col > 0 && !maze[row, col - 1].IsVisited)
-                neighbors.Add('L');
-
-            if (row > 0 && !maze[row - 1, col].IsVisited)
-                neighbors.Add('U');
-
-            if (col < maze.Length - 1 && !maze[row, col + 1].IsVisited)
-                neighbors.Add('R');
-
-            if (row < maze.Width - 1 && !maze[row + 1, col].IsVisited)
-                neighbors.Add('D');
-
-            // 5a. If there is a neighbor not yet visited, choose one randomly to connect to the current cell. 
-            if (neighbors.Count > 0) {
-                history.Add(new Vector2(row, col));
-                char direction = Convert.ToChar(neighbors[rand.Next(0, neighbors.Count)]);
-
-                switch (direction) {
-                    case 'L':
-                        maze[row, col].ToggleWall(Wall.Left);
-                        maze[row, --col].ToggleWall(Wall.Right);
-                        break;
-
-                    case 'U':
-                        maze[row, col].ToggleWall(Wall.Up);
-                        maze[--row, col].ToggleWall(Wall.Down);
-                        break;
-
-                    case 'R':
-                        maze[row, col].ToggleWall(Wall.Right);
-                        maze[row, ++col].ToggleWall(Wall.Left);
-                        break;
-
-                    case 'D':
-                        maze[row, col].ToggleWall(Wall.Down);
-                        maze[++row, col].ToggleWall(Wall.Up);
-                        break;
-                }
+            if (neighborDirection != Wall.None) {
+                _history.Add(currentCell);
+                currentCell = ConnectToNeighborCell(currentCell, neighborDirection);
 
             } else {
-                // 5b. If there isn't a neighbor to visit, backtrack one step.
-                Vector2 retrace = (Vector2)history[history.Count - 1];
-                row = (int)retrace.X;
-                col = (int)retrace.Y;
-
-                history.RemoveAt(history.Count - 1);
+                currentCell = BacktrackCurrentCell();
             }
-
-            // 6. If there are still cells in the history list, go back to step 3.
         }
     }
 
-    private void CreateChests(Maze<DFSCell> maze) {
-        Random rand = new Random();
-
-        for (int row = 0; row < maze.Length; row++)
-            for (int col = 0; col < maze.Width; col++)
-                if (maze[row, col].IsDeadEnd() && rand.NextDouble() < _probabilityOfChests)
-                    maze[row, col].HasChest = true;
+    private void MarkAsVisited(DFSCell cell) {
+        cell.IsVisited = true;
     }
 
-    private void CreateEntrance(Maze<DFSCell> maze) {
-        maze.Entrance = maze[0, 0];
-        maze[0, 0].ToggleWall(Wall.Left);
+    private Wall GetNeighborNotVisited(DFSCell cell) {
+        ArrayList neighbors = new ArrayList();
+
+        int row = (int)cell.Position.X;
+        int col = (int)cell.Position.Y;
+
+        if (col > 0 && !_maze[row, col - 1].IsVisited)
+            neighbors.Add(Wall.Left);
+
+        if (row > 0 && !_maze[row - 1, col].IsVisited)
+            neighbors.Add(Wall.Up);
+
+        if (col < _maze.Length - 1 && !_maze[row, col + 1].IsVisited)
+            neighbors.Add(Wall.Right);
+
+        if (row < _maze.Width - 1 && !_maze[row + 1, col].IsVisited)
+            neighbors.Add(Wall.Down);
+
+        if (neighbors.Count > 0)
+            return (Wall)neighbors[random.Next(0, neighbors.Count)];
+
+        return Wall.None;
     }
 
-    private void CreateExit(Maze<DFSCell> maze) {
-        Random rand = new Random();
-        Vector2 exitPosition = new Vector2(rand.Range(maze.Length * 0.5f, maze.Length), rand.Range(maze.Width * 0.5f, maze.Width));
+    private DFSCell BacktrackCurrentCell() {
+        DFSCell cell = (DFSCell)_history[_history.Count - 1];
+        _history.RemoveAt(_history.Count - 1);
+
+        return cell;
+    }
+
+    private DFSCell ConnectToNeighborCell(DFSCell cell, Wall direction) {
+        int row = (int)cell.Position.X;
+        int col = (int)cell.Position.Y;
+
+        switch (direction) {
+            case Wall.Left:
+                _maze[row, col].ToggleWall(Wall.Left);
+                _maze[row, --col].ToggleWall(Wall.Right);
+                break;
+
+            case Wall.Up:
+                _maze[row, col].ToggleWall(Wall.Up);
+                _maze[--row, col].ToggleWall(Wall.Down);
+                break;
+
+            case Wall.Right:
+                _maze[row, col].ToggleWall(Wall.Right);
+                _maze[row, ++col].ToggleWall(Wall.Left);
+                break;
+
+            case Wall.Down:
+                _maze[row, col].ToggleWall(Wall.Down);
+                _maze[++row, col].ToggleWall(Wall.Up);
+                break;
+        }
+
+        return _maze[row, col];
+    }
+
+    private void CreateChests() {
+        for (int row = 0; row < _maze.Length; row++)
+            for (int col = 0; col < _maze.Width; col++)
+                if (_maze[row, col].IsDeadEnd() && random.NextDouble() < _probabilityOfChests)
+                    _maze[row, col].HasChest = true;
+    }
+
+    private void CreateEntrance() {
+        _maze.Entrance = _maze[0, 0];
+        _maze[0, 0].ToggleWall(Wall.Left);
+    }
+
+    private void CreateExit() {
+        Vector2 exitPosition = new Vector2(random.Range(_maze.Length * 0.5f, _maze.Length), random.Range(_maze.Width * 0.5f, _maze.Width));
 
         if (exitPosition.X > exitPosition.Y) {
-            exitPosition.Y = maze.Width - 1;
-            maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Wall.Right);
+            exitPosition.Y = _maze.Width - 1;
+            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Wall.Right);
 
         } else {
-            exitPosition.X = maze.Length - 1;
-            maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Wall.Down);
+            exitPosition.X = _maze.Length - 1;
+            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Wall.Down);
         }
 
-        maze.Exit = maze[(int)exitPosition.X, (int)exitPosition.Y];
+        _maze.Exit = _maze[(int)exitPosition.X, (int)exitPosition.Y];
     }
 
-    private Maze<Cell> DFSMazeToMaze(Maze<DFSCell> dfsMaze) {
-        Maze<Cell> maze = new Maze<Cell>(dfsMaze.Length, dfsMaze.Width, dfsMaze.CellSize) {
-            Entrance = dfsMaze.Entrance,
-            Exit = dfsMaze.Exit
+    private Maze<Cell> DFSMazeToMaze() {
+        Maze<Cell> maze = new Maze<Cell>(_maze.Length, _maze.Width, _maze.CellSize) {
+            Entrance = _maze.Entrance,
+            Exit = _maze.Exit
         };
 
         for (int row = 0; row < maze.Length; row++)
             for (int col = 0; col < maze.Width; col++)
-                maze[row, col] = dfsMaze[row, col];
+                maze[row, col] = _maze[row, col];
 
         return maze;
     }
