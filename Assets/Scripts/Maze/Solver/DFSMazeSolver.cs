@@ -47,8 +47,8 @@ public class DFSMazeSolver : IMazeSolver {
                 _history.Add(currentCell);
 
             } else {
-                currentCell = (DFSCell)_history[_history.Count - 1];
                 _history.RemoveAt(_history.Count - 1);
+                currentCell = _history.Count > 0 ? (DFSCell)_history[_history.Count - 1] : null;
             }
         }
 
@@ -62,7 +62,7 @@ public class DFSMazeSolver : IMazeSolver {
         int col = (int)cell.Position.Y;
 
         if (!cell.HasWall(Wall.Left) && !IsVisited(row, col -1))
-            neighbors.Add(_maze[row, col -1]);
+            neighbors.Add(_maze[row, col - 1]);
 
         if (!cell.HasWall(Wall.Up) && !IsVisited(row - 1, col))
             neighbors.Add(_maze[row - 1, col]);
