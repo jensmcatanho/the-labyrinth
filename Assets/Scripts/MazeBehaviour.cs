@@ -16,9 +16,6 @@ public class MazeBehaviour : MonoBehaviour {
     private void Awake() {
         _mazeFactory = new DFSMazeFactory();
         _maze = _mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
-
-        //ASCIIFactory.Render(_maze, "*");
-
         _renderer = transform.GetComponentInChildren<MazeRenderer>();
     }
 

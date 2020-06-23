@@ -104,17 +104,15 @@ namespace Tests {
         [Test]
         public void Test_CreateMaze_MazeShouldHaveASolution() {
             IMazeFactory dfsMazeFactory = new DFSMazeFactory();
-            int length = 20;
-            int width = 20;
+
+            int length = 50;
+            int width = 50;
             int cellSize = 2;
 
             Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, cellSize);
 
-            /*
-             * Implement MazeSolver class
-             * Assert.True(MazeSolver.HasSolution(maze))
-             */
-            Assert.True(true);
+            IMazeSolver dfsMazeSolver = new DFSMazeSolver();
+            Assert.True(dfsMazeSolver.IsSolvable(maze));
         }
 
         [Test]

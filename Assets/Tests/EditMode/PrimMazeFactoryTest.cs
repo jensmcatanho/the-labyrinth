@@ -110,11 +110,8 @@ namespace Tests {
 
             Maze<Cell> maze = primFactory.CreateMaze(length, width, cellSize);
 
-            /*
-             * Implement MazeSolver class
-             * Assert.True(MazeSolver.HasSolution(maze))
-             */
-            Assert.True(true);
+            IMazeSolver dfsMazeSolver = new DFSMazeSolver();
+            Assert.True(dfsMazeSolver.IsSolvable(maze));
         }
 
         [Test]

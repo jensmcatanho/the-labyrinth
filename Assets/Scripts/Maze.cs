@@ -44,7 +44,7 @@ public class Maze<T> where T : Cell {
 
     public T this[int row, int col] {
         get {
-            return _cells[row, col];
+            return isInsideMaze(row, col) ? _cells[row, col] : null;
         }
         set {
             _cells[row, col] = value;
@@ -67,6 +67,12 @@ public class Maze<T> where T : Cell {
         set {
             _exit = value;
         }
+    }
+    #endregion
+
+    #region private methods
+    private bool isInsideMaze(int row, int col) {
+        return row >= 0 && row < _length && col >= 0 && col < _width;
     }
     #endregion
 }

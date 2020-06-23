@@ -42,6 +42,20 @@ namespace Tests {
         }
 
         [Test]
+        public void Test_SetWall_WhenThreeWallsAreSet() {
+            Cell cell = new CellMock(1, 1, 5);
+            cell.UnsetAllWalls();
+
+            cell.SetWall(Wall.Down | Wall.Up | Wall.Right);
+
+            Assert.True(
+                cell.HasWall(Wall.Down) &&
+                cell.HasWall(Wall.Up) &&
+                cell.HasWall(Wall.Right) &&
+                !cell.HasWall(Wall.Left));
+        }
+
+        [Test]
         public void Test_SetAllWalls() {
             Cell cell = new CellMock(1, 1, 5);
 

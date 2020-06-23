@@ -61,22 +61,26 @@ public class DFSMazeFactory : IMazeFactory {
         int row = (int)cell.Position.X;
         int col = (int)cell.Position.Y;
 
-        if (col > 0 && !_maze[row, col - 1].IsVisited)
+        if (!IsVisited(row, col - 1))
             neighbors.Add(Wall.Left);
 
-        if (row > 0 && !_maze[row - 1, col].IsVisited)
+        if (!IsVisited(row - 1, col))
             neighbors.Add(Wall.Up);
 
-        if (col < _maze.Length - 1 && !_maze[row, col + 1].IsVisited)
+        if (!IsVisited(row, col + 1))
             neighbors.Add(Wall.Right);
 
-        if (row < _maze.Width - 1 && !_maze[row + 1, col].IsVisited)
+        if (!IsVisited(row + 1, col))
             neighbors.Add(Wall.Down);
 
         if (neighbors.Count > 0)
             return (Wall)neighbors[random.Next(0, neighbors.Count)];
 
         return Wall.None;
+    }
+
+    private bool IsVisited(int row, int col) {
+        return _maze[row, col]?.IsVisited ?? true;
     }
 
     private DFSCell BacktrackCurrentCell() {
@@ -153,6 +157,8 @@ public class DFSMazeFactory : IMazeFactory {
                 maze[row, col] = _maze[row, col];
 
         return maze;
+
+
     }
     #endregion
 }

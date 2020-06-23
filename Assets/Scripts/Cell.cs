@@ -11,7 +11,7 @@ public enum Wall {
 }
 #endregion
 
-public abstract class Cell {
+public class Cell {
 
     #region private variables
     private Wall _walls;
@@ -52,6 +52,12 @@ public abstract class Cell {
 
     public bool HasChest {
         get; set;
+    }
+
+    public Wall Walls {
+        get {
+            return _walls;
+        }
     }
 
     public void SetWall(Wall target) {

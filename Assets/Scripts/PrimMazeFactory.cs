@@ -57,21 +57,14 @@ public class PrimMazeFactory : IMazeFactory {
         int row = (int)cell.Position.X;
         int col = (int)cell.Position.Y;
 
-        if (col > 0)
-            MarkAsNeighbor(_maze[row, col - 1]);
-
-        if (row > 0)
-            MarkAsNeighbor(_maze[row - 1, col]);
-
-        if (col < _maze.Length - 1)
-            MarkAsNeighbor(_maze[row, col + 1]);
-
-        if (row < _maze.Width - 1)
-            MarkAsNeighbor(_maze[row + 1, col]);
+        MarkAsNeighbor(_maze[row, col - 1]);
+        MarkAsNeighbor(_maze[row - 1, col]);
+        MarkAsNeighbor(_maze[row, col + 1]);
+        MarkAsNeighbor(_maze[row + 1, col]);
     }
 
     private void MarkAsNeighbor(PrimCell cell) {
-        if (cell.IsNone()) {
+        if (cell?.IsNone() ?? false) {
             _frontier.Add(cell.Position);
             MarkStatus(cell, PrimStatus.Neighbor);
         }
@@ -100,19 +93,23 @@ public class PrimMazeFactory : IMazeFactory {
         int row = (int)cell.Position.X;
         int col = (int)cell.Position.Y;
 
-        if (col > 0 && _maze[row, col - 1].IsVisited())
+        if (IsVisited(row, col - 1))
             neighbors.Add(Wall.Left);
 
-        if (row > 0 && _maze[row - 1, col].IsVisited())
+        if (IsVisited(row - 1, col))
             neighbors.Add(Wall.Up);
 
-        if (col < _maze.Length - 1 && _maze[row, col + 1].IsVisited())
+        if (IsVisited(row, col + 1))
             neighbors.Add(Wall.Right);
 
-        if (row < _maze.Width - 1 && _maze[row + 1, col].IsVisited())
+        if (IsVisited(row + 1, col))
             neighbors.Add(Wall.Down);
 
         return (Wall)neighbors[random.Next(0, neighbors.Count)];
+    }
+
+    private bool IsVisited(int row, int col) {
+        return _maze[row, col]?.IsVisited() ?? false;
     }
 
     private void ConnectToNeighborCell(PrimCell cell, Wall direction) {
@@ -170,14 +167,17 @@ public class PrimMazeFactory : IMazeFactory {
     }
 
     private Maze<Cell> PrimMazeToMaze() {
-        Maze<Cell> maze = new Maze<Cell>(_maze.Length, _maze.Width, _maze.CellSize) {
-            Entrance = _maze.Entrance,
-            Exit = _maze.Exit
-        };
+        Maze<Cell> maze = new Maze<Cell>(_maze.Length, _maze.Width, _maze.CellSize);
 
         for (int row = 0; row < maze.Length; row++)
-            for (int col = 0; col < maze.Width; col++)
-                maze[row, col] = _maze[row, col];
+            for (int col = 0; col < maze.Width; col++) {
+                maze[row, col] = new Cell(row, col, _maze.CellSize);
+                maze[row, col].UnsetAllWalls();
+                maze[row, col].SetWall(_maze[row, col].Walls);
+            }
+
+        maze.Entrance = maze[(int)_maze.Entrance.Position.X, (int)_maze.Entrance.Position.Y];
+        maze.Exit = maze[(int)_maze.Exit.Position.X, (int)_maze.Exit.Position.Y];
 
         return maze;
     }
