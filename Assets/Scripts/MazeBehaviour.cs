@@ -14,13 +14,26 @@ public class MazeBehaviour : MonoBehaviour {
 
     #region private methods
     private void Awake() {
-        _mazeFactory = new DFSMazeFactory();
+        SetMazeFactory();
+
         _maze = _mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
         _renderer = transform.GetComponentInChildren<MazeRenderer>();
     }
 
     private void Start() {
         _renderer.Render(_maze);
+    }
+
+    private void SetMazeFactory() {
+        switch (_mazeSettings.Algorithm) {
+            case GenerationAlgorithm.DepthFirstSearch:
+                _mazeFactory = new DFSMazeFactory();
+                break;
+
+            case GenerationAlgorithm.Prim:
+                _mazeFactory = new PrimMazeFactory();
+                break;
+        }
     }
     #endregion
 }
