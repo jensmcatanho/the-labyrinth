@@ -3,7 +3,7 @@
 public class MenuBehaviour : MonoBehaviour {
 
     #region private variables
-    private MenuInput _menuInput;
+
     #endregion
 
     #region private methods

@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace Core {
+
 enum GameScene {
     Menu,
     Game
@@ -24,8 +26,8 @@ public class SceneLoader : MonoBehaviour, IEventListener {
 
     #region public methods
     public void AddListeners() {
-        EventManager.Instance.AddListener<Events.StartButtonClicked>(LoadGame);
-        EventManager.Instance.AddListener<Events.MazeFinished>(LoadMenu);
+        EventManager.Instance.AddListener<StartButtonClicked>(LoadGame);
+        EventManager.Instance.AddListener<MazeFinished>(LoadMenu);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -51,11 +53,11 @@ public class SceneLoader : MonoBehaviour, IEventListener {
         RemoveListeners();
     }
 
-    private void LoadGame(Events.StartButtonClicked e) {
+    private void LoadGame(StartButtonClicked e) {
         SceneManager.LoadScene((int)GameScene.Game);
     }
 
-    private void LoadMenu(Events.MazeFinished e) {
+    private void LoadMenu(MazeFinished e) {
         SceneManager.LoadScene((int)GameScene.Menu);
     }
 
@@ -65,11 +67,11 @@ public class SceneLoader : MonoBehaviour, IEventListener {
         switch (sceneIndex) {
             case GameScene.Menu:
                 Cursor.visible = true;
-                EventManager.Instance.QueueEvent(new MenuSceneLoaded());
+                EventManager.Instance.QueueEvent(new Events.MenuSceneLoaded());
                 break;
 
             case GameScene.Game:
-                EventManager.Instance.QueueEvent(new GameSceneLoaded());
+                EventManager.Instance.QueueEvent(new Events.GameSceneLoaded());
                 break;
 
             default:
@@ -91,5 +93,7 @@ namespace Events {
         public GameSceneLoaded() {
         }
     }
+
+}
 
 }

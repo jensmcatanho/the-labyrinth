@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerBehaviour : MonoBehaviour, IEventListener {
+public class PlayerBehaviour : MonoBehaviour, Core.IEventListener {
 
     [SerializeField] private GameObject _playerPrefab;
 
@@ -8,11 +8,11 @@ public class PlayerBehaviour : MonoBehaviour, IEventListener {
 
     #region public methods
     public void AddListeners() {
-        EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnSceneLoaded);
+       Core.EventManager.Instance.AddListenerOnce<Core.Events.GameSceneLoaded>(OnSceneLoaded);
     }
 
     public void RemoveListeners() {
-        EventManager.Instance?.RemoveListener<Events.GameSceneLoaded>(OnSceneLoaded);
+        Core.EventManager.Instance?.RemoveListener<Core.Events.GameSceneLoaded>(OnSceneLoaded);
     }
     #endregion
 
@@ -26,7 +26,7 @@ public class PlayerBehaviour : MonoBehaviour, IEventListener {
         RemoveListeners();
     }
 
-    private void OnSceneLoaded(Events.GameSceneLoaded e) {
+    private void OnSceneLoaded(Core.Events.GameSceneLoaded e) {
         InstantiatePlayer();
     }
 

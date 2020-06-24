@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+namespace Core {
+
 public class EventManager : MonoBehaviour {
 
     #region singleton
@@ -163,4 +165,6 @@ public class EventManager : MonoBehaviour {
         _instance = null;
     }
     #endregion
+}
+
 }

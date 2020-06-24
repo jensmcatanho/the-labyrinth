@@ -5,7 +5,7 @@ namespace Tests {
 
         [Test]
         public void Test_GameEvent_GameSceneLoaded() {
-            Events.GameSceneLoaded evt = new Events.GameSceneLoaded();
+            Core.Events.GameSceneLoaded evt = new Core.Events.GameSceneLoaded();
             Assert.NotNull(evt);
         }
 
@@ -17,7 +17,7 @@ namespace Tests {
 
         [Test]
         public void Test_GameEvent_MenuSceneLoaded() {
-            Events.MenuSceneLoaded evt = new Events.MenuSceneLoaded();
+            Core.Events.MenuSceneLoaded evt = new Core.Events.MenuSceneLoaded();
             Assert.NotNull(evt);
         }
 

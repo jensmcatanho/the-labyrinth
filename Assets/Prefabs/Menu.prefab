@@ -166,8 +166,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2512425779093913293}
   - component: {fileID: 2512425779093913292}
-  - component: {fileID: 2512425779093913299}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,19 +200,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea6a60cd8f93a254f9945420751f05ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2512425779093913299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2512425779093913298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb6a4413023f40b41848f74687bab348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startButton: {fileID: 2512425779868290221}
 --- !u!1 &2512425779165385568
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +368,7 @@ GameObject:
   - component: {fileID: 2512425779868290223}
   - component: {fileID: 2512425779868290222}
   - component: {fileID: 2512425779868290221}
+  - component: {fileID: 748975133392045205}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -500,6 +487,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+--- !u!114 &748975133392045205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512425779868290220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f3fcdbf372253943b6a30580135eeb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2512425780011711435
 GameObject:
   m_ObjectHideFlags: 0
