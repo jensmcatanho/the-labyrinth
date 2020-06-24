@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+namespace Menu {
+
 public class MenuBehaviour : MonoBehaviour {
 
     #region private variables
@@ -11,4 +13,6 @@ public class MenuBehaviour : MonoBehaviour {
 
     }
     #endregion
+}
+
 }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+namespace Menu {
+
 public class StartButton : MonoBehaviour, Core.IEventListener {
     
     private Button _button;
@@ -34,4 +36,6 @@ namespace Events {
         public StartButtonClicked() {
         }
     }
+}
+
 }

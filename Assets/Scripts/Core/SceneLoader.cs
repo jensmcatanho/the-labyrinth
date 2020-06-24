@@ -26,7 +26,7 @@ public class SceneLoader : MonoBehaviour, IEventListener {
 
     #region public methods
     public void AddListeners() {
-        EventManager.Instance.AddListener<StartButtonClicked>(LoadGame);
+        EventManager.Instance.AddListener<Menu.Events.StartButtonClicked>(LoadGame);
         EventManager.Instance.AddListener<MazeFinished>(LoadMenu);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -53,7 +53,7 @@ public class SceneLoader : MonoBehaviour, IEventListener {
         RemoveListeners();
     }
 
-    private void LoadGame(StartButtonClicked e) {
+    private void LoadGame(Menu.Events.StartButtonClicked e) {
         SceneManager.LoadScene((int)GameScene.Game);
     }
 

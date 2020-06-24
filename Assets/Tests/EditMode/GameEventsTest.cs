@@ -23,7 +23,7 @@ namespace Tests {
 
         [Test]
         public void Test_GameEvent_StartButtonClicked() {
-            Events.StartButtonClicked evt = new Events.StartButtonClicked();
+            Menu.Events.StartButtonClicked evt = new Menu.Events.StartButtonClicked();
             Assert.NotNull(evt);
         }
     }
