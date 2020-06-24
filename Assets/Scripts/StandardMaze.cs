@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using Maze;
 
-public class MazeBehaviour : MonoBehaviour {
+public class StandardMaze : MonoBehaviour, IMaze {
 
     #region private variables
     [SerializeField] private MazeSettings _mazeSettings;
-
-    private Maze.Factory.IMazeFactory _mazeFactory;
 
     private MazeRenderer _renderer;
 
@@ -15,9 +13,9 @@ public class MazeBehaviour : MonoBehaviour {
 
     #region private methods
     private void Awake() {
-        SetMazeFactory();
+        var mazeFactory = GetFactoryFromSettings();
 
-        _maze = _mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
+        _maze = mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
         _renderer = transform.GetComponentInChildren<MazeRenderer>();
     }
 
@@ -25,16 +23,18 @@ public class MazeBehaviour : MonoBehaviour {
         _renderer.Render(_maze);
     }
 
-    private void SetMazeFactory() {
+    private Maze.Factory.IMazeFactory GetFactoryFromSettings() {
         switch (_mazeSettings.Algorithm) {
             case GenerationAlgorithm.DepthFirstSearch:
-                _mazeFactory = new Maze.Factory.DFSFactory();
-                break;
+                return new Maze.Factory.DFSFactory();
 
             case GenerationAlgorithm.Prim:
-                _mazeFactory = new Maze.Factory.PrimFactory();
-                break;
+                return new Maze.Factory.PrimFactory();
+
+            default:
+                return null;
         }
+
     }
     #endregion
 }
