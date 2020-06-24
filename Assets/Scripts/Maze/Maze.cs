@@ -1,4 +1,6 @@
-﻿[System.Serializable]
+﻿namespace Maze {
+
+[System.Serializable]
 public class Maze<T> where T : Cell {
 
     #region private variables
@@ -75,4 +77,6 @@ public class Maze<T> where T : Cell {
         return row >= 0 && row < _length && col >= 0 && col < _width;
     }
     #endregion
+}
+
 }

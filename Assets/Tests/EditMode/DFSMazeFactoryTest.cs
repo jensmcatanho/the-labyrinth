@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Tests {
+namespace Maze.Factory.Tests {
     public class DFSMazeFactoryTest {
 
         private readonly float _probabilityOfDeadEnds = 0.1f;
@@ -9,7 +9,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_ApproximateDeadEndsPercentageShouldMatchTheExpectedForDFSAlgorithm() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory dfsMazeFactory = new DFSFactory();
             int maxSize = 50;
             float delta = 0.05f;
 
@@ -32,7 +32,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_NumberOfChestsShouldMatchTheExpectedProbability() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory dfsMazeFactory = new DFSFactory();
             int maxSize = 50;
             float delta = 0.5f;
 
@@ -58,7 +58,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeCellsShouldHaveTheSameSize() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory dfsMazeFactory = new DFSFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
@@ -72,7 +72,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveAnEntrance() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory dfsMazeFactory = new DFSFactory();
 
             Maze<Cell> maze = dfsMazeFactory.CreateMaze(20, 20, 1);
 
@@ -81,7 +81,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveAnExit() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory dfsMazeFactory = new DFSFactory();
 
             Maze<Cell> maze = dfsMazeFactory.CreateMaze(20, 20, 1);
 
@@ -90,7 +90,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeSizeShouldMatchArguments() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory dfsMazeFactory = new DFSFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
@@ -103,7 +103,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveASolution() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory dfsMazeFactory = new DFSFactory();
 
             int length = 50;
             int width = 50;
@@ -111,13 +111,13 @@ namespace Tests {
 
             Maze<Cell> maze = dfsMazeFactory.CreateMaze(length, width, cellSize);
 
-            IMazeSolver dfsMazeSolver = new DFSMazeSolver();
+            Solver.IMazeSolver dfsMazeSolver = new Solver.DFSSolver();
             Assert.True(dfsMazeSolver.IsSolvable(maze));
         }
 
         [Test]
         public void Test_CreateMaze_MazeShoulNotHaveCellsWithFourWalls() {
-            IMazeFactory dfsMazeFactory = new DFSMazeFactory();
+            IMazeFactory dfsMazeFactory = new DFSFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;

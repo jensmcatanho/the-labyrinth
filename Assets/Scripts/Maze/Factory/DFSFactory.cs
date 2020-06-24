@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Numerics;
 
-public class DFSMazeFactory : IMazeFactory {
+namespace Maze.Factory {
+
+public class DFSFactory : IMazeFactory {
 
     #region private variables
     private Maze<DFSCell> _maze;
@@ -161,4 +163,6 @@ public class DFSMazeFactory : IMazeFactory {
 
     }
     #endregion
+}
+
 }

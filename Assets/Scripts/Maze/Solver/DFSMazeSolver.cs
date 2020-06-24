@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System;
-using System.Data;
 
-public class DFSMazeSolver : IMazeSolver {
+namespace Maze.Solver {
+
+public class DFSSolver : IMazeSolver {
 
     private Maze<DFSCell> _maze;
 
@@ -10,7 +11,7 @@ public class DFSMazeSolver : IMazeSolver {
 
     private static readonly Random random = new Random();
 
-    public DFSMazeSolver() {
+    public DFSSolver() {
     
     }
 
@@ -82,4 +83,6 @@ public class DFSMazeSolver : IMazeSolver {
     private bool IsVisited(int row, int col) {
         return _maze[row, col]?.IsVisited ?? true;
     }
+}
+
 }

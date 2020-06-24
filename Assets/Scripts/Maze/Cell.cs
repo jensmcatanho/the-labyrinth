@@ -1,5 +1,7 @@
 ﻿using System.Numerics;
 
+namespace Maze {
+
 #region enums
 [System.Flags]
 public enum Wall {
@@ -112,4 +114,6 @@ public class Cell {
         return numWalls == 3;
     }
     #endregion
+}
+
 }

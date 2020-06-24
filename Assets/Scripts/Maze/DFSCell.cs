@@ -1,4 +1,6 @@
-﻿public class DFSCell : Cell {
+﻿namespace Maze {
+
+public class DFSCell : Cell {
 
     #region constructor
     public DFSCell(int x, int y, int size)
@@ -14,4 +16,6 @@
         set;
     }
     #endregion
+}
+
 }

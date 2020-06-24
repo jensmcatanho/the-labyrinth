@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace Tests {
-    public class PrimMazeFactoryTest {
+namespace Maze.Factory.Tests {
+    public class PrimFactoryTest {
 
         private readonly float _probabilityOfDeadEnds = 0.3f;
 
@@ -9,7 +9,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_ApproximateDeadEndsPercentageShouldMatchTheExpectedForPrimAlgorithm() {
-            IMazeFactory primFactory = new PrimMazeFactory();
+            IMazeFactory primFactory = new PrimFactory();
             int maxSize = 50;
             float delta = 0.1f;
 
@@ -32,7 +32,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_NumberOfChestsShouldMatchTheExpectedProbability() {
-            IMazeFactory primFactory = new PrimMazeFactory();
+            IMazeFactory primFactory = new PrimFactory();
             int maxSize = 50;
             float delta = 0.5f;
 
@@ -58,7 +58,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeCellsShouldHaveTheSameSize() {
-            IMazeFactory primFactory = new PrimMazeFactory();
+            IMazeFactory primFactory = new PrimFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
@@ -72,7 +72,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveAnEntrance() {
-            IMazeFactory primFactory = new PrimMazeFactory();
+            IMazeFactory primFactory = new PrimFactory();
 
             Maze<Cell> maze = primFactory.CreateMaze(20, 20, 1);
 
@@ -81,7 +81,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveAnExit() {
-            IMazeFactory primFactory = new PrimMazeFactory();
+            IMazeFactory primFactory = new PrimFactory();
 
             Maze<Cell> maze = primFactory.CreateMaze(20, 20, 1);
 
@@ -90,7 +90,7 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeSizeShouldMatchArguments() {
-            IMazeFactory primFactory = new PrimMazeFactory();
+            IMazeFactory primFactory = new PrimFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
@@ -103,20 +103,20 @@ namespace Tests {
 
         [Test]
         public void Test_CreateMaze_MazeShouldHaveASolution() {
-            IMazeFactory primFactory = new PrimMazeFactory();
+            IMazeFactory primFactory = new PrimFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;
 
             Maze<Cell> maze = primFactory.CreateMaze(length, width, cellSize);
 
-            IMazeSolver dfsMazeSolver = new DFSMazeSolver();
+            Solver.IMazeSolver dfsMazeSolver = new Solver.DFSSolver();
             Assert.True(dfsMazeSolver.IsSolvable(maze));
         }
 
         [Test]
         public void Test_CreateMaze_MazeShoulNotHaveCellsWithFourWalls() {
-            IMazeFactory primFactory = new PrimMazeFactory();
+            IMazeFactory primFactory = new PrimFactory();
             int length = 20;
             int width = 20;
             int cellSize = 2;

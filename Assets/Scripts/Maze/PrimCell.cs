@@ -1,4 +1,6 @@
 ﻿
+namespace Maze {
+
 /*
  * This status specifies if the cell was already visited by the algorithm,
  * or if it is a neighbor of a visited cell.
@@ -30,4 +32,6 @@ public class PrimCell : Cell {
 
         _status = PrimStatus.None;
     }
+}
+
 }

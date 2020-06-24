@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Numerics;
 
-public class PrimMazeFactory : IMazeFactory {
+namespace Maze.Factory {
+
+public class PrimFactory : IMazeFactory {
 
     #region private variables
     private Maze<PrimCell> _maze;
@@ -181,4 +183,6 @@ public class PrimMazeFactory : IMazeFactory {
         return maze;
     }
     #endregion
+}
+
 }

@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Tests {
+namespace Maze.Tests {
     public class CellTest {
 
         public class CellMock : Cell {

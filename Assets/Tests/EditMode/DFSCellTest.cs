@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Tests {
+namespace Maze.Tests {
     public class DFSCellTest {
 
         [Test]
