@@ -9,10 +9,6 @@ public class MazeRenderer : MonoBehaviour, IEventListener {
     #region private variables
     private GameObject _mazeObject;
 
-    private List<GameObject> _wallObjects = new List<GameObject>();
-
-    private List<GameObject> _chestObjects = new List<GameObject>();
-
     [SerializeField] private AssetReference _wallReference;
 
     [SerializeField] private AssetReference _chestReference;
@@ -40,12 +36,10 @@ public class MazeRenderer : MonoBehaviour, IEventListener {
 
     public void AddListeners() {
         EventManager.Instance.AddListener<Core.Events.InstantiationCompleted>(OnInstantiationCompleted);
-        EventManager.Instance.AddListener<Core.Events.InstanceDestroyed>(OnInstanceDestroyed);
     }
 
     public void RemoveListeners() {
         EventManager.Instance.RemoveListener<Core.Events.InstantiationCompleted>(OnInstantiationCompleted);
-        EventManager.Instance.RemoveListener<Core.Events.InstanceDestroyed>(OnInstanceDestroyed);
     }
     #endregion
 
@@ -180,22 +174,8 @@ public class MazeRenderer : MonoBehaviour, IEventListener {
             e.GameObject.transform.parent = _mazeObject.transform;
             e.GameObject.transform.localScale *= _maze.CellSize;
 
-            _wallObjects.Add(e.GameObject);
-
         } else if (e.Reference == _chestReference) {
             e.GameObject.transform.parent = _mazeObject.transform;
-
-            _chestObjects.Add(e.GameObject);
-
-        }
-    }
-
-    private void OnInstanceDestroyed(Core.Events.InstanceDestroyed e) {
-        if (e.Reference == _wallReference) {
-            _wallObjects.Remove(e.GameObject);
-
-        } else if (e.Reference == _chestReference) {
-            _chestObjects.Remove(e.GameObject);
         }
     }
     #endregion
