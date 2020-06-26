@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Core {
 
-    public class AssetLoader : MonoBehaviour, IEventListener {
+    public class AssetLoader : MonoBehaviour {
 
         #region singleton
         static AssetLoader _instance = null;
@@ -47,27 +47,26 @@ namespace Core {
             LoadAndSpawn(data);
         }
 
-        public void AddListeners() {
-            EventManager.Instance.AddListener<Events.InstanceDestroyed>(OnInstanceDestroyed);
-        }
+        public void Remove(AssetReference reference, GameObject instance) {
+            Addressables.ReleaseInstance(instance);
 
-        public void RemoveListeners() {
-            EventManager.Instance.RemoveListener<Events.InstanceDestroyed>(OnInstanceDestroyed);
+            _spawnedObjects[reference].Remove(instance);
+
+            if (_spawnedObjects[reference].Count == 0) {
+                if (_asyncOperationHandles[reference].IsValid())
+                    Addressables.Release(_asyncOperationHandles[reference]);
+
+                _asyncOperationHandles.Remove(reference);
+            }
         }
         #endregion
 
         #region private methods
         private void Awake() {
-            AddListeners();
-
             if (_instance == null) {
                 _instance = this;
                 DontDestroyOnLoad(gameObject);
             }
-        }
-
-        private void OnDestroy() {
-            RemoveListeners();
         }
 
         private void LoadAndSpawn(AssetReferenceData data) {
@@ -109,26 +108,14 @@ namespace Core {
 
         private GameObject OnInstatiationCompleted(AssetReferenceData data, AsyncOperationHandle<GameObject> asyncOperationHandle) {
             var instantiatedObject = asyncOperationHandle.Result;
-            instantiatedObject.AddComponent<NotifyOnDestroy>();
+            var notify = instantiatedObject.AddComponent<NotifyOnDestroy>();
+            notify.AssetReference = data.Reference;
 
             if (!_spawnedObjects.ContainsKey(data.Reference))
                 _spawnedObjects[data.Reference] = new List<GameObject>();
 
             _spawnedObjects[data.Reference].Add(instantiatedObject);
             return instantiatedObject;
-        }
-
-        private void OnInstanceDestroyed(Events.InstanceDestroyed e) {
-            Addressables.ReleaseInstance(e.GameObject);
-
-            _spawnedObjects[e.Reference].Remove(e.GameObject);
-
-            if (_spawnedObjects[e.Reference].Count == 0) {
-                if (_asyncOperationHandles[e.Reference].IsValid())
-                    Addressables.Release(_asyncOperationHandles[e.Reference]);
-
-                _asyncOperationHandles.Remove(e.Reference);
-            }
         }
         #endregion
     }

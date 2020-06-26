@@ -11,7 +11,8 @@ public class NotifyOnDestroy : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        Core.EventManager.Instance.QueueEvent(new Events.InstanceDestroyed(AssetReference, gameObject));
+        EventManager.Instance.TriggerEvent(new Events.InstanceDestroyed(AssetReference, gameObject));
+        AssetLoader.Instance.Remove(AssetReference, gameObject);
     }
 }
 

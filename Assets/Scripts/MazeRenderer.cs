@@ -133,26 +133,6 @@ public class MazeRenderer : MonoBehaviour, IEventListener {
         AssetLoader.Instance.Spawn(assetReferenceData);
     }
 
-    /*
-    private void InstantiateWall(Maze<Cell> maze, Vector3 position, Quaternion rotation) {
-        GameObject wall = Instantiate(_wallPrefab, position, rotation);
-
-        wall.transform.parent = _maze.transform;
-        wall.transform.localScale *= maze.CellSize;
-    }
-
-    private void InstantiateChest(Maze<Cell> maze, int row, int col) {
-        if (!maze[row, col].HasChest)
-            return;
-
-        Vector3 chestPosition = new Vector3((2 * row + 1) * maze.CellSize, 0.0f, (2 * col + 1) * maze.CellSize);
-        Quaternion chestRotation = GetChestRotation(maze[row, col]);
-
-        GameObject chest = Instantiate(_chestPrefab, chestPosition, chestRotation);
-        chest.transform.parent = _maze.transform;
-    }
-    */
-
     private Quaternion GetChestRotation(Cell cell) {
         switch (cell.DeadEndOpening()) {
             case Wall.Left:
