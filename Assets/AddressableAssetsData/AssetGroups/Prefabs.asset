@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Prefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: Prefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 12cd7efd03b4c7844aa55531667ded51
+  m_SerializeEntries:
+  - m_GUID: 6efb87a3a5204514d9d15ab836354937
+    m_Address: Assets/Prefabs/Wall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 6900542227850751051, guid: 6efb87a3a5204514d9d15ab836354937,
+      type: 3}
+    m_TargetAsset: {fileID: 6900542227850751051, guid: 6efb87a3a5204514d9d15ab836354937,
+      type: 3}
+  - m_GUID: 8982a22a414f86a4fb6f48905e0a97a8
+    m_Address: Assets/Prefabs/Chest.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 77bceda38d543c44292761ddd9efdcb2, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 2f3492ae619f8b0469bee373d0dd1bb2, type: 2}
+    - {fileID: 11400000, guid: 3efd7e5ae1783374191791ab66c07dc5, type: 2}

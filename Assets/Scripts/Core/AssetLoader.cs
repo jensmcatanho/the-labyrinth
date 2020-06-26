@@ -1,0 +1,181 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+
+namespace Core {
+
+    public class AssetLoader : MonoBehaviour, IEventListener {
+
+        #region singleton
+        static AssetLoader _instance = null;
+
+        public static AssetLoader Instance {
+            get {
+                if (_instance == null)
+                    _instance = FindObjectOfType(typeof(AssetLoader)) as AssetLoader;
+
+                return _instance;
+            }
+        }
+        #endregion
+
+        #region private variables
+        private readonly Dictionary<AssetReference, List<GameObject>> _spawnedObjects = new Dictionary<AssetReference, List<GameObject>>();
+
+        private readonly Dictionary<AssetReference, AsyncOperationHandle<GameObject>> _asyncOperationHandles = new Dictionary<AssetReference, AsyncOperationHandle<GameObject>>();
+
+        private readonly Dictionary<AssetReference, Queue<AssetReferenceData>> _queuedInstantiations = new Dictionary<AssetReference, Queue<AssetReferenceData>>();
+        #endregion
+
+        #region public methods
+        public void Spawn(AssetReferenceData data) {
+            if (!data.Reference.RuntimeKeyIsValid())
+                return;
+
+            if (_asyncOperationHandles.ContainsKey(data.Reference)) {
+                if (_asyncOperationHandles[data.Reference].IsDone)
+                    SpawnFromLoadedReference(data);
+                else
+                    EnqueueInstantiation(data);
+
+                return;
+            }
+
+            LoadAndSpawn(data);
+        }
+
+        public void AddListeners() {
+            EventManager.Instance.AddListener<Events.InstanceDestroyed>(OnInstanceDestroyed);
+        }
+
+        public void RemoveListeners() {
+            EventManager.Instance.RemoveListener<Events.InstanceDestroyed>(OnInstanceDestroyed);
+        }
+        #endregion
+
+        #region private methods
+        private void Awake() {
+            AddListeners();
+
+            if (_instance == null) {
+                _instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+        }
+
+        private void OnDestroy() {
+            RemoveListeners();
+        }
+
+        private void LoadAndSpawn(AssetReferenceData data) {
+            var operationHandle = Addressables.LoadAssetAsync<GameObject>(data.Reference);
+            _asyncOperationHandles[data.Reference] = operationHandle;
+
+            operationHandle.Completed += (operation) => {
+                SpawnFromLoadedReference(data);
+                SpawnFromQueue(data);
+            };
+        }
+
+        private void SpawnFromLoadedReference(AssetReferenceData data) {
+            data.InstantiateAsync().Completed += (asyncOperationHandle) => {
+                var instantiatedObject = OnInstatiationCompleted(data, asyncOperationHandle);
+                NotifyInstatiation(data.Reference, instantiatedObject);
+            };
+        }
+
+        private void EnqueueInstantiation(AssetReferenceData data) {
+            if (!_queuedInstantiations.ContainsKey(data.Reference))
+                _queuedInstantiations[data.Reference] = new Queue<AssetReferenceData>();
+
+            _queuedInstantiations[data.Reference].Enqueue(data);
+        }
+
+        private void SpawnFromQueue(AssetReferenceData data) {
+            if (_queuedInstantiations.ContainsKey(data.Reference)) {
+                while (_queuedInstantiations[data.Reference].Any()) {
+                    var queuedData = _queuedInstantiations[data.Reference].Dequeue();
+                    SpawnFromLoadedReference(queuedData);
+                }
+            }
+        }
+
+        private void NotifyInstatiation(AssetReference reference, GameObject instantiatedObject) {
+            EventManager.Instance.QueueEvent(new Events.InstantiationCompleted(reference, instantiatedObject));
+        }
+
+        private GameObject OnInstatiationCompleted(AssetReferenceData data, AsyncOperationHandle<GameObject> asyncOperationHandle) {
+            var instantiatedObject = asyncOperationHandle.Result;
+            instantiatedObject.AddComponent<NotifyOnDestroy>();
+
+            if (!_spawnedObjects.ContainsKey(data.Reference))
+                _spawnedObjects[data.Reference] = new List<GameObject>();
+
+            _spawnedObjects[data.Reference].Add(instantiatedObject);
+            return instantiatedObject;
+        }
+
+        private void OnInstanceDestroyed(Events.InstanceDestroyed e) {
+            Addressables.ReleaseInstance(e.GameObject);
+
+            _spawnedObjects[e.Reference].Remove(e.GameObject);
+
+            if (_spawnedObjects[e.Reference].Count == 0) {
+                if (_asyncOperationHandles[e.Reference].IsValid())
+                    Addressables.Release(_asyncOperationHandles[e.Reference]);
+
+                _asyncOperationHandles.Remove(e.Reference);
+            }
+        }
+        #endregion
+    }
+
+    namespace Events {
+
+        public class InstantiationCompleted : GameEvent {
+
+            public InstantiationCompleted(AssetReference reference, GameObject objectInstantiated) {
+                Reference = reference;
+                GameObject = objectInstantiated;
+            }
+
+            public AssetReference Reference {
+                get;
+            }
+
+            public GameObject GameObject {
+                get;
+            }
+        }
+
+    }
+
+    public class AssetReferenceData {
+
+        private AssetReference _reference;
+
+        private Vector3 _position;
+
+        private Quaternion _rotation;
+
+        public AssetReferenceData(AssetReference reference, Vector3 position, Quaternion rotation) {
+            _reference = reference;
+            _position = position;
+            _rotation = rotation;
+        }
+
+        public AssetReference Reference {
+            get {
+                return _reference;
+            }
+        }
+
+        public AsyncOperationHandle<GameObject> InstantiateAsync() {
+            return _reference.InstantiateAsync(_position, _rotation);
+        }
+    }
+
+}

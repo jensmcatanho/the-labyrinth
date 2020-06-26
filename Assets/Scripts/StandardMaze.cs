@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Maze;
+using System.Collections;
 
 public class StandardMaze : MonoBehaviour, IMaze {
 
@@ -21,6 +22,7 @@ public class StandardMaze : MonoBehaviour, IMaze {
 
     private void Start() {
         _renderer.Render(_maze);
+
     }
 
     private Maze.Factory.IMazeFactory GetFactoryFromSettings() {

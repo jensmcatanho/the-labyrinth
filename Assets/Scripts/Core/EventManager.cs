@@ -132,13 +132,8 @@ public class EventManager : MonoBehaviour {
     }
 
     private void Awake() {
-        if (_instance == null) {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-
-        } else {
-            DestroyImmediate(gameObject);
-        }
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     //Every update cycle the queue is processed, if the queue processing is limited,
