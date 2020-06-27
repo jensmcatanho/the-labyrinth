@@ -108,6 +108,9 @@ namespace Core {
 
         private GameObject OnInstatiationCompleted(AssetReferenceData data, AsyncOperationHandle<GameObject> asyncOperationHandle) {
             var instantiatedObject = asyncOperationHandle.Result;
+            if (data.Name.Length > 0)
+                instantiatedObject.name = data.Name;
+
             var notify = instantiatedObject.AddComponent<NotifyOnDestroy>();
             notify.AssetReference = data.Reference;
 
@@ -142,26 +145,30 @@ namespace Core {
 
     public class AssetReferenceData {
 
-        private AssetReference _reference;
-
         private Vector3 _position;
 
         private Quaternion _rotation;
 
-        public AssetReferenceData(AssetReference reference, Vector3 position, Quaternion rotation) {
-            _reference = reference;
+        private Transform _parent;
+        
+        public AssetReferenceData(AssetReference reference, Vector3 position, Quaternion rotation, Transform parent = null, string name = "") {
+            Reference = reference;
             _position = position;
             _rotation = rotation;
+            _parent = parent;
+            Name = name;
         }
 
         public AssetReference Reference {
-            get {
-                return _reference;
-            }
+            get;
+        }
+
+        public string Name {
+            get;
         }
 
         public AsyncOperationHandle<GameObject> InstantiateAsync() {
-            return _reference.InstantiateAsync(_position, _rotation);
+            return Reference.InstantiateAsync(_position, _rotation, _parent);
         }
     }
 
