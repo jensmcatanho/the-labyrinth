@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -103,7 +102,7 @@ namespace Core {
         }
 
         private void NotifyInstatiation(AssetReference reference, GameObject instantiatedObject) {
-            EventManager.Instance.QueueEvent(new Events.InstantiationCompleted(reference, instantiatedObject));
+            EventManager.Instance.QueueEvent(new Events.SpawnCompleted(reference, instantiatedObject));
         }
 
         private GameObject OnInstatiationCompleted(AssetReferenceData data, AsyncOperationHandle<GameObject> asyncOperationHandle) {
@@ -122,54 +121,4 @@ namespace Core {
         }
         #endregion
     }
-
-    namespace Events {
-
-        public class InstantiationCompleted : GameEvent {
-
-            public InstantiationCompleted(AssetReference reference, GameObject objectInstantiated) {
-                Reference = reference;
-                GameObject = objectInstantiated;
-            }
-
-            public AssetReference Reference {
-                get;
-            }
-
-            public GameObject GameObject {
-                get;
-            }
-        }
-
-    }
-
-    public class AssetReferenceData {
-
-        private Vector3 _position;
-
-        private Quaternion _rotation;
-
-        private Transform _parent;
-        
-        public AssetReferenceData(AssetReference reference, Vector3 position, Quaternion rotation, Transform parent = null, string name = "") {
-            Reference = reference;
-            _position = position;
-            _rotation = rotation;
-            _parent = parent;
-            Name = name;
-        }
-
-        public AssetReference Reference {
-            get;
-        }
-
-        public string Name {
-            get;
-        }
-
-        public AsyncOperationHandle<GameObject> InstantiateAsync() {
-            return Reference.InstantiateAsync(_position, _rotation, _parent);
-        }
-    }
-
 }

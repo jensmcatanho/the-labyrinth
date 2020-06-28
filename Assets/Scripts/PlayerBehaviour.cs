@@ -8,11 +8,11 @@ public class PlayerBehaviour : MonoBehaviour, Core.IEventListener {
 
     #region public methods
     public void AddListeners() {
-       Core.EventManager.Instance.AddListenerOnce<Core.Events.GameSceneLoaded>(OnSceneLoaded);
+       Core.EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnSceneLoaded);
     }
 
     public void RemoveListeners() {
-        Core.EventManager.Instance?.RemoveListener<Core.Events.GameSceneLoaded>(OnSceneLoaded);
+        Core.EventManager.Instance?.RemoveListener<Events.GameSceneLoaded>(OnSceneLoaded);
     }
     #endregion
 
@@ -26,7 +26,7 @@ public class PlayerBehaviour : MonoBehaviour, Core.IEventListener {
         RemoveListeners();
     }
 
-    private void OnSceneLoaded(Core.Events.GameSceneLoaded e) {
+    private void OnSceneLoaded(Events.GameSceneLoaded e) {
         InstantiatePlayer();
     }
 

@@ -5,25 +5,25 @@ namespace Tests {
 
         [Test]
         public void Test_GameEvent_GameSceneLoaded() {
-            Core.Events.GameSceneLoaded evt = new Core.Events.GameSceneLoaded();
+            var evt = new Events.GameSceneLoaded();
             Assert.NotNull(evt);
         }
 
         [Test]
         public void Test_GameEvent_MazeFinished() {
-            Events.MazeFinished evt = new Events.MazeFinished();
+            var evt = new Events.MazeFinished();
             Assert.NotNull(evt);
         }
 
         [Test]
         public void Test_GameEvent_MenuSceneLoaded() {
-            Core.Events.MenuSceneLoaded evt = new Core.Events.MenuSceneLoaded();
+            var evt = new Events.MenuSceneLoaded();
             Assert.NotNull(evt);
         }
 
         [Test]
         public void Test_GameEvent_StartButtonClicked() {
-            Menu.Events.StartButtonClicked evt = new Menu.Events.StartButtonClicked();
+            var evt = new Events.StartButtonClicked();
             Assert.NotNull(evt);
         }
     }

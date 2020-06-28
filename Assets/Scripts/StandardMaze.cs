@@ -17,11 +17,11 @@ public class StandardMaze : MonoBehaviour, IMaze, IEventListener {
 
     #region public methods
     public void AddListeners() {
-        EventManager.Instance.AddListener<Core.Events.InstantiationCompleted>(OnInstantiationCompleted);
+        EventManager.Instance.AddListener<Events.SpawnCompleted>(OnSpawnCompleted);
     }
 
     public void RemoveListeners() {
-        EventManager.Instance.RemoveListener<Core.Events.InstantiationCompleted>(OnInstantiationCompleted);
+        EventManager.Instance.RemoveListener<Events.SpawnCompleted>(OnSpawnCompleted);
     }
     #endregion
 
@@ -53,7 +53,7 @@ public class StandardMaze : MonoBehaviour, IMaze, IEventListener {
         }
     }
 
-    private void OnInstantiationCompleted(Core.Events.InstantiationCompleted e) {
+    private void OnSpawnCompleted(Events.SpawnCompleted e) {
         if (e.Reference == _wallAssetReference) {
             e.GameObject.transform.localScale *= _maze.CellSize;
         }

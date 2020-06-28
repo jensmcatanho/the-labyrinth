@@ -9,12 +9,3 @@ public class FinishTrigger : MonoBehaviour {
     }
     #endregion
 }
-
-namespace Events {
-
-    public class MazeFinished : Core.GameEvent {
-        public MazeFinished() {
-        }
-    }
-
-}

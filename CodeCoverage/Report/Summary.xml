@@ -1,27 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>24/06/2020 - 14:05:01</Generatedon>
+    <Generatedon>28/06/2020 - 04:00:06</Generatedon>
     <Parser>OpenCoverParser</Parser>
     <Assemblies>1</Assemblies>
-    <Classes>21</Classes>
-    <Files>17</Files>
-    <Coveredlines>416</Coveredlines>
-    <Uncoveredlines>272</Uncoveredlines>
-    <Coverablelines>688</Coverablelines>
-    <Totallines>1337</Totallines>
-    <Linecoverage>60.4</Linecoverage>
+    <Classes>25</Classes>
+    <Files>25</Files>
+    <Coveredlines>415</Coveredlines>
+    <Uncoveredlines>404</Uncoveredlines>
+    <Coverablelines>819</Coverablelines>
+    <Totallines>1614</Totallines>
+    <Linecoverage>50.6</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="Scripts" classes="21" coverage="60.4" coveredlines="416" coverablelines="688" totallines="1596" branchcoverage="" coveredbranches="0" totalbranches="0">
-      <Class name="Core.EventManager" coverage="6" coveredlines="6" coverablelines="99" totallines="170" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.Events.GameSceneLoaded" coverage="100" coveredlines="2" coverablelines="2" totallines="99" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.Events.MenuSceneLoaded" coverage="100" coveredlines="2" coverablelines="2" totallines="99" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.SceneLoader" coverage="0" coveredlines="0" coverablelines="43" totallines="99" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Events.MazeFinished" coverage="100" coveredlines="2" coverablelines="2" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="FinishTrigger" coverage="0" coveredlines="0" coverablelines="3" totallines="20" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    <Assembly name="Scripts" classes="25" coverage="50.6" coveredlines="415" coverablelines="819" totallines="1614" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="Core.AssetLoader" coverage="4" coveredlines="3" coverablelines="75" totallines="124" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.AssetReferenceData" coverage="0" coveredlines="0" coverablelines="12" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.EventManager" coverage="6.3" coveredlines="6" coverablelines="95" totallines="165" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.NotifyOnDestroy" coverage="0" coveredlines="0" coverablelines="5" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.SceneLoader" coverage="0" coveredlines="0" coverablelines="43" totallines="85" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.GameSceneLoaded" coverage="100" coveredlines="2" coverablelines="2" totallines="8" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.MazeFinished" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.MenuSceneLoaded" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.SpawnCompleted" coverage="0" coveredlines="0" coverablelines="6" totallines="22" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.StartButtonClicked" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="FinishTrigger" coverage="0" coveredlines="0" coverablelines="3" totallines="11" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Cell" coverage="100" coveredlines="57" coverablelines="57" totallines="119" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.DFSCell" coverage="100" coveredlines="5" coverablelines="5" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Factory.DFSFactory" coverage="100" coveredlines="101" coverablelines="101" totallines="168" branchcoverage="" coveredbranches="0" totalbranches="0" />
@@ -29,14 +34,13 @@
       <Class name="Maze.Maze[T]" coverage="100" coveredlines="37" coverablelines="37" totallines="82" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.PrimCell" coverage="88.8" coveredlines="8" coverablelines="9" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Solver.DFSSolver" coverage="100" coveredlines="54" coverablelines="54" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MazeBehaviour" coverage="0" coveredlines="0" coverablelines="15" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MazeRenderer" coverage="4.8" coveredlines="4" coverablelines="83" totallines="157" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="MazeSettings" coverage="80" coveredlines="12" coverablelines="15" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.Events.StartButtonClicked" coverage="100" coveredlines="2" coverablelines="2" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MazeSettings" coverage="75" coveredlines="9" coverablelines="12" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MazeSpawner" coverage="0" coveredlines="0" coverablelines="108" totallines="213" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Menu.MenuBehaviour" coverage="0" coveredlines="0" coverablelines="2" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.StartButton" coverage="0" coveredlines="0" coverablelines="13" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Menu.StartButton" coverage="0" coveredlines="0" coverablelines="13" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="PlayerBehaviour" coverage="0" coveredlines="0" coverablelines="20" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="RandomExtensions" coverage="100" coveredlines="3" coverablelines="3" totallines="7" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="StandardMaze" coverage="10" coveredlines="3" coverablelines="30" totallines="62" branchcoverage="" coveredbranches="0" totalbranches="0" />
     </Assembly>
   </Coverage>
 </CoverageReport>

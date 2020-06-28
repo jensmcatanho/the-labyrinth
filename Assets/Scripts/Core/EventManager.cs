@@ -19,7 +19,7 @@ public class EventManager : MonoBehaviour {
     }
     #endregion
 
-    public delegate void EventDelegate<T>(T e) where T : GameEvent;
+    public delegate void EventDelegate<T>(T e) where T : Events.GameEvent;
 
     #region private members
     [SerializeField] private bool _limitQueueProcessing = false;
@@ -34,22 +34,22 @@ public class EventManager : MonoBehaviour {
 
     private Queue _eventQueue = new Queue();
 
-    private delegate void EventDelegate(GameEvent e);
+    private delegate void EventDelegate(Events.GameEvent e);
     #endregion
 
     #region public methods
-    public void AddListener<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
+    public void AddListener<T>(EventDelegate<T> eventDelegate) where T : Events.GameEvent {
         AddDelegate<T>(eventDelegate);
     }
 
-    public void AddListenerOnce<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
+    public void AddListenerOnce<T>(EventDelegate<T> eventDelegate) where T : Events.GameEvent {
         EventDelegate result = AddDelegate<T>(eventDelegate);
 
         if (result != null)
             _onceLookups[result] = eventDelegate;
     }
 
-    public void RemoveListener<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
+    public void RemoveListener<T>(EventDelegate<T> eventDelegate) where T : Events.GameEvent {
         if (_delegateLookup.Count == 0)
             return;
 
@@ -73,13 +73,13 @@ public class EventManager : MonoBehaviour {
         _onceLookups.Clear();
     }
 
-    public bool HasListener<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
+    public bool HasListener<T>(EventDelegate<T> eventDelegate) where T : Events.GameEvent {
         return _delegateLookup.ContainsKey(eventDelegate);
     }
 
-    public void TriggerEvent(GameEvent e) {
+    public void TriggerEvent(Events.GameEvent e) {
 #if UNITY_EDITOR
-        Debug.Log("GameEvent " + e.ToString() + " triggered.");
+        Debug.Log("Events.GameEvent " + e.ToString() + " triggered.");
 #endif
 
         if (_delegates.TryGetValue(e.GetType(), out EventDelegate eventDelegate)) {
@@ -98,11 +98,11 @@ public class EventManager : MonoBehaviour {
                 }
 
         } else {
-            Debug.LogWarning("GameEvent: " + e.GetType() + " has no listeners");
+            Debug.LogWarning("Events.GameEvent: " + e.GetType() + " has no listeners");
         }
     }
 
-    public bool QueueEvent(GameEvent eventToQueue) {
+    public bool QueueEvent(Events.GameEvent eventToQueue) {
         if (!_delegates.ContainsKey(eventToQueue.GetType())) {
             Debug.LogWarning("EventManager: QueueEvent failed due to no listeners for event: " + eventToQueue.GetType());
             return false;
@@ -114,7 +114,7 @@ public class EventManager : MonoBehaviour {
     #endregion
 
     #region private methods
-    private EventDelegate AddDelegate<T>(EventDelegate<T> eventDelegate) where T : GameEvent {
+    private EventDelegate AddDelegate<T>(EventDelegate<T> eventDelegate) where T : Events.GameEvent {
         // Check if this delegate is already registered
         if (_delegateLookup.ContainsKey(eventDelegate))
             return null;
@@ -146,7 +146,7 @@ public class EventManager : MonoBehaviour {
                 if (timer > _queueProcessTime)
                     return;
 
-            GameEvent dequeuedEvent = _eventQueue.Dequeue() as GameEvent;
+            Events.GameEvent dequeuedEvent = _eventQueue.Dequeue() as Events.GameEvent;
             TriggerEvent(dequeuedEvent);
 
             if (_limitQueueProcessing)
