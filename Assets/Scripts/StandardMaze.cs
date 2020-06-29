@@ -34,7 +34,7 @@ public class StandardMaze : MonoBehaviour, IMaze, IEventListener {
         _maze = mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
 
         var mazeSpawner = new MazeSpawner(gameObject.transform, _wallAssetReference, _chestAssetReference);
-        mazeSpawner.SpawnMaze(_maze);
+        mazeSpawner.SpawnMaze(_maze, _mazeSettings);
     }
 
     private void OnDestroy() {

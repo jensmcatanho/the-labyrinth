@@ -16,6 +16,8 @@ public class MazeSettings : ScriptableObject {
     [SerializeField] private int _cellSize;
 
     [SerializeField] private GenerationAlgorithm _algorithm;
+
+    [SerializeField] private bool _isPlayable;
     #endregion
 
     #region public methods
@@ -24,6 +26,7 @@ public class MazeSettings : ScriptableObject {
             return _width;
         }
     }
+
     public int Height {
         get {
             return _height;
@@ -38,6 +41,12 @@ public class MazeSettings : ScriptableObject {
     public GenerationAlgorithm Algorithm {
         get {
             return _algorithm;
+        }
+    }
+
+    public bool IsPlayable {
+        get {
+            return _isPlayable;
         }
     }
     #endregion

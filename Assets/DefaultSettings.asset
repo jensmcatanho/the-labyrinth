@@ -15,3 +15,5 @@ MonoBehaviour:
   _width: 20
   _height: 20
   _cellSize: 2
+  _algorithm: 0
+  _isPlayable: 1

@@ -8,6 +8,8 @@ public class MazeSpawner {
     #region private variables
     private Maze<Cell> _maze;
 
+    private MazeSettings _mazeSettings;
+
     private readonly Transform _parent;
 
     private readonly AssetReference _wallAssetReference = null;
@@ -30,8 +32,9 @@ public class MazeSpawner {
         _chestAssetReference = chestAssetReference;
     }
 
-    public void SpawnMaze(Maze<Cell> maze) {
+    public void SpawnMaze(Maze<Cell> maze, MazeSettings settings) {
         _maze = maze;
+        _mazeSettings = settings;
 
         SpawnFloor();
         SpawnWalls();
@@ -150,7 +153,7 @@ public class MazeSpawner {
     }
 
     private void SpawnChest(int row, int col) {
-        if (!_maze[row, col].HasChest)
+        if (!_maze[row, col].HasChest || !_mazeSettings.IsPlayable)
             return;
 
         var assetReferenceData = new Core.AssetReferenceData(
