@@ -11,7 +11,8 @@ public class NotifyOnDestroy : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        AssetLoader.Instance.Remove(AssetReference, gameObject);
+        if (AssetLoader.Instance)
+            AssetLoader.Instance.Remove(AssetReference, gameObject);
     }
 }
 
