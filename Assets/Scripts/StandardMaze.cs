@@ -21,7 +21,8 @@ public class StandardMaze : MonoBehaviour, IMaze, IEventListener {
     }
 
     public void RemoveListeners() {
-        EventManager.Instance.RemoveListener<Events.SpawnCompleted>(OnSpawnCompleted);
+        if (EventManager.Instance)
+            EventManager.Instance.RemoveListener<Events.SpawnCompleted>(OnSpawnCompleted);
     }
     #endregion
 
