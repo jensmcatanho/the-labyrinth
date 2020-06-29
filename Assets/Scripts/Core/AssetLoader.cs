@@ -49,7 +49,8 @@ namespace Core {
         public void Remove(AssetReference reference, GameObject instance) {
             Addressables.ReleaseInstance(instance);
 
-            _spawnedObjects[reference].Remove(instance);
+            if (_spawnedObjects.ContainsKey(reference))
+                _spawnedObjects[reference]?.Remove(instance);
 
             if (_spawnedObjects[reference].Count == 0) {
                 if (_asyncOperationHandles[reference].IsValid())
