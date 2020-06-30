@@ -15,6 +15,10 @@ namespace Menu {
         public void RemoveListeners() {
             _button.onClick.RemoveListener(OnClicked);
         }
+
+        public void SetActive(bool target) {
+            gameObject.SetActive(target);
+        }
         #endregion
 
         #region private methods

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f09c7eb12b59e459ca4eb04a5bd417, type: 3}
   m_Name: MenuSettings
   m_EditorClassIdentifier: 
-  _width: 100
-  _height: 100
+  _width: 80
+  _height: 80
   _cellSize: 5
   _algorithm: 0
+  _isPlayable: 0
