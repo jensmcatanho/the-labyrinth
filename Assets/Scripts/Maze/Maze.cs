@@ -3,7 +3,7 @@
 [System.Serializable]
 public class Maze<T> where T : Cell {
 
-    #region private variables
+    #region private fields
     private int _length;
 
     private int _width;

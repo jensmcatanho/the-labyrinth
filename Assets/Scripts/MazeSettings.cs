@@ -8,7 +8,7 @@ public enum GenerationAlgorithm {
 
 [CreateAssetMenu(menuName = "Maze/Settings")]
 public class MazeSettings : ScriptableObject {
-    #region private variables
+    #region private fields
     [SerializeField] private int _width;
 
     [SerializeField] private int _height;

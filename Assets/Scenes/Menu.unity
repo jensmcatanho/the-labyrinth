@@ -630,6 +630,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1854132534301925877, guid: 9461b8cb7d6923246be74275c3fbfae8,
+        type: 3}
+      propertyPath: temporalAntialiasing.motionBlending
+      value: 0.93
+      objectReference: {fileID: 0}
     - target: {fileID: 460543641357454482, guid: 9461b8cb7d6923246be74275c3fbfae8,
         type: 3}
       propertyPath: _fadeInImage

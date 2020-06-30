@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fadeInImage: {fileID: 0}
+  _delay: 0
+  _duration: 0
 --- !u!114 &7130164293233404328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +155,7 @@ MonoBehaviour:
     jitterSpread: 0.75
     sharpness: 0.25
     stationaryBlending: 0.95
-    motionBlending: 0.85
+    motionBlending: 0.95
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:

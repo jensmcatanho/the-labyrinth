@@ -1,12 +1,12 @@
-﻿using Core;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Menu.Animation {
 
-    public class CameraFadeIn : MonoBehaviour, IEventListener {
+    public class CameraFadeIn : MonoBehaviour, Core.IEventListener {
 
+        #region private fields
         [SerializeField] private Image _fadeInImage;
 
         [SerializeField] private float _delay;
@@ -14,15 +14,19 @@ namespace Menu.Animation {
         [SerializeField] private float _duration;
 
         private Hashtable _args;
+        #endregion
 
+        #region public methods
         public void AddListeners() {
-            EventManager.Instance.AddListenerOnce<Events.MenuCameraAscensionStarted>(OnCameraAscensionStarted);
+            Core.EventManager.Instance.AddListenerOnce<Events.MenuCameraAscensionStarted>(OnCameraAscensionStarted);
         }
 
         public void RemoveListeners() {
             return;
         }
+        #endregion
 
+        #region private methods
         private void Awake() {
             _fadeInImage.gameObject.SetActive(true);
             _fadeInImage.canvasRenderer.SetColor(Color.black);
@@ -53,6 +57,7 @@ namespace Menu.Animation {
         private void FadeIn(float alpha) {
             _fadeInImage.canvasRenderer.SetAlpha(alpha);
         }
+        #endregion
     }
 
 }

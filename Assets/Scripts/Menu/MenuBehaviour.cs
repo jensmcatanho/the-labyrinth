@@ -1,11 +1,10 @@
-﻿using Core;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Menu {
 
-    public class MenuBehaviour : MonoBehaviour, IEventListener {
+    public class MenuBehaviour : MonoBehaviour, Core.IEventListener {
 
-        #region private variables
+        #region private fields
         private TitleText _titleText;
 
         private StartButton _startButton;
@@ -13,12 +12,12 @@ namespace Menu {
 
         #region public methods
         public void AddListeners() {
-            EventManager.Instance.AddListener<Events.MenuCameraPositioned>(OnCameraPositioned);
+            Core.EventManager.Instance.AddListener<Events.MenuCameraPositioned>(OnCameraPositioned);
         }
 
         public void RemoveListeners() {
-            if (EventManager.Instance)
-                EventManager.Instance.RemoveListener<Events.MenuCameraPositioned>(OnCameraPositioned);
+            if (Core.EventManager.Instance)
+                Core.EventManager.Instance.RemoveListener<Events.MenuCameraPositioned>(OnCameraPositioned);
         }
         #endregion
 

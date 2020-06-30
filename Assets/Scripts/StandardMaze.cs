@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Maze;
-using Core;
 
-public class StandardMaze : MonoBehaviour, IMaze, IEventListener {
+public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
 
-    #region private variables
+    #region private fields
     [SerializeField] private MazeSettings _mazeSettings = null;
 
     [SerializeField] private AssetReference _wallAssetReference = null;
@@ -17,12 +16,12 @@ public class StandardMaze : MonoBehaviour, IMaze, IEventListener {
 
     #region public methods
     public void AddListeners() {
-        EventManager.Instance.AddListener<Events.SpawnCompleted>(OnSpawnCompleted);
+        Core.EventManager.Instance.AddListener<Events.SpawnCompleted>(OnSpawnCompleted);
     }
 
     public void RemoveListeners() {
-        if (EventManager.Instance)
-            EventManager.Instance.RemoveListener<Events.SpawnCompleted>(OnSpawnCompleted);
+        if (Core.EventManager.Instance)
+            Core.EventManager.Instance.RemoveListener<Events.SpawnCompleted>(OnSpawnCompleted);
     }
     #endregion
 

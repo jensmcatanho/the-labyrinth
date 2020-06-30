@@ -5,7 +5,7 @@ using Maze;
 
 public class MazeSpawner {
 
-    #region private variables
+    #region private fields
     private Maze<Cell> _maze;
 
     private MazeSettings _mazeSettings;

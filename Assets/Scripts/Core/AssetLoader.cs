@@ -21,7 +21,7 @@ namespace Core {
         }
         #endregion
 
-        #region private variables
+        #region private fields
         private readonly Dictionary<AssetReference, List<GameObject>> _spawnedObjects = new Dictionary<AssetReference, List<GameObject>>();
 
         private readonly Dictionary<AssetReference, AsyncOperationHandle<GameObject>> _asyncOperationHandles = new Dictionary<AssetReference, AsyncOperationHandle<GameObject>>();

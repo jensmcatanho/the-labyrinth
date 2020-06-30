@@ -1,11 +1,11 @@
-﻿using Core;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Menu.Animation {
 
     public class CameraAscension : MonoBehaviour {
 
+        #region private fields
         [SerializeField] private float _delay;
 
         [SerializeField] private float _duration;
@@ -13,7 +13,9 @@ namespace Menu.Animation {
         [SerializeField] private float _height;
 
         private Hashtable _args;
+        #endregion
 
+        #region private methods
         private void Awake() {
             _args = new Hashtable {
                 { "position", new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + _height, gameObject.transform.position.z) },
@@ -25,13 +27,15 @@ namespace Menu.Animation {
         }
 
         private void Start() {
-            EventManager.Instance.TriggerEvent(new Events.MenuCameraAscensionStarted());
+            Core.EventManager.Instance.TriggerEvent(new Events.MenuCameraAscensionStarted());
             iTween.MoveTo(gameObject, _args);
         }
 
         private void OnCameraAscensionCompleted() {
-            EventManager.Instance.QueueEvent(new Events.MenuCameraPositioned(gameObject.transform.position));
+            Core.EventManager.Instance.TriggerEvent(new Events.MenuCameraPositioned(gameObject.transform.position));
+            Destroy(this);
         }
+        #endregion
     }
 
 }

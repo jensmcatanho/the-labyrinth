@@ -6,7 +6,7 @@ namespace Maze.Factory {
 
 public class PrimFactory : IMazeFactory {
 
-    #region private variables
+    #region private fields
     private Maze<PrimCell> _maze;
 
     private readonly float _probabilityOfChests = 0.14f;

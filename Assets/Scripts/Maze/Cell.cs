@@ -15,7 +15,7 @@ public enum Wall {
 
 public class Cell {
 
-    #region private variables
+    #region private fields
     private Wall _walls;
 
     private Vector2 _position;

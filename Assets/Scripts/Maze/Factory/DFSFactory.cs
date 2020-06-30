@@ -6,7 +6,7 @@ namespace Maze.Factory {
 
 public class DFSFactory : IMazeFactory {
 
-    #region private variables
+    #region private fields
     private Maze<DFSCell> _maze;
 
     private readonly float _probabilityOfChests = 0.5f;

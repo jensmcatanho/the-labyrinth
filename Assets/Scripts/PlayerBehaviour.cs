@@ -12,7 +12,8 @@ public class PlayerBehaviour : MonoBehaviour, Core.IEventListener {
     }
 
     public void RemoveListeners() {
-        Core.EventManager.Instance?.RemoveListener<Events.GameSceneLoaded>(OnSceneLoaded);
+        if (Core.EventManager.Instance)
+            Core.EventManager.Instance.RemoveListener<Events.GameSceneLoaded>(OnSceneLoaded);
     }
     #endregion
 
