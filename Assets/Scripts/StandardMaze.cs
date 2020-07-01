@@ -58,5 +58,9 @@ public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
             e.GameObject.transform.localScale *= _maze.CellSize;
         }
     }
+
+    private void NotifyOnMazeInstantiated() {
+        
+    }
     #endregion
 }

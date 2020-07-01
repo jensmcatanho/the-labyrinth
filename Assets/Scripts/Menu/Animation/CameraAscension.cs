@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Menu.Animation {
 
-    public class CameraAscension : MonoBehaviour {
+    public class CameraAscension : MonoBehaviour, Core.IEventListener {
 
         #region private fields
         [SerializeField] private float _delay;
@@ -15,6 +15,16 @@ namespace Menu.Animation {
         private Hashtable _args;
         #endregion
 
+        #region public methods
+        public void AddListeners() {
+            Core.EventManager.Instance.AddListenerOnce<Events.MazeInstanced>(StartAnimation);
+        }
+
+        public void RemoveListeners() {
+            return;
+        }
+        #endregion
+
         #region private methods
         private void Awake() {
             _args = new Hashtable {
@@ -24,9 +34,11 @@ namespace Menu.Animation {
                 { "time", _duration },
                 { "oncomplete", "OnCameraAscensionCompleted" }
             };
+
+            AddListeners();
         }
 
-        private void Start() {
+        private void StartAnimation(Events.MazeInstanced e) {
             Core.EventManager.Instance.TriggerEvent(new Events.MenuCameraAscensionStarted());
             iTween.MoveTo(gameObject, _args);
         }
