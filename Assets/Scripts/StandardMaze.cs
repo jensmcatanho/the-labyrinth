@@ -30,7 +30,7 @@ public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
         AddListeners();
 
         var mazeFactory = GetFactoryFromSettings();
-        _maze = mazeFactory.CreateMaze(_mazeSettings.Width, _mazeSettings.Height, _mazeSettings.CellSize);
+        _maze = mazeFactory.CreateMaze(_mazeSettings.Length, _mazeSettings.Width, _mazeSettings.CellSize);
 
         var mazeSpawner = new MazeSpawner(gameObject.transform, _wallAssetReference, _chestAssetReference);
         mazeSpawner.SpawnMaze(_maze, _mazeSettings);
@@ -58,9 +58,5 @@ public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
             e.GameObject.transform.localScale *= _maze.CellSize;
         }
     }
-
-    private void NotifyOnMazeInstantiated() {
-        
-    }
-    #endregion
+   #endregion
 }

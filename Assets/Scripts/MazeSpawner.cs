@@ -53,53 +53,55 @@ public class MazeSpawner {
     }
 
     private void SpawnWalls() {
-        /*
-		 *  Note that the maze matrix is not traversed like we normally would do. Instead of instantiating every cell of each row in order, we
-		 *  first instatiate cells from the diagonal. Next, we instantiate cells from the lower and upper triangular parts of the maze separately.
-		 *  This way we ensure that we are not instantiating a wall south of the cell on the same place we have already instantiated a wall north
-		 *  of the cell right below.
-		 */
-        SpawnDiagonalCells();
+        SpawnFirstRow();
+        SpawnFirstColumn();
 
-        for (int i = 0; i < _maze.Length; i++)
-            for (int j = i + 1; j < _maze.Width; j++) {
-                SpawnLowerTriangular(j, i);
-                SpawnChest(j, i);
-
-                SpawnUpperTriangular(i, j);
+        for (int i = 1; i < _maze.Length; i++) {
+            for (int j = 1; j < _maze.Width; j++) {
                 SpawnChest(i, j);
+
+                if (_maze[i, j].HasWall(Wall.Right))
+                    SpawnRightWall(i, j);
+
+                if (_maze[i, j].HasWall(Wall.Down))
+                    SpawnDownWall(i, j);
             }
+        }
     }
 
-    private void SpawnLowerTriangular(int i, int j) {
-        if (_maze[i, j].HasWall(Wall.Left))
-            SpawnLeftWall(i, j);
-
-        if (_maze[i, j].HasWall(Wall.Down))
-            SpawnDownWall(i, j);
-    }
-
-    private void SpawnUpperTriangular(int i, int j) {
-        if (_maze[i, j].HasWall(Wall.Up))
-            SpawnUpWall(i, j);
-
-        if (_maze[i, j].HasWall(Wall.Right))
-            SpawnRightWall(i, j);
-    }
-
-    private void SpawnDiagonalCells() {
+    private void SpawnFirstRow() {
         for (int i = 0; i < _maze.Length; i++) {
-            if (_maze[i, i].HasWall(Wall.Left))
-                SpawnLeftWall(i, i);
+            SpawnChest(i, 0);
 
-            if (_maze[i, i].HasWall(Wall.Down))
-                SpawnDownWall(i, i);
+            if (_maze[i, 0].HasWall(Wall.Left))
+                SpawnLeftWall(i, 0);
 
-            if (_maze[i, i].HasWall(Wall.Up))
-                SpawnUpWall(i, i);
+            if (_maze[i, 0].HasWall(Wall.Down))
+                SpawnDownWall(i, 0);
 
-            if (_maze[i, i].HasWall(Wall.Right))
-                SpawnRightWall(i, i);
+            if (_maze[i, 0].HasWall(Wall.Up))
+                SpawnUpWall(i, 0);
+
+            if (_maze[i, 0].HasWall(Wall.Right))
+                SpawnRightWall(i, 0);
+        }
+    }
+
+    private void SpawnFirstColumn() {
+        for (int i = 1; i < _maze.Width; i++) {
+            SpawnChest(0, i);
+
+            if (_maze[0, i].HasWall(Wall.Left))
+                SpawnLeftWall(0, i);
+
+            if (_maze[0, i].HasWall(Wall.Down))
+                SpawnDownWall(0, i);
+
+            if (_maze[0, i].HasWall(Wall.Up))
+                SpawnUpWall(0, i);
+
+            if (_maze[0, i].HasWall(Wall.Right))
+                SpawnRightWall(0, i);
         }
     }
 
