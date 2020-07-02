@@ -84,27 +84,27 @@ public class MazeSpawner {
             SpawnRightWall(0, 0);
     }
 
-    private void SpawnFirstRow() {
+    private void SpawnFirstColumn() {
         for (int i = 1; i < _maze.Length; i++) {
             SpawnChest(i, 0);
 
+            if (_maze[i, 0].HasWall(Wall.Left))
+                SpawnLeftWall(i, 0);
+
             if (_maze[i, 0].HasWall(Wall.Down))
                 SpawnDownWall(i, 0);
-
-            if (_maze[i, 0].HasWall(Wall.Up))
-                SpawnUpWall(i, 0);
 
             if (_maze[i, 0].HasWall(Wall.Right))
                 SpawnRightWall(i, 0);
         }
     }
 
-    private void SpawnFirstColumn() {
+    private void SpawnFirstRow() {
         for (int i = 1; i < _maze.Width; i++) {
             SpawnChest(0, i);
 
-            if (_maze[0, i].HasWall(Wall.Left))
-                SpawnLeftWall(0, i);
+            if (_maze[0, i].HasWall(Wall.Up))
+                SpawnUpWall(0, i);
 
             if (_maze[0, i].HasWall(Wall.Down))
                 SpawnDownWall(0, i);
