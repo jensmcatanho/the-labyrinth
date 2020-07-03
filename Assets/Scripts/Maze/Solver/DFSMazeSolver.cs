@@ -62,16 +62,16 @@ public class DFSSolver : IMazeSolver {
         int row = (int)cell.Position.X;
         int col = (int)cell.Position.Y;
 
-        if (!cell.HasWall(Wall.Left) && !IsVisited(row, col -1))
+        if (!cell.HasWall(Direction.Left) && !IsVisited(row, col -1))
             neighbors.Add(_maze[row, col - 1]);
 
-        if (!cell.HasWall(Wall.Up) && !IsVisited(row - 1, col))
+        if (!cell.HasWall(Direction.Up) && !IsVisited(row - 1, col))
             neighbors.Add(_maze[row - 1, col]);
 
-        if (!cell.HasWall(Wall.Right) && !IsVisited(row, col + 1))
+        if (!cell.HasWall(Direction.Right) && !IsVisited(row, col + 1))
             neighbors.Add(_maze[row, col + 1]);
 
-        if (!cell.HasWall(Wall.Down) && !IsVisited(row + 1, col))
+        if (!cell.HasWall(Direction.Down) && !IsVisited(row + 1, col))
             neighbors.Add(_maze[row + 1, col]);
 
         if (neighbors.Count > 0)

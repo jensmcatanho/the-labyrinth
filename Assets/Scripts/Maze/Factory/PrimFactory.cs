@@ -44,7 +44,7 @@ public class PrimFactory : IMazeFactory {
             currentCell = GetCellFromFrontier();
             MarkAsVisited(currentCell);
 
-            Wall neighborDirection = GetRandomVisitedNeighbor(currentCell);
+            Direction neighborDirection = GetRandomVisitedNeighbor(currentCell);
             ConnectToNeighborCell(currentCell, neighborDirection);
 
         } while (_frontier.Count > 0);
@@ -88,54 +88,54 @@ public class PrimFactory : IMazeFactory {
         cell.Status = status;
     }
 
-    private Wall GetRandomVisitedNeighbor(PrimCell cell) {
+    private Direction GetRandomVisitedNeighbor(PrimCell cell) {
         ArrayList neighbors = new ArrayList();
 
         int row = (int)cell.Position.X;
         int col = (int)cell.Position.Y;
 
         if (IsVisited(row, col - 1))
-            neighbors.Add(Wall.Left);
+            neighbors.Add(Direction.Left);
 
         if (IsVisited(row - 1, col))
-            neighbors.Add(Wall.Up);
+            neighbors.Add(Direction.Up);
 
         if (IsVisited(row, col + 1))
-            neighbors.Add(Wall.Right);
+            neighbors.Add(Direction.Right);
 
         if (IsVisited(row + 1, col))
-            neighbors.Add(Wall.Down);
+            neighbors.Add(Direction.Down);
 
-        return (Wall)neighbors[random.Next(0, neighbors.Count)];
+        return (Direction)neighbors[random.Next(0, neighbors.Count)];
     }
 
     private bool IsVisited(int row, int col) {
         return _maze[row, col]?.IsVisited() ?? false;
     }
 
-    private void ConnectToNeighborCell(PrimCell cell, Wall direction) {
+    private void ConnectToNeighborCell(PrimCell cell, Direction direction) {
         int row = (int)cell.Position.X;
         int col = (int)cell.Position.Y;
 
         switch (direction) {
-		    case Wall.Left:
-                _maze[row, col].ToggleWall(Wall.Left);
-                _maze[row, col - 1].ToggleWall(Wall.Right);
+		    case Direction.Left:
+                _maze[row, col].ToggleWall(Direction.Left);
+                _maze[row, col - 1].ToggleWall(Direction.Right);
 			    break;
 			
-		    case Wall.Up:
-                _maze[row, col].ToggleWall(Wall.Up);
-                _maze[row - 1, col].ToggleWall(Wall.Down);
+		    case Direction.Up:
+                _maze[row, col].ToggleWall(Direction.Up);
+                _maze[row - 1, col].ToggleWall(Direction.Down);
 			    break;
 
-		    case Wall.Right:
-                _maze[row, col].ToggleWall(Wall.Right);
-                _maze[row, col + 1].ToggleWall(Wall.Left);
+		    case Direction.Right:
+                _maze[row, col].ToggleWall(Direction.Right);
+                _maze[row, col + 1].ToggleWall(Direction.Left);
 			    break;
 
-		    case Wall.Down:
-                _maze[row, col].ToggleWall(Wall.Down);
-                _maze[row + 1, col].ToggleWall(Wall.Up);
+		    case Direction.Down:
+                _maze[row, col].ToggleWall(Direction.Down);
+                _maze[row + 1, col].ToggleWall(Direction.Up);
 			    break;
 	        }
     }
@@ -149,7 +149,7 @@ public class PrimFactory : IMazeFactory {
 
     private void CreateEntrance() {
         _maze.Entrance = _maze[0, 0];
-        _maze[0, 0].ToggleWall(Wall.Left);
+        _maze[0, 0].ToggleWall(Direction.Left);
     }
 
     private void CreateExit() {
@@ -157,11 +157,11 @@ public class PrimFactory : IMazeFactory {
 
         if (exitPosition.X > exitPosition.Y) {
             exitPosition.Y = _maze.Width - 1;
-            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Wall.Right);
+            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Direction.Right);
 
         } else {
             exitPosition.X = _maze.Length - 1;
-            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Wall.Down);
+            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Direction.Down);
         }
 
         _maze.Exit = _maze[(int)exitPosition.X, (int)exitPosition.Y];

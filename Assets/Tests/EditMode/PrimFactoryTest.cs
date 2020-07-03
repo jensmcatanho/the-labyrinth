@@ -127,10 +127,10 @@ namespace Maze.Factory.Tests {
                 for (int col = 0; col < width; col++) {
                     Cell cell = maze[row, col];
                     Assert.False(
-                        cell.HasWall(Wall.Left) &&
-                        cell.HasWall(Wall.Up) &&
-                        cell.HasWall(Wall.Down) &&
-                        cell.HasWall(Wall.Right)
+                        cell.HasWall(Direction.Left) &&
+                        cell.HasWall(Direction.Up) &&
+                        cell.HasWall(Direction.Down) &&
+                        cell.HasWall(Direction.Right)
                     );
                 }
         }

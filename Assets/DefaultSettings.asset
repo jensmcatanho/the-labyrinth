@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultSettings
   m_EditorClassIdentifier: 
   _length: 20
-  _width: 20
+  _width: 30
   _cellSize: 2
   _algorithm: 0
   _isPlayable: 1

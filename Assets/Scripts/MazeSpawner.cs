@@ -61,26 +61,26 @@ public class MazeSpawner {
             for (int j = 1; j < _maze.Width; j++) {
                 SpawnChest(i, j);
 
-                if (_maze[i, j].HasWall(Wall.Right))
+                if (_maze[i, j].HasWall(Direction.Right))
                     SpawnRightWall(i, j);
 
-                if (_maze[i, j].HasWall(Wall.Down))
+                if (_maze[i, j].HasWall(Direction.Down))
                     SpawnDownWall(i, j);
             }
         }
     }
 
     private void SpawnFirstCell() {
-        if (_maze[0, 0].HasWall(Wall.Left))
+        if (_maze[0, 0].HasWall(Direction.Left))
             SpawnLeftWall(0, 0);
 
-        if (_maze[0, 0].HasWall(Wall.Down))
+        if (_maze[0, 0].HasWall(Direction.Down))
             SpawnDownWall(0, 0);
 
-        if (_maze[0, 0].HasWall(Wall.Up))
+        if (_maze[0, 0].HasWall(Direction.Up))
             SpawnUpWall(0, 0);
 
-        if (_maze[0, 0].HasWall(Wall.Right))
+        if (_maze[0, 0].HasWall(Direction.Right))
             SpawnRightWall(0, 0);
     }
 
@@ -88,13 +88,13 @@ public class MazeSpawner {
         for (int i = 1; i < _maze.Length; i++) {
             SpawnChest(i, 0);
 
-            if (_maze[i, 0].HasWall(Wall.Left))
+            if (_maze[i, 0].HasWall(Direction.Left))
                 SpawnLeftWall(i, 0);
 
-            if (_maze[i, 0].HasWall(Wall.Down))
+            if (_maze[i, 0].HasWall(Direction.Down))
                 SpawnDownWall(i, 0);
 
-            if (_maze[i, 0].HasWall(Wall.Right))
+            if (_maze[i, 0].HasWall(Direction.Right))
                 SpawnRightWall(i, 0);
         }
     }
@@ -103,13 +103,13 @@ public class MazeSpawner {
         for (int i = 1; i < _maze.Width; i++) {
             SpawnChest(0, i);
 
-            if (_maze[0, i].HasWall(Wall.Up))
+            if (_maze[0, i].HasWall(Direction.Up))
                 SpawnUpWall(0, i);
 
-            if (_maze[0, i].HasWall(Wall.Down))
+            if (_maze[0, i].HasWall(Direction.Down))
                 SpawnDownWall(0, i);
 
-            if (_maze[0, i].HasWall(Wall.Right))
+            if (_maze[0, i].HasWall(Direction.Right))
                 SpawnRightWall(0, i);
         }
     }
@@ -120,7 +120,7 @@ public class MazeSpawner {
             new Vector3((2 * i + 1) * _maze.CellSize, 2.0f, 2 * j * _maze.CellSize),
             _leftWallRotation,
             _parent,
-            MakeWallObjectName(i, j, Wall.Left));
+            MakeWallObjectName(i, j, Direction.Left));
 
         Core.AssetLoader.Instance.Spawn(assetReferenceData);
     }
@@ -131,7 +131,7 @@ public class MazeSpawner {
             new Vector3(2 * i * _maze.CellSize, 2.0f, (2 * j + 1) * _maze.CellSize),
             _upWallRotation,
             _parent,
-            MakeWallObjectName(i, j, Wall.Up));
+            MakeWallObjectName(i, j, Direction.Up));
 
         Core.AssetLoader.Instance.Spawn(assetReferenceData);
     }
@@ -142,7 +142,7 @@ public class MazeSpawner {
             new Vector3((2 * i + 1) * _maze.CellSize, 2.0f, (2 * j + 2) * _maze.CellSize),
             _rightWallRotation,
             _parent,
-            MakeWallObjectName(i, j, Wall.Right));
+            MakeWallObjectName(i, j, Direction.Right));
 
         Core.AssetLoader.Instance.Spawn(assetReferenceData);
     }
@@ -153,14 +153,14 @@ public class MazeSpawner {
             new Vector3((2 * i + 2) * _maze.CellSize, 2.0f, (2 * j + 1) * _maze.CellSize),
             _downWallRotation,
             _parent,
-            MakeWallObjectName(i, j, Wall.Down));
+            MakeWallObjectName(i, j, Direction.Down));
 
         Core.AssetLoader.Instance.Spawn(assetReferenceData);
     }
 
-    private string MakeWallObjectName(int i, int j, Wall direction) {
+    private string MakeWallObjectName(int i, int j, Direction direction) {
         var stringBuilder = new StringBuilder();
-        return stringBuilder.Append(" (").Append(i).Append(", ").Append(j).Append(") ").Append(direction).Append(" Wall").ToString();
+        return stringBuilder.Append(" (").Append(i).Append(", ").Append(j).Append(") ").Append(direction).Append(" Direction").ToString();
     }
 
     private void SpawnChest(int row, int col) {
@@ -179,13 +179,13 @@ public class MazeSpawner {
 
     private Quaternion GetChestRotation(Cell cell) {
         switch (cell.DeadEndOpening()) {
-            case Wall.Left:
+            case Direction.Left:
                 return Quaternion.Euler(0f, 180f, 0f);
 
-            case Wall.Up:
+            case Direction.Up:
                 return Quaternion.Euler(0f, -90f, 0f);
 
-            case Wall.Down:
+            case Direction.Down:
                 return Quaternion.Euler(0f, 90f, 0f);
 
             default:
@@ -195,9 +195,9 @@ public class MazeSpawner {
         /*
 		 * Switch expressions are not yet supported by the Unity C# compiler. :(
         return (cell.DeadEndOpening()) switch {
-            Wall.Left => Quaternion.Euler(0f, 180f, 0f),
-            Wall.Up => Quaternion.Euler(0f, -90f, 0f),
-            Wall.Down => Quaternion.Euler(0f, 90f, 0f),
+            Direction.Left => Quaternion.Euler(0f, 180f, 0f),
+            Direction.Up => Quaternion.Euler(0f, -90f, 0f),
+            Direction.Down => Quaternion.Euler(0f, 90f, 0f),
             _ => Quaternion.identity
         };
 		*/

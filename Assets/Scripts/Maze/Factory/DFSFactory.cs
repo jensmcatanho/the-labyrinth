@@ -41,9 +41,9 @@ public class DFSFactory : IMazeFactory {
 
         while (_history.Count > 0) {
             MarkAsVisited(currentCell);
-            Wall neighborDirection = GetNeighborNotVisited(currentCell);
+            Direction neighborDirection = GetNeighborNotVisited(currentCell);
 
-            if (neighborDirection != Wall.None) {
+            if (neighborDirection != Direction.None) {
                 _history.Add(currentCell);
                 currentCell = ConnectToNeighborCell(currentCell, neighborDirection);
 
@@ -57,28 +57,28 @@ public class DFSFactory : IMazeFactory {
         cell.IsVisited = true;
     }
 
-    private Wall GetNeighborNotVisited(DFSCell cell) {
+    private Direction GetNeighborNotVisited(DFSCell cell) {
         ArrayList neighbors = new ArrayList();
 
         int row = (int)cell.Position.X;
         int col = (int)cell.Position.Y;
 
         if (!IsVisited(row, col - 1))
-            neighbors.Add(Wall.Left);
+            neighbors.Add(Direction.Left);
 
         if (!IsVisited(row - 1, col))
-            neighbors.Add(Wall.Up);
+            neighbors.Add(Direction.Up);
 
         if (!IsVisited(row, col + 1))
-            neighbors.Add(Wall.Right);
+            neighbors.Add(Direction.Right);
 
         if (!IsVisited(row + 1, col))
-            neighbors.Add(Wall.Down);
+            neighbors.Add(Direction.Down);
 
         if (neighbors.Count > 0)
-            return (Wall)neighbors[random.Next(0, neighbors.Count)];
+            return (Direction)neighbors[random.Next(0, neighbors.Count)];
 
-        return Wall.None;
+        return Direction.None;
     }
 
     private bool IsVisited(int row, int col) {
@@ -92,29 +92,29 @@ public class DFSFactory : IMazeFactory {
         return cell;
     }
 
-    private DFSCell ConnectToNeighborCell(DFSCell cell, Wall direction) {
+    private DFSCell ConnectToNeighborCell(DFSCell cell, Direction direction) {
         int row = (int)cell.Position.X;
         int col = (int)cell.Position.Y;
 
         switch (direction) {
-            case Wall.Left:
-                _maze[row, col].ToggleWall(Wall.Left);
-                _maze[row, --col].ToggleWall(Wall.Right);
+            case Direction.Left:
+                _maze[row, col].ToggleWall(Direction.Left);
+                _maze[row, --col].ToggleWall(Direction.Right);
                 break;
 
-            case Wall.Up:
-                _maze[row, col].ToggleWall(Wall.Up);
-                _maze[--row, col].ToggleWall(Wall.Down);
+            case Direction.Up:
+                _maze[row, col].ToggleWall(Direction.Up);
+                _maze[--row, col].ToggleWall(Direction.Down);
                 break;
 
-            case Wall.Right:
-                _maze[row, col].ToggleWall(Wall.Right);
-                _maze[row, ++col].ToggleWall(Wall.Left);
+            case Direction.Right:
+                _maze[row, col].ToggleWall(Direction.Right);
+                _maze[row, ++col].ToggleWall(Direction.Left);
                 break;
 
-            case Wall.Down:
-                _maze[row, col].ToggleWall(Wall.Down);
-                _maze[++row, col].ToggleWall(Wall.Up);
+            case Direction.Down:
+                _maze[row, col].ToggleWall(Direction.Down);
+                _maze[++row, col].ToggleWall(Direction.Up);
                 break;
         }
 
@@ -130,7 +130,7 @@ public class DFSFactory : IMazeFactory {
 
     private void CreateEntrance() {
         _maze.Entrance = _maze[0, 0];
-        _maze[0, 0].ToggleWall(Wall.Left);
+        _maze[0, 0].ToggleWall(Direction.Left);
     }
 
     private void CreateExit() {
@@ -138,11 +138,11 @@ public class DFSFactory : IMazeFactory {
 
         if (exitPosition.X > exitPosition.Y) {
             exitPosition.Y = _maze.Width - 1;
-            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Wall.Right);
+            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Direction.Right);
 
         } else {
             exitPosition.X = _maze.Length - 1;
-            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Wall.Down);
+            _maze[(int)exitPosition.X, (int)exitPosition.Y].ToggleWall(Direction.Down);
         }
 
         _maze.Exit = _maze[(int)exitPosition.X, (int)exitPosition.Y];

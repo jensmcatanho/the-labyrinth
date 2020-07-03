@@ -27,18 +27,18 @@ namespace Maze.Tests {
         public void Test_SetWall_WhenAWallIsSet() {
             Cell cell = new CellMock(1, 1, 5);
 
-            cell.SetWall(Wall.Up);
+            cell.SetWall(Direction.Up);
 
-            Assert.True(cell.HasWall(Wall.Up));
+            Assert.True(cell.HasWall(Direction.Up));
         }
 
         [Test]
         public void Test_SetWall_WhenNoWallIsSet() {
             Cell cell = new CellMock(1, 1, 5);
 
-            cell.SetWall(Wall.None);
+            cell.SetWall(Direction.None);
 
-            Assert.True(cell.HasWall(Wall.None));
+            Assert.True(cell.HasWall(Direction.None));
         }
 
         [Test]
@@ -46,13 +46,13 @@ namespace Maze.Tests {
             Cell cell = new CellMock(1, 1, 5);
             cell.UnsetAllWalls();
 
-            cell.SetWall(Wall.Down | Wall.Up | Wall.Right);
+            cell.SetWall(Direction.Down | Direction.Up | Direction.Right);
 
             Assert.True(
-                cell.HasWall(Wall.Down) &&
-                cell.HasWall(Wall.Up) &&
-                cell.HasWall(Wall.Right) &&
-                !cell.HasWall(Wall.Left));
+                cell.HasWall(Direction.Down) &&
+                cell.HasWall(Direction.Up) &&
+                cell.HasWall(Direction.Right) &&
+                !cell.HasWall(Direction.Left));
         }
 
         [Test]
@@ -61,10 +61,10 @@ namespace Maze.Tests {
 
             cell.SetAllWalls();
 
-            Assert.True(cell.HasWall(Wall.Left));
-            Assert.True(cell.HasWall(Wall.Up));
-            Assert.True(cell.HasWall(Wall.Down));
-            Assert.True(cell.HasWall(Wall.Right));
+            Assert.True(cell.HasWall(Direction.Left));
+            Assert.True(cell.HasWall(Direction.Up));
+            Assert.True(cell.HasWall(Direction.Down));
+            Assert.True(cell.HasWall(Direction.Right));
         }
 
         [Test]
@@ -99,11 +99,11 @@ namespace Maze.Tests {
             Cell cell = new CellMock(1, 1, 5);
             cell.UnsetAllWalls();
 
-            cell.SetWall(Wall.Left);
-            Assert.True(cell.HasWall(Wall.Left));
-            Assert.False(cell.HasWall(Wall.Up));
-            Assert.False(cell.HasWall(Wall.Down));
-            Assert.False(cell.HasWall(Wall.Right));
+            cell.SetWall(Direction.Left);
+            Assert.True(cell.HasWall(Direction.Left));
+            Assert.False(cell.HasWall(Direction.Up));
+            Assert.False(cell.HasWall(Direction.Down));
+            Assert.False(cell.HasWall(Direction.Right));
         }
 
         [Test]
@@ -111,53 +111,53 @@ namespace Maze.Tests {
             Cell cell = new CellMock(1, 1, 5);
             cell.SetAllWalls();
 
-            cell.UnsetWall(Wall.Left);
-            Assert.False(cell.HasWall(Wall.Left));
-            Assert.True(cell.HasWall(Wall.Up));
-            Assert.True(cell.HasWall(Wall.Down));
-            Assert.True(cell.HasWall(Wall.Right));
+            cell.UnsetWall(Direction.Left);
+            Assert.False(cell.HasWall(Direction.Left));
+            Assert.True(cell.HasWall(Direction.Up));
+            Assert.True(cell.HasWall(Direction.Down));
+            Assert.True(cell.HasWall(Direction.Right));
         }
 
         [Test]
         public void Test_ToggleWall() {
             Cell cell = new CellMock(1, 1, 5);
 
-            cell.ToggleWall(Wall.Left);
-            Assert.False(cell.HasWall(Wall.Left));
+            cell.ToggleWall(Direction.Left);
+            Assert.False(cell.HasWall(Direction.Left));
         }
 
         [Test]
         public void Test_DeadEndOpening() {
             Cell cell = new CellMock(1, 1, 5);
 
-            cell.UnsetWall(Wall.Left);
-            Assert.AreEqual(Wall.Left, cell.DeadEndOpening());
-            cell.SetWall(Wall.Left);
+            cell.UnsetWall(Direction.Left);
+            Assert.AreEqual(Direction.Left, cell.DeadEndOpening());
+            cell.SetWall(Direction.Left);
 
-            cell.UnsetWall(Wall.Up);
-            Assert.AreEqual(Wall.Up, cell.DeadEndOpening());
-            cell.SetWall(Wall.Up);
+            cell.UnsetWall(Direction.Up);
+            Assert.AreEqual(Direction.Up, cell.DeadEndOpening());
+            cell.SetWall(Direction.Up);
 
-            cell.UnsetWall(Wall.Down);
-            Assert.AreEqual(Wall.Down, cell.DeadEndOpening());
-            cell.SetWall(Wall.Down);
+            cell.UnsetWall(Direction.Down);
+            Assert.AreEqual(Direction.Down, cell.DeadEndOpening());
+            cell.SetWall(Direction.Down);
 
-            cell.UnsetWall(Wall.Right);
-            Assert.AreEqual(Wall.Right, cell.DeadEndOpening());
-            cell.SetWall(Wall.Right);
+            cell.UnsetWall(Direction.Right);
+            Assert.AreEqual(Direction.Right, cell.DeadEndOpening());
+            cell.SetWall(Direction.Right);
         }
 
         [Test]
         public void Test_DeadEndOpening_WhenCellIsNotDeadEnd() {
             Cell cell = new CellMock(1, 1, 5);
 
-            Assert.AreEqual(Wall.None, (Wall)cell.DeadEndOpening());
+            Assert.AreEqual(Direction.None, (Direction)cell.DeadEndOpening());
         }
 
         [Test]
         public void Test_IsDeadEnd_WhenCellIsDeadEnd() {
             Cell cell = new CellMock(1, 1, 5);
-            cell.UnsetWall(Wall.Left);
+            cell.UnsetWall(Direction.Left);
 
             Assert.True(cell.IsDeadEnd());
         }
@@ -172,8 +172,8 @@ namespace Maze.Tests {
         [Test]
         public void Test_IsDeadEnd_WhenCellIsNotDeadEnd() {
             Cell cell = new CellMock(1, 1, 5);
-            cell.UnsetWall(Wall.Left);
-            cell.UnsetWall(Wall.Down);
+            cell.UnsetWall(Direction.Left);
+            cell.UnsetWall(Direction.Down);
 
             Assert.False(cell.IsDeadEnd());
         }
