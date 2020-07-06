@@ -4,12 +4,13 @@ using UnityEngine.AddressableAssets;
 
 namespace Maze {
 
-    [Serializable]
-    public class MazeAssets {
+    [Serializable] public class MazeAssets {
 
+        #region private fields
         [SerializeField] private AssetReference _wall;
 
         [SerializeField] private AssetReference _chest;
+        #endregion
 
         public AssetReference Wall {
             get {
@@ -30,11 +31,6 @@ namespace Maze {
                 _chest = value;
             }
         }
-
-        public MazeAssets(AssetReference wallAssetReference) {
-            Wall = wallAssetReference;
-        }
-
     }
 
 }
