@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6091248465521686257}
   - component: {fileID: 7144870243601430868}
   - component: {fileID: 4954903968826248606}
+  - component: {fileID: 7262289184250600882}
   m_Layer: 0
   m_Name: Wall-NoCollider
   m_TagString: Untagged
@@ -79,3 +80,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7262289184250600882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900542227850751051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85510691f084eb746bb1b8f0573c311f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1136132450504109175}
   - component: {fileID: 893142233419282673}
   - component: {fileID: 8090372263602132078}
+  - component: {fileID: 527783002812404349}
   m_Layer: 11
   m_Name: Labyrinth
   m_TagString: Untagged
@@ -44,13 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab9ba40a1de1004fa93ee73c037191b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mazeSettings: {fileID: 11400000, guid: 4e44400243052a84e8a245e263fbf16d, type: 2}
-  _wallAssetReference:
-    m_AssetGUID: 6efb87a3a5204514d9d15ab836354937
-    m_SubObjectName: 
-  _chestAssetReference:
-    m_AssetGUID: 8982a22a414f86a4fb6f48905e0a97a8
-    m_SubObjectName: 
+  _assets:
+    _wall:
+      m_AssetGUID: 
+      m_SubObjectName: 
+    _chest:
+      m_AssetGUID: 
+      m_SubObjectName: 
 --- !u!114 &8090372263602132078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,3 +65,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allowedFrames: 60
+--- !u!114 &527783002812404349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6403506512852150918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996f994cbe95374488491cfe9157b15f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,141 +1,53 @@
-﻿using UnityEngine;
+﻿using Maze;
+using UnityEngine;
 
 namespace Maze {
 
-public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
+    public class StandardMaze : MonoBehaviour, IMaze {
 
-    #region private fields
-    [SerializeField] private MazeSettings _mazeSettings = null;
+        #region private fields
+        [SerializeField] private MazeAssets _assets;
 
-    [SerializeField] private MazeAssets _assets;
+        private Maze<Cell> _maze;
+        #endregion
 
-    private Maze<Cell> _maze;
-    #endregion
+        #region public methods
+        public void CreateMaze(MazeSettings settings) {
+            var mazeFactory = GetFactoryFromSettings(settings);
+            _maze = mazeFactory.CreateMaze(settings.Length, settings.Width, settings.CellSize);
 
-    #region public methods
-    public void AddListeners() {
-        Core.EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnSceneLoaded);
-        Core.EventManager.Instance.AddListenerOnce<Events.MenuSceneLoaded>(OnSceneLoaded);
-        Core.EventManager.Instance.AddListener<Events.SpawnCompleted>(OnSpawnCompleted);
-        Core.EventManager.Instance.AddListener<Events.MazeInstanced>(OnMazeInstanced);
-    }
-
-    public void RemoveListeners() {
-        if (Core.EventManager.Instance) {
-            Core.EventManager.Instance.RemoveListener<Events.GameSceneLoaded>(OnSceneLoaded);
-            Core.EventManager.Instance.RemoveListener<Events.MenuSceneLoaded>(OnSceneLoaded);
-            Core.EventManager.Instance.RemoveListener<Events.SpawnCompleted>(OnSpawnCompleted);
-            Core.EventManager.Instance.RemoveListener<Events.MazeInstanced>(OnMazeInstanced);
+            var mazeSpawner = new MazeSpawner(gameObject.transform, _assets);
+            mazeSpawner.SpawnMaze(_maze, settings);
         }
-    }
-    #endregion
 
-    #region private methods
-    private void Awake() {
-        AddListeners();
-    }
+        public void SetupChildren() {
+            foreach (Transform child in gameObject.transform) {
+                if (child == null) {
+                    continue;
+                }
 
-    private void OnDestroy() {
-        RemoveListeners();
-    }
+                child.gameObject.layer = gameObject.layer;
 
-    private Maze.Factory.IMazeFactory GetFactoryFromSettings() {
-        switch (_mazeSettings.Algorithm) {
-            case GenerationAlgorithm.DepthFirstSearch:
-                return new Maze.Factory.DFSFactory();
-
-            case GenerationAlgorithm.Prim:
-                return new Maze.Factory.PrimFactory();
-
-            default:
-                return null;
-        }
-    }
-
-    private void OnSceneLoaded(Events.MenuSceneLoaded e) {
-        CreateMaze(e.MazeSettings);
-    }
-
-    private void OnSceneLoaded(Events.GameSceneLoaded e) {
-        CreateMaze(e.MazeSettings);
-    }
-
-    private void CreateMaze(MazeSettings mazeSettings) {
-        var mazeFactory = GetFactoryFromSettings();
-        _maze = mazeFactory.CreateMaze(mazeSettings.Length, mazeSettings.Width, mazeSettings.CellSize);
-
-        var mazeSpawner = new MazeSpawner(gameObject.transform, _assets.Wall, _assets.Chest);
-        mazeSpawner.SpawnMaze(_maze, mazeSettings);
-    }
-
-    private void OnMazeInstanced(Events.MazeInstanced e) {
-        foreach (Transform child in gameObject.transform) {
-            if (child == null) {
-                continue;
+                if (child.TryGetComponent(out Wall _))
+                    child.transform.localScale *= _maze.CellSize;
             }
-
-            child.gameObject.layer = gameObject.layer;
         }
-    }
+        #endregion
 
-    private void OnSpawnCompleted(Events.SpawnCompleted e) {
-        if (e.Reference == _assets.Wall) {
-            e.GameObject.transform.localScale *= _maze.CellSize;
-        }
-    }
-   #endregion
-}
+        #region private methods
+        private Factory.IMazeFactory GetFactoryFromSettings(MazeSettings settings) {
+            switch (settings.Algorithm) {
+                case GenerationAlgorithm.DepthFirstSearch:
+                    return new Factory.DFSFactory();
 
-}
+                case GenerationAlgorithm.Prim:
+                    return new Factory.PrimFactory();
 
-/*
-public class MazeListener : MonoBehaviour, Core.IEventListener {
-
-
-    #region public methods
-    public void AddListeners() {
-        Core.EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnSceneLoaded);
-        Core.EventManager.Instance.AddListenerOnce<Events.MenuSceneLoaded>(OnSceneLoaded);
-        Core.EventManager.Instance.AddListener<Events.SpawnCompleted>(OnSpawnCompleted);
-        Core.EventManager.Instance.AddListener<Events.MazeInstanced>(OnMazeInstanced);
-    }
-
-    public void RemoveListeners() {
-        if (Core.EventManager.Instance) {
-            Core.EventManager.Instance.RemoveListener<Events.GameSceneLoaded>(OnSceneLoaded);
-            Core.EventManager.Instance.RemoveListener<Events.MenuSceneLoaded>(OnSceneLoaded);
-            Core.EventManager.Instance.RemoveListener<Events.SpawnCompleted>(OnSpawnCompleted);
-            Core.EventManager.Instance.RemoveListener<Events.MazeInstanced>(OnMazeInstanced);
-        }
-    }
-    #endregion
-
-    #region private methods
-    private void Awake() {
-        AddListeners();
-    }
-
-    private void OnDestroy() {
-        RemoveListeners();
-    }
-
-    private void OnMazeInstanced(Events.MazeInstanced e) {
-        foreach (Transform child in gameObject.transform) {
-            if (child == null) {
-                continue;
+                default:
+                    return null;
             }
-
-            child.gameObject.layer = gameObject.layer;
         }
+       #endregion
     }
-
-    private void OnSpawnCompleted(Events.SpawnCompleted e) {
-        if (e.Reference == _wallAssetReference) {
-            e.GameObject.transform.localScale *= _maze.CellSize;
-        }
-    }
-    #endregion
 
 }
-
-*/

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AddressableAssets;
 using System.Text;
 
 namespace Maze {
@@ -13,9 +12,7 @@ namespace Maze {
 
         private readonly Transform _parent;
 
-        private readonly AssetReference _wallAssetReference = null;
-
-        private readonly AssetReference _chestAssetReference = null;
+        private readonly MazeAssets _assets = null;
 
         private readonly Quaternion _leftWallRotation = Quaternion.Euler(90f, 90f, 0f);
 
@@ -27,10 +24,9 @@ namespace Maze {
         #endregion
 
         #region public methods
-        public MazeSpawner(Transform parent, AssetReference wallAssetReference, AssetReference chestAssetReference) {
+        public MazeSpawner(Transform parent, MazeAssets assets) {
             _parent = parent;
-            _wallAssetReference = wallAssetReference;
-            _chestAssetReference = chestAssetReference;
+            _assets = assets;
         }
 
         public void SpawnMaze(Maze<Cell> maze, MazeSettings settings) {
@@ -117,7 +113,7 @@ namespace Maze {
 
         private void SpawnLeftWall(int i, int j) {
             var assetReferenceData = new Core.AssetReferenceData(
-                _wallAssetReference,
+                _assets.Wall,
                 new Vector3((2 * i + 1) * _maze.CellSize, 2.0f, 2 * j * _maze.CellSize),
                 _leftWallRotation,
                 _parent,
@@ -128,7 +124,7 @@ namespace Maze {
 
         private void SpawnUpWall(int i, int j) {
             var assetReferenceData = new Core.AssetReferenceData(
-                _wallAssetReference,
+                _assets.Wall,
                 new Vector3(2 * i * _maze.CellSize, 2.0f, (2 * j + 1) * _maze.CellSize),
                 _upWallRotation,
                 _parent,
@@ -139,7 +135,7 @@ namespace Maze {
 
         private void SpawnRightWall(int i, int j) {
             var assetReferenceData = new Core.AssetReferenceData(
-                _wallAssetReference,
+                _assets.Wall,
                 new Vector3((2 * i + 1) * _maze.CellSize, 2.0f, (2 * j + 2) * _maze.CellSize),
                 _rightWallRotation,
                 _parent,
@@ -150,7 +146,7 @@ namespace Maze {
 
         private void SpawnDownWall(int i, int j) {
             var assetReferenceData = new Core.AssetReferenceData(
-                _wallAssetReference,
+                _assets.Wall,
                 new Vector3((2 * i + 2) * _maze.CellSize, 2.0f, (2 * j + 1) * _maze.CellSize),
                 _downWallRotation,
                 _parent,
@@ -169,7 +165,7 @@ namespace Maze {
                 return;
 
             var assetReferenceData = new Core.AssetReferenceData(
-                _chestAssetReference,
+                _assets.Chest,
                 new Vector3((2 * row + 1) * _maze.CellSize, 0.0f, (2 * col + 1) * _maze.CellSize),
                  GetChestRotation(_maze[row, col]),
                  _parent.parent,
