@@ -154,7 +154,7 @@ MonoBehaviour:
   hueVsSat:
     m_OverrideState: 1
     m_Value:
-      <length>k__BackingField: 4
+      <length>k__BackingField: 5
       m_Loop: 1
       m_ZeroValue: 0.5
       m_Range: 1
@@ -226,7 +226,7 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  m_SelectedCurve: 5
+  m_SelectedCurve: 4
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
