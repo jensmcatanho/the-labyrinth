@@ -13,14 +13,6 @@ namespace Maze {
         private readonly Transform _parent;
 
         private readonly MazeAssets _assets = null;
-
-        private readonly Quaternion _leftWallRotation = Quaternion.Euler(90f, 90f, 0f);
-
-        private readonly Quaternion _downWallRotation = Quaternion.Euler(90f, 0f, 0f);
-
-        private readonly Quaternion _upWallRotation = Quaternion.Euler(90f, 0f, 180f);
-
-        private readonly Quaternion _rightWallRotation = Quaternion.Euler(90f, -90f, 0f);
         #endregion
 
         #region public methods
@@ -115,7 +107,7 @@ namespace Maze {
             var assetReferenceData = new Core.AssetReferenceData(
                 _assets.Wall,
                 new Vector3((2 * i + 1) * _maze.CellSize, 2.0f, 2 * j * _maze.CellSize),
-                _leftWallRotation,
+                WallRotation.Left,
                 _parent,
                 MakeWallObjectName(i, j, Direction.Left));
 
@@ -126,7 +118,7 @@ namespace Maze {
             var assetReferenceData = new Core.AssetReferenceData(
                 _assets.Wall,
                 new Vector3(2 * i * _maze.CellSize, 2.0f, (2 * j + 1) * _maze.CellSize),
-                _upWallRotation,
+                WallRotation.Up,
                 _parent,
                 MakeWallObjectName(i, j, Direction.Up));
 
@@ -137,7 +129,7 @@ namespace Maze {
             var assetReferenceData = new Core.AssetReferenceData(
                 _assets.Wall,
                 new Vector3((2 * i + 1) * _maze.CellSize, 2.0f, (2 * j + 2) * _maze.CellSize),
-                _rightWallRotation,
+                WallRotation.Right,
                 _parent,
                 MakeWallObjectName(i, j, Direction.Right));
 
@@ -148,7 +140,7 @@ namespace Maze {
             var assetReferenceData = new Core.AssetReferenceData(
                 _assets.Wall,
                 new Vector3((2 * i + 2) * _maze.CellSize, 2.0f, (2 * j + 1) * _maze.CellSize),
-                _downWallRotation,
+                WallRotation.Down,
                 _parent,
                 MakeWallObjectName(i, j, Direction.Down));
 
@@ -175,29 +167,20 @@ namespace Maze {
         }
 
         private Quaternion GetChestRotation(Cell cell) {
+            // Switch expressions are not yet supported by the Unity C# compiler :(
             switch (cell.DeadEndOpening()) {
                 case Direction.Left:
-                    return Quaternion.Euler(0f, 180f, 0f);
+                    return ChestRotation.Left;
 
                 case Direction.Up:
-                    return Quaternion.Euler(0f, -90f, 0f);
+                    return ChestRotation.Up;
 
                 case Direction.Down:
-                    return Quaternion.Euler(0f, 90f, 0f);
+                    return ChestRotation.Down;
 
                 default:
-                    return Quaternion.identity;
+                    return ChestRotation.Right;
             }
-
-            /*
-		     * Switch expressions are not yet supported by the Unity C# compiler. :(
-            return (cell.DeadEndOpening()) switch {
-                Direction.Left => Quaternion.Euler(0f, 180f, 0f),
-                Direction.Up => Quaternion.Euler(0f, -90f, 0f),
-                Direction.Down => Quaternion.Euler(0f, 90f, 0f),
-                _ => Quaternion.identity
-            };
-		    */
         }
 
         private string MakeChestObjectName(int i, int j) {
