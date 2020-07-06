@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
 
 public static class TextureExtensions {
+
+    private static WaitForEndOfFrame _waitForEndOfFrame = new WaitForEndOfFrame();
 
     public static Texture2D Blend(this Texture2D texture, Texture2D textureToBlend) {
         var finalTexture = new Texture2D(texture.width, texture.height);
@@ -12,8 +13,11 @@ public static class TextureExtensions {
                 var incomingColor = textureToBlend.GetPixel(u, v);
                 var finalColor = currentColor;
 
-//                finalTexture.SetPixel(u, v, finalColor);
-                finalTexture.SetPixel(u, v, Color.Lerp(texture.GetPixel(u, v), textureToBlend.GetPixel(u, v), 0.5f));
+                if (incomingColor.r > incomingColor.g) {
+                    finalColor.r = incomingColor.r;
+                }
+
+                finalTexture.SetPixel(u, v, finalColor);
             }
         
         finalTexture.Apply();
