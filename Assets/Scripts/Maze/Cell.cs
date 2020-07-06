@@ -16,8 +16,6 @@ namespace Maze {
     public class Cell {
 
         #region private fields
-        private Direction _walls;
-
         private Vector2 _position;
         #endregion
 
@@ -56,26 +54,24 @@ namespace Maze {
             get; set;
         }
 
-        public Direction Walls {
-            get {
-                return _walls;
-            }
+        public Direction Walls { get;
+            private set;
         }
 
         public void SetWall(Direction target) {
-            _walls |= target;
+            Walls |= target;
         }
 
         public void UnsetWall(Direction target) {
-            _walls &= ~target;
+            Walls &= ~target;
         }
 
         public void ToggleWall(Direction target) {
-            _walls ^= target;
+            Walls ^= target;
         }
 
         public bool HasWall(Direction target) {
-            return (_walls & target) == target;
+            return (Walls & target) == target;
         }
 
         public Direction DeadEndOpening() {
