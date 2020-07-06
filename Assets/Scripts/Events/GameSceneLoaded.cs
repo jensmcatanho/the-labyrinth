@@ -1,7 +1,13 @@
 ﻿namespace Events {
 
     public class GameSceneLoaded : GameEvent {
-        public GameSceneLoaded() {
+
+        public MazeSettings MazeSettings {
+            get;
+        }
+
+        public GameSceneLoaded(MazeSettings mazeSettings) {
+            MazeSettings = mazeSettings;
         }
     }
 

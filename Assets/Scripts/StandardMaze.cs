@@ -16,24 +16,25 @@ public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
 
     #region public methods
     public void AddListeners() {
+        Core.EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnSceneLoaded);
+        Core.EventManager.Instance.AddListenerOnce<Events.MenuSceneLoaded>(OnSceneLoaded);
         Core.EventManager.Instance.AddListener<Events.SpawnCompleted>(OnSpawnCompleted);
+        Core.EventManager.Instance.AddListener<Events.MazeInstanced>(OnMazeInstanced);
     }
 
     public void RemoveListeners() {
-        if (Core.EventManager.Instance)
+        if (Core.EventManager.Instance) {
+            Core.EventManager.Instance.RemoveListener<Events.GameSceneLoaded>(OnSceneLoaded);
+            Core.EventManager.Instance.RemoveListener<Events.MenuSceneLoaded>(OnSceneLoaded);
             Core.EventManager.Instance.RemoveListener<Events.SpawnCompleted>(OnSpawnCompleted);
+            Core.EventManager.Instance.RemoveListener<Events.MazeInstanced>(OnMazeInstanced);
+        }
     }
     #endregion
 
     #region private methods
     private void Awake() {
         AddListeners();
-
-        var mazeFactory = GetFactoryFromSettings();
-        _maze = mazeFactory.CreateMaze(_mazeSettings.Length, _mazeSettings.Width, _mazeSettings.CellSize);
-
-        var mazeSpawner = new MazeSpawner(gameObject.transform, _wallAssetReference, _chestAssetReference);
-        mazeSpawner.SpawnMaze(_maze, _mazeSettings);
     }
 
     private void OnDestroy() {
@@ -50,6 +51,32 @@ public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
 
             default:
                 return null;
+        }
+    }
+
+    private void OnSceneLoaded(Events.MenuSceneLoaded e) {
+        CreateMaze(e.MazeSettings);
+    }
+
+    private void OnSceneLoaded(Events.GameSceneLoaded e) {
+        CreateMaze(e.MazeSettings);
+    }
+
+    private void CreateMaze(MazeSettings mazeSettings) {
+        var mazeFactory = GetFactoryFromSettings();
+        _maze = mazeFactory.CreateMaze(mazeSettings.Length, mazeSettings.Width, mazeSettings.CellSize);
+
+        var mazeSpawner = new MazeSpawner(gameObject.transform, _wallAssetReference, _chestAssetReference);
+        mazeSpawner.SpawnMaze(_maze, mazeSettings);
+    }
+
+    private void OnMazeInstanced(Events.MazeInstanced e) {
+        foreach (Transform child in gameObject.transform) {
+            if (child == null) {
+                continue;
+            }
+
+            child.gameObject.layer = gameObject.layer;
         }
     }
 

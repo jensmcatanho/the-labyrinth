@@ -1,5 +1,4 @@
-﻿using Events;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Core {
@@ -24,10 +23,15 @@ namespace Core {
         }
         #endregion
 
+        #region private fields
+        [SerializeField] private MazeSettings _mazeSettings;
+        [SerializeField] private MazeSettings _menuSettings;
+        #endregion
+
         #region public methods
         public void AddListeners() {
             EventManager.Instance.AddListener<Events.StartButtonClicked>(LoadGame);
-            EventManager.Instance.AddListener<MazeFinished>(LoadMenu);
+            EventManager.Instance.AddListener<Events.MazeFinished>(LoadMenu);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
@@ -57,7 +61,7 @@ namespace Core {
             SceneManager.LoadScene((int)GameScene.Game);
         }
 
-        private void LoadMenu(MazeFinished e) {
+        private void LoadMenu(Events.MazeFinished e) {
             SceneManager.LoadScene((int)GameScene.Menu);
         }
 
@@ -67,11 +71,11 @@ namespace Core {
             switch (sceneIndex) {
                 case GameScene.Menu:
                     Cursor.visible = true;
-                    EventManager.Instance.QueueEvent(new Events.MenuSceneLoaded());
+                    EventManager.Instance.QueueEvent(new Events.MenuSceneLoaded(_menuSettings));
                     break;
 
                 case GameScene.Game:
-                    EventManager.Instance.QueueEvent(new Events.GameSceneLoaded());
+                    EventManager.Instance.QueueEvent(new Events.GameSceneLoaded(_mazeSettings));
                     break;
 
                 default:

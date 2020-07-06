@@ -1,8 +1,13 @@
 ﻿namespace Events {
 
     public class MenuSceneLoaded : GameEvent {
-        public MenuSceneLoaded() {
 
+        public MazeSettings MazeSettings {
+            get;
+        }
+
+        public MenuSceneLoaded(MazeSettings mazeSettings) {
+            MazeSettings = mazeSettings;
         }
     }
 

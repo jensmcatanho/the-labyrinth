@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31f09c7eb12b59e459ca4eb04a5bd417, type: 3}
-  m_Name: DefaultSettings
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: Global Volume Profile
   m_EditorClassIdentifier: 
-  _length: 20
-  _width: 20
-  _cellSize: 2
-  _algorithm: 0
-  _isPlayable: 1
+  components: []
