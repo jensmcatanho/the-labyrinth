@@ -301,6 +301,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 893142233419282673, guid: 1fa526959d5e69043bfb08f201ec6345,
+        type: 3}
+      propertyPath: _assets._wall.m_AssetGUID
+      value: 6efb87a3a5204514d9d15ab836354937
+      objectReference: {fileID: 0}
+    - target: {fileID: 893142233419282673, guid: 1fa526959d5e69043bfb08f201ec6345,
+        type: 3}
+      propertyPath: _assets._chest.m_AssetGUID
+      value: 8982a22a414f86a4fb6f48905e0a97a8
+      objectReference: {fileID: 0}
     - target: {fileID: 1136132450504109175, guid: 1fa526959d5e69043bfb08f201ec6345,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -2,35 +2,39 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-[Serializable]
-public class MazeAssets {
+namespace Maze {
 
-    [SerializeField] private AssetReference _wall;
+    [Serializable]
+    public class MazeAssets {
 
-    [SerializeField] private AssetReference _chest;
+        [SerializeField] private AssetReference _wall;
 
-    public AssetReference Wall {
-        get {
-            return _wall;
+        [SerializeField] private AssetReference _chest;
+
+        public AssetReference Wall {
+            get {
+                return _wall;
+            }
+
+            set {
+                _wall = value;
+            }
         }
 
-        set {
-            _wall = value;
-        }
-    }
+        public AssetReference Chest {
+            get {
+                return _chest;
+            }
 
-    public AssetReference Chest {
-        get {
-            return _chest;
+            set {
+                _chest = value;
+            }
         }
 
-        set {
-            _chest = value;
+        public MazeAssets(AssetReference wallAssetReference) {
+            Wall = wallAssetReference;
         }
-    }
 
-    public MazeAssets(AssetReference wallAssetReference) {
-        Wall = wallAssetReference;
     }
 
 }

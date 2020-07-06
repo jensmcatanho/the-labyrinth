@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
+using Maze;
 
 public class ProgressTracker : MonoBehaviour, Core.IEventListener {
 

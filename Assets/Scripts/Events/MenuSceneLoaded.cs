@@ -1,4 +1,6 @@
-﻿namespace Events {
+﻿using Maze;
+
+namespace Events {
 
     public class MenuSceneLoaded : GameEvent {
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using Maze;
+
+namespace Maze {
 
 public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
 
@@ -83,6 +84,8 @@ public class StandardMaze : MonoBehaviour, IMaze, Core.IEventListener {
         }
     }
    #endregion
+}
+
 }
 
 /*

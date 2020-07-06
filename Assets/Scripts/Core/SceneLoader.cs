@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using Maze;
+
 namespace Core {
 
     enum GameScene {
