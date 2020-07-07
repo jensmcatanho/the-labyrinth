@@ -189,19 +189,8 @@ namespace Maze {
         }
 
         private void SpawnFinishTrigger() {
-            GameObject finishTrigger = new GameObject("Finish Trigger");
-            finishTrigger.AddComponent<FinishTrigger>();
-            finishTrigger.AddComponent<BoxCollider>().isTrigger = true;
+            var finishTrigger = FinishTrigger.Spawn(_maze.Exit).transform.parent;
             finishTrigger.transform.parent = _parent;
-
-            if (_maze.Exit.Position.X >= _maze.Exit.Position.Y) {
-                finishTrigger.transform.position = new Vector3((2 * _maze.Exit.Position.X + 4) * _maze.CellSize - 2 * _maze.CellSize, 1.0f, (2 * _maze.Exit.Position.Y + 1) * _maze.CellSize);
-                finishTrigger.transform.localScale = new Vector3(.5f * _maze.CellSize, 2f * _maze.CellSize, 1.5f * _maze.CellSize);
-
-            } else {
-                finishTrigger.transform.position = new Vector3((2 * _maze.Exit.Position.X + 1) * _maze.CellSize, 1.0f, (2 * _maze.Exit.Position.Y + 4) * _maze.CellSize - 2 * _maze.CellSize);
-                finishTrigger.transform.localScale = new Vector3(2f * _maze.CellSize, 2.0f * _maze.CellSize, _maze.CellSize * 0.5f);
-            }
         }
         #endregion
     }
