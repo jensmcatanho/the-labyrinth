@@ -189,7 +189,7 @@ namespace Maze {
         }
 
         private void SpawnFinishTrigger() {
-            var finishTrigger = FinishTrigger.Spawn(_maze.Exit).transform.parent;
+            var finishTrigger = FinishTrigger.Spawn(_maze.Exit);
             finishTrigger.transform.parent = _parent;
         }
         #endregion

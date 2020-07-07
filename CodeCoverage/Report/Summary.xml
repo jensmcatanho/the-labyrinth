@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>06/07/2020 - 22:38:08</Generatedon>
-    <Parser>OpenCoverParser</Parser>
+    <Generatedon>07/07/2020 - 13:31:43</Generatedon>
+    <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
     <Assemblies>1</Assemblies>
     <Classes>42</Classes>
     <Files>42</Files>
-    <Coveredlines>399</Coveredlines>
-    <Uncoveredlines>707</Uncoveredlines>
-    <Coverablelines>1106</Coverablelines>
-    <Totallines>2260</Totallines>
-    <Linecoverage>36</Linecoverage>
+    <Coveredlines>468</Coveredlines>
+    <Uncoveredlines>647</Uncoveredlines>
+    <Coverablelines>1115</Coverablelines>
+    <Totallines>2266</Totallines>
+    <Linecoverage>41.9</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="Scripts" classes="42" coverage="36" coveredlines="399" coverablelines="1106" totallines="2260" branchcoverage="" coveredbranches="0" totalbranches="0">
+    <Assembly name="Scripts" classes="42" coverage="41.9" coveredlines="468" coverablelines="1115" totallines="2266" branchcoverage="" coveredbranches="0" totalbranches="0">
       <Class name="Core.AssetLoader" coverage="3.9" coveredlines="3" coverablelines="76" totallines="125" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Core.AssetReferenceData" coverage="0" coveredlines="0" coverablelines="12" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Core.DayCycle" coverage="0" coveredlines="0" coverablelines="43" totallines="77" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.EventManager" coverage="6.3" coveredlines="6" coverablelines="95" totallines="165" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.EventManager" coverage="58.9" coveredlines="56" coverablelines="95" totallines="165" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Core.NotifyOnDestroy" coverage="0" coveredlines="0" coverablelines="6" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Core.SceneLoader" coverage="0" coveredlines="0" coverablelines="43" totallines="91" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Events.GameSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
@@ -30,7 +30,7 @@
       <Class name="Events.MenuSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Events.SpawnCompleted" coverage="0" coveredlines="0" coverablelines="6" totallines="22" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Events.StartButtonClicked" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="FinishTrigger" coverage="0" coveredlines="0" coverablelines="16" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="FinishTrigger" coverage="76" coveredlines="19" coverablelines="25" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Cell" coverage="100" coveredlines="56" coverablelines="56" totallines="115" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.ChestRotation" coverage="0" coveredlines="0" coverablelines="4" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.DFSCell" coverage="100" coveredlines="5" coverablelines="5" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
