@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Core;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -52,7 +50,7 @@ namespace Tests {
             var isMazeFinished = false;
 
             SetUpEventManager();
-            EventManager.Instance.AddListenerOnce((Events.MazeFinished e) => {
+            Core.EventManager.Instance.AddListenerOnce((Events.MazeFinished e) => {
                 isMazeFinished = true;
             });
 
@@ -70,7 +68,7 @@ namespace Tests {
             var isMazeFinished = false;
 
             SetUpEventManager();
-            EventManager.Instance.AddListenerOnce((Events.MazeFinished e) => {
+            Core.EventManager.Instance.AddListenerOnce((Events.MazeFinished e) => {
                 isMazeFinished = true;
             });
 
@@ -89,7 +87,7 @@ namespace Tests {
 
         public void SetUpEventManager() {
             var eventManager = new GameObject();
-            eventManager.AddComponent<EventManager>();
+            eventManager.AddComponent<Core.EventManager>();
         }
     }
 }

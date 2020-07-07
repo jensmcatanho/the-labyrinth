@@ -26,8 +26,8 @@ namespace Menu {
             _titleText = GetComponentInChildren<TitleText>();
             _startButton = GetComponentInChildren<StartButton>();
 
-            _titleText.SetActive(false);
-            _startButton.SetActive(false);
+            _titleText.gameObject.SetActive(false);
+            _startButton.gameObject.SetActive(false);
 
             AddListeners();
         }
@@ -37,8 +37,8 @@ namespace Menu {
         }
 
         private void OnCameraPositioned(Events.MenuCameraPositioned e) {
-            _titleText.SetActive(true);
-            _startButton.SetActive(true);
+            _titleText.gameObject.SetActive(true);
+            _startButton.gameObject.SetActive(true);
         }
         #endregion
     }
