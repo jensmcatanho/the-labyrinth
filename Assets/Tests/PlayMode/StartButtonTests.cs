@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 
 namespace Tests {
 
@@ -41,7 +41,7 @@ namespace Tests {
             Assert.IsTrue(isStartButtonClicked);
             _garbageCollector.Enqueue(gameObject);
         }
-        
+
         [UnityTest]
         public IEnumerator Test_StartButton_Should_Not_Queue_A_StartButtonClicked_Event_When_Its_Not_Clicked() {
             var gameObject = new GameObject("Start Button");

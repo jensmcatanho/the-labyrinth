@@ -54,7 +54,8 @@ namespace Maze {
             get; set;
         }
 
-        public Direction Walls { get;
+        public Direction Walls {
+            get;
             private set;
         }
 

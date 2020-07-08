@@ -19,14 +19,14 @@ public static class TextureExtensions {
 
                 finalTexture.SetPixel(u, v, finalColor);
             }
-        
+
         finalTexture.Apply();
         return finalTexture;
     }
 
     public static Texture2D ToTexture2D(this RenderTexture renderTexture) {
         RenderTexture.active = renderTexture;
-        
+
         var texture = new Texture2D(renderTexture.width, renderTexture.height);
         texture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
         texture.Apply();

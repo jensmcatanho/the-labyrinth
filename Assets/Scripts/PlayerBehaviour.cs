@@ -8,7 +8,7 @@ public class PlayerBehaviour : MonoBehaviour, Core.IEventListener {
 
     #region public methods
     public void AddListeners() {
-       Core.EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnSceneLoaded);
+        Core.EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnSceneLoaded);
     }
 
     public void RemoveListeners() {
@@ -32,7 +32,8 @@ public class PlayerBehaviour : MonoBehaviour, Core.IEventListener {
     }
 
     private void InstantiatePlayer() {
-        _playerObject = Instantiate(_playerPrefab, new Vector3(2.5f, 1.0f, 2.5f), Quaternion.identity);;
+        _playerObject = Instantiate(_playerPrefab, new Vector3(2.5f, 1.0f, 2.5f), Quaternion.identity);
+        ;
         _playerObject.transform.parent = transform;
     }
     #endregion

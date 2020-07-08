@@ -28,7 +28,7 @@ namespace Core {
 
         private void Update() {
             UpdateTime();
-            
+
             RotateSun();
             RotateMoon();
 

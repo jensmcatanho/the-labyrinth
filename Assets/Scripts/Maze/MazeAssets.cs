@@ -4,7 +4,8 @@ using UnityEngine.AddressableAssets;
 
 namespace Maze {
 
-    [Serializable] public class MazeAssets {
+    [Serializable]
+    public class MazeAssets {
 
         #region private fields
         [SerializeField] private AssetReference _wall;

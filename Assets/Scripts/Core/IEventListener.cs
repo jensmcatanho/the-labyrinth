@@ -1,8 +1,8 @@
 ﻿namespace Core {
 
-public interface IEventListener {
-    void AddListeners();
-    void RemoveListeners();
-}
+    public interface IEventListener {
+        void AddListeners();
+        void RemoveListeners();
+    }
 
 }

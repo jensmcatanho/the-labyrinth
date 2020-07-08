@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using Maze;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -31,7 +28,7 @@ namespace Tests {
         public IEnumerator Test_Event_Should_Not_Be_Triggered_While_allowedFrames_Is_Not_Zero() {
             var gameObject = new GameObject();
             var child = new GameObject();
-            var notifyOnCreated = gameObject.AddComponent<NotifyOnCreated>();
+            var notifyOnCreated = gameObject.AddComponent<Maze.NotifyOnCreated>();
             child.transform.parent = gameObject.transform;
             var mazeInstancedTriggered = false;
 
@@ -52,7 +49,7 @@ namespace Tests {
         public IEnumerator Test_Event_Should_Be_Triggered_When_allowedFrames_Reaches_Zero() {
             var gameObject = new GameObject();
             var child = new GameObject();
-            var notifyOnCreated = gameObject.AddComponent<NotifyOnCreated>();
+            var notifyOnCreated = gameObject.AddComponent<Maze.NotifyOnCreated>();
             child.transform.parent = gameObject.transform;
             var mazeInstancedTriggered = false;
 

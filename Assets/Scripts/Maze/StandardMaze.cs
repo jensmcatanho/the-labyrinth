@@ -1,5 +1,4 @@
-﻿using Maze;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Maze {
 
@@ -47,7 +46,7 @@ namespace Maze {
                     return null;
             }
         }
-       #endregion
+        #endregion
     }
 
 }

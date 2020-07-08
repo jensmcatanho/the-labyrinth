@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿using Maze;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-
-using Maze;
 
 namespace Core {
 

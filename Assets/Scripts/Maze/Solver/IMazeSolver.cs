@@ -1,8 +1,8 @@
 ﻿namespace Maze.Solver {
 
-public interface IMazeSolver {
+    public interface IMazeSolver {
 
-    bool IsSolvable(Maze<Cell> maze);
-}
+        bool IsSolvable(Maze<Cell> maze);
+    }
 
 }

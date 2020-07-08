@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Maze {
+﻿namespace Maze {
 
     public interface IMaze {
 

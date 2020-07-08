@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace Menu {
 
     public class StartButton : MonoBehaviour, Core.IEventListener {
-    
+
         private Button _button;
 
         #region public methods

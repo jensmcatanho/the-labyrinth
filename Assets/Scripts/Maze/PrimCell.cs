@@ -26,7 +26,7 @@ namespace Maze {
                 _status = value;
             }
         }
-    
+
         public PrimCell(int x, int y, int size)
             : base(x, y, size) {
 

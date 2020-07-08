@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
 
@@ -34,7 +34,7 @@ namespace Tests {
             Assert.AreEqual(expectedLocalScale, finishTrigger.transform.localScale);
             _garbageCollector.Enqueue(finishTrigger);
         }
-        
+
         [Test]
         public void Test_Spawn_When_Position_X_Is_Lower_Than_Position_Y() {
             var finishCell = new Maze.Cell(9, 10, 2);
@@ -47,7 +47,7 @@ namespace Tests {
             Assert.AreEqual(expectedLocalScale, finishTrigger.transform.localScale);
             _garbageCollector.Enqueue(finishTrigger);
         }
-        
+
         [Test]
         public void Test_Spawn_When_Position_X_And_Position_Y_Are_Equal() {
             var finishCell = new Maze.Cell(10, 10, 2);
