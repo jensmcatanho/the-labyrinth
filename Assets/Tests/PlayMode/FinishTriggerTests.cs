@@ -6,18 +6,15 @@ using UnityEngine.TestTools;
 namespace Tests {
 
     public class FinishTriggerTests {
-
-        private GameObject _eventManager = null;
-
         private GarbageCollector _garbageCollector = null;
 
         [SetUp]
         public void SetUp() {
-            _eventManager = new GameObject("Event Manager");
-            _eventManager.AddComponent<Core.EventManager>();
+            var eventManager = new GameObject("Event Manager");
+            eventManager.AddComponent<Core.EventManager>();
 
             _garbageCollector = new GarbageCollector();
-            _garbageCollector.Enqueue(_eventManager);
+            _garbageCollector.Enqueue(eventManager);
         }
 
         [TearDown]

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tests
-{
+namespace Tests {
+
     public class GarbageCollector {
 
         private readonly Queue<GameObject> _objects = new Queue<GameObject>();
