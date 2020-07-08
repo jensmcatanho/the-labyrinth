@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>07/07/2020 - 13:31:43</Generatedon>
+    <Generatedon>08/07/2020 - 00:08:06</Generatedon>
     <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
     <Assemblies>1</Assemblies>
-    <Classes>42</Classes>
-    <Files>42</Files>
-    <Coveredlines>468</Coveredlines>
-    <Uncoveredlines>647</Uncoveredlines>
-    <Coverablelines>1115</Coverablelines>
-    <Totallines>2266</Totallines>
-    <Linecoverage>41.9</Linecoverage>
+    <Classes>41</Classes>
+    <Files>41</Files>
+    <Coveredlines>481</Coveredlines>
+    <Uncoveredlines>622</Uncoveredlines>
+    <Coverablelines>1103</Coverablelines>
+    <Totallines>2251</Totallines>
+    <Linecoverage>43.6</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="Scripts" classes="42" coverage="41.9" coveredlines="468" coverablelines="1115" totallines="2266" branchcoverage="" coveredbranches="0" totalbranches="0">
+    <Assembly name="Scripts" classes="41" coverage="43.6" coveredlines="481" coverablelines="1103" totallines="2251" branchcoverage="" coveredbranches="0" totalbranches="0">
       <Class name="Core.AssetLoader" coverage="3.9" coveredlines="3" coverablelines="76" totallines="125" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Core.AssetReferenceData" coverage="0" coveredlines="0" coverablelines="12" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Core.DayCycle" coverage="0" coveredlines="0" coverablelines="43" totallines="77" branchcoverage="" coveredbranches="0" totalbranches="0" />
@@ -30,7 +30,7 @@
       <Class name="Events.MenuSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Events.SpawnCompleted" coverage="0" coveredlines="0" coverablelines="6" totallines="22" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Events.StartButtonClicked" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="FinishTrigger" coverage="76" coveredlines="19" coverablelines="25" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="FinishTrigger" coverage="100" coveredlines="19" coverablelines="19" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Cell" coverage="100" coveredlines="56" coverablelines="56" totallines="115" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.ChestRotation" coverage="0" coveredlines="0" coverablelines="4" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.DFSCell" coverage="100" coveredlines="5" coverablelines="5" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
@@ -50,10 +50,9 @@
       <Class name="Menu.Animation.CameraFadeIn" coverage="0" coveredlines="0" coverablelines="25" totallines="63" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Menu.Animation.CameraIdle" coverage="0" coveredlines="0" coverablelines="14" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Menu.MenuBehaviour" coverage="0" coveredlines="0" coverablelines="21" totallines="46" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.StartButton" coverage="0" coveredlines="0" coverablelines="16" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Menu.StartButton" coverage="100" coveredlines="13" coverablelines="13" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Menu.TitleText" coverage="0" coveredlines="0" coverablelines="6" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="PlayerBehaviour" coverage="0" coveredlines="0" coverablelines="21" totallines="39" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="PostProcessingFX" coverage="0" coveredlines="0" coverablelines="3" totallines="11" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="ProgressTracker" coverage="0" coveredlines="0" coverablelines="46" totallines="79" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="RandomExtensions" coverage="100" coveredlines="3" coverablelines="3" totallines="7" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="TextureExtensions" coverage="0" coveredlines="0" coverablelines="23" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />

@@ -6,7 +6,25 @@ using UnityEngine.TestTools;
 namespace Tests {
 
     public class FinishTriggerTests {
-        
+
+        private GameObject _eventManager = null;
+
+        private GarbageCollector _garbageCollector = null;
+
+        [SetUp]
+        public void SetUp() {
+            _eventManager = new GameObject("Event Manager");
+            _eventManager.AddComponent<Core.EventManager>();
+
+            _garbageCollector = new GarbageCollector();
+            _garbageCollector.Enqueue(_eventManager);
+        }
+
+        [TearDown]
+        public void TearDown() {
+            _garbageCollector.DestroyAll();
+        }
+
         [Test]
         public void Test_Spawn_When_Position_X_Is_Greater_Than_Position_Y() {
             var finishCell = new Maze.Cell(11, 10, 2);
@@ -17,6 +35,7 @@ namespace Tests {
 
             Assert.AreEqual(expectedPosition, finishTrigger.transform.position);
             Assert.AreEqual(expectedLocalScale, finishTrigger.transform.localScale);
+            _garbageCollector.Enqueue(finishTrigger);
         }
         
         [Test]
@@ -29,6 +48,7 @@ namespace Tests {
 
             Assert.AreEqual(expectedPosition, finishTrigger.transform.position);
             Assert.AreEqual(expectedLocalScale, finishTrigger.transform.localScale);
+            _garbageCollector.Enqueue(finishTrigger);
         }
         
         [Test]
@@ -41,6 +61,7 @@ namespace Tests {
 
             Assert.AreEqual(expectedPosition, finishTrigger.transform.position);
             Assert.AreEqual(expectedLocalScale, finishTrigger.transform.localScale);
+            _garbageCollector.Enqueue(finishTrigger);
         }
 
         [UnityTest]
@@ -49,15 +70,15 @@ namespace Tests {
             var finishTrigger = FinishTrigger.Spawn(finishCell);
             var isMazeFinished = false;
 
-            SetUpEventManager();
             Core.EventManager.Instance.AddListenerOnce((Events.MazeFinished e) => {
                 isMazeFinished = true;
             });
 
-            SetUpColliderObject(finishTrigger.transform.position);
-            yield return null;
+            var collider = SetUpColliderObject(finishTrigger.transform.position);
+            yield return new WaitForSeconds(.5f);
 
             Assert.IsTrue(isMazeFinished);
+            _garbageCollector.Enqueue(finishTrigger, collider);
         }
 
 
@@ -67,27 +88,26 @@ namespace Tests {
             var finishTrigger = FinishTrigger.Spawn(finishCell);
             var isMazeFinished = false;
 
-            SetUpEventManager();
             Core.EventManager.Instance.AddListenerOnce((Events.MazeFinished e) => {
                 isMazeFinished = true;
             });
 
-            SetUpColliderObject(new Vector3(100, 100, 100));
-            yield return null;
+            var collider = SetUpColliderObject(new Vector3(100, 100, 100));
+            yield return new WaitForSeconds(.5f);
 
             Assert.IsFalse(isMazeFinished);
+            _garbageCollector.Enqueue(finishTrigger, collider);
         }
 
-        public void SetUpColliderObject(Vector3 position) {
+        public GameObject SetUpColliderObject(Vector3 position) {
             var collider = new GameObject("Collider");
             collider.AddComponent<BoxCollider>();
             collider.AddComponent<Rigidbody>();
             collider.transform.position = position;
+
+            return collider;
         }
 
-        public void SetUpEventManager() {
-            var eventManager = new GameObject();
-            eventManager.AddComponent<Core.EventManager>();
-        }
+
     }
 }

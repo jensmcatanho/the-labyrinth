@@ -8,6 +8,24 @@ namespace Tests {
 
     public class StartButtonTests {
 
+        private GameObject _eventManager = null;
+
+        private GarbageCollector _garbageCollector = null;
+
+        [SetUp]
+        public void SetUp() {
+            _eventManager = new GameObject("Event Manager");
+            _eventManager.AddComponent<Core.EventManager>();
+
+            _garbageCollector = new GarbageCollector();
+            _garbageCollector.Enqueue(_eventManager);
+        }
+
+        [TearDown]
+        public void TearDown() {
+            _garbageCollector.DestroyAll();
+        }
+
         [UnityTest]
         public IEnumerator Test_StartButton_Should_Queue_A_StartButtonClicked_Event_When_Clicked() {
             var gameObject = new GameObject("Start Button");
@@ -20,9 +38,10 @@ namespace Tests {
             });
 
             button.onClick.Invoke();
-            yield return null;
+            yield return new WaitForSeconds(.5f);
 
             Assert.IsTrue(isStartButtonClicked);
+            _garbageCollector.Enqueue(gameObject);
         }
         
         [UnityTest]
@@ -36,9 +55,10 @@ namespace Tests {
                 isStartButtonClicked = true;
             });
 
-            yield return null;
+            yield return new WaitForSeconds(.5f);
 
             Assert.IsFalse(isStartButtonClicked);
+            _garbageCollector.Enqueue(gameObject);
         }
 
 
@@ -49,14 +69,10 @@ namespace Tests {
             var startButton = gameObject.AddComponent<Menu.StartButton>();
 
             startButton.RemoveListeners();
-            yield return null;
+            yield return new WaitForSeconds(.5f);
 
             Assert.Zero(button.onClick.GetPersistentEventCount());
-        }
-
-        public void SetUpEventManager() {
-            var eventManager = new GameObject();
-            eventManager.AddComponent<Core.EventManager>();
+            _garbageCollector.Enqueue(gameObject);
         }
     }
 
