@@ -81,8 +81,7 @@ namespace Core {
 
         private void SpawnFromLoadedReference(AssetReferenceData data) {
             data.InstantiateAsync().Completed += (asyncOperationHandle) => {
-                var instantiatedObject = OnInstatiationCompleted(data, asyncOperationHandle);
-                NotifyInstatiation(data.Reference, instantiatedObject);
+                OnInstatiationCompleted(data, asyncOperationHandle);
             };
         }
 
@@ -100,10 +99,6 @@ namespace Core {
                     SpawnFromLoadedReference(queuedData);
                 }
             }
-        }
-
-        private void NotifyInstatiation(AssetReference reference, GameObject instantiatedObject) {
-            EventManager.Instance.QueueEvent(new Events.SpawnCompleted(reference, instantiatedObject));
         }
 
         private GameObject OnInstatiationCompleted(AssetReferenceData data, AsyncOperationHandle<GameObject> asyncOperationHandle) {

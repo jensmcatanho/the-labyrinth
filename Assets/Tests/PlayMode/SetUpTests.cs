@@ -14,7 +14,7 @@ namespace Tests {
 
         public void DestroyAll() {
             foreach (var gameObject in _objects) {
-                Object.DestroyImmediate(gameObject);
+                Object.Destroy(gameObject);
             }
         }
     }

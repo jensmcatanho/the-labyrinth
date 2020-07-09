@@ -11,8 +11,8 @@ namespace Core {
         }
 
         private void OnDestroy() {
-            if (AssetLoader.Instance)
-                AssetLoader.Instance.Remove(AssetReference, gameObject);
+            if (EventManager.Instance)
+                EventManager.Instance.TriggerEvent(new Events.ObjectDestroyed(AssetReference, gameObject));
         }
     }
 

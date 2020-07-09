@@ -39,11 +39,11 @@ namespace Core {
 
         #region public methods
         public void AddListener<T>(EventDelegate<T> eventDelegate) where T : Events.GameEvent {
-            AddDelegate<T>(eventDelegate);
+            AddDelegate(eventDelegate);
         }
 
         public void AddListenerOnce<T>(EventDelegate<T> eventDelegate) where T : Events.GameEvent {
-            EventDelegate result = AddDelegate<T>(eventDelegate);
+            EventDelegate result = AddDelegate(eventDelegate);
 
             if (result != null)
                 _onceLookups[result] = eventDelegate;
