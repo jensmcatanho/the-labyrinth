@@ -1,35 +1,36 @@
-﻿using Achievements;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PayRespectsTracker : MonoBehaviour, IAchievementTracker {
+namespace Achievements {
 
-    #region private fields
-    [SerializeReference] private Achievement _achievement;
-    #endregion
+    public class PayRespectsTracker : MonoBehaviour, IAchievementTracker {
 
-    #region public methods
-    public void Track() {
-        if (Input.GetKeyDown(KeyCode.F)) {
-            AchievementManager.Instance.RewardAchievement(_achievement);
-            Destroy(this);
+        #region private fields
+        [SerializeReference] private Achievement _achievement;
+        #endregion
+
+        #region public methods
+        public void Track() {
+            if (Input.GetKeyDown(KeyCode.F)) {
+                AchievementManager.Instance.RewardAchievement(_achievement);
+                Destroy(this);
+            }
         }
-    }
-    #endregion
+        #endregion
 
-    #region private methods
-    private void Awake() {
-        DestroyIfRewarded();
+        #region private methods
+        private void Awake() {
+            DestroyIfRewarded();
+        }
+
+        private void DestroyIfRewarded() {
+            if (!AchievementManager.Instance.IsRewardable(_achievement))
+                Destroy(this);
+        }
+
+        private void Update() {
+            Track();
+        }
+        #endregion
     }
 
-    private void DestroyIfRewarded() {
-        if (!AchievementManager.Instance.IsRewardable(_achievement))
-            Destroy(this);
-    }
-
-    private void Update() {
-        Track();
-    }
-    #endregion
 }

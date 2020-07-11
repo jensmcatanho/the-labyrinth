@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02391cdd18c48384ab609f829168db3f, type: 3}
   m_Name: PayRespects
   m_EditorClassIdentifier: 
+  _name: Pay Respects
+  _description: Press F to pay respects near a decayed soul
+  _steamID: ACH_WIN_ONE_GAME

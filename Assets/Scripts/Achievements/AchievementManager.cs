@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+using System.Linq;
 
 #if !DISABLESTEAMWORKS
 using Steamworks;
@@ -25,7 +25,13 @@ namespace Achievements {
 
         #region private fields
         [SerializeReference] private List<Achievement> _achievements;
-        #endregion
+
+#if UNITY_EDITOR
+        [SerializeField] private bool _resetOnStart;
+#endif
+
+
+#endregion
 
         #region public methods
         public void RewardAchievement(Achievement achievement) {
@@ -34,8 +40,10 @@ namespace Achievements {
                 return;
             }
 
-            if (SteamManager.Initialized)
+            if (SteamManager.Initialized) {
                 SteamUserStats.SetAchievement(achievement.SteamID);
+                SteamUserStats.StoreStats();
+            }
 
             Debug.Log("Achievement \"" + achievement.Name + "\" rewarded.");
             _achievements.Remove(achievement);
@@ -50,6 +58,27 @@ namespace Achievements {
                 _instance = this;
                 DontDestroyOnLoad(gameObject);
             }
+
+            if (_resetOnStart)
+                ResetAchievements();
+
+            FilterCompletedAchievements();
+        }
+
+        private void FilterCompletedAchievements() {
+            if (!SteamManager.Initialized)
+                return;
+
+            SteamUserStats.RequestCurrentStats();
+
+            _achievements = _achievements.Where(achievement => {
+                SteamUserStats.GetAchievement(achievement.SteamID, out bool achieved);
+                return !achieved;
+            }).ToList();
+        }
+
+        private void ResetAchievements() {
+            SteamUserStats.ResetAllStats(true);
         }
         #endregion
     }

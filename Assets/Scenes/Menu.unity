@@ -1217,6 +1217,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1613912432899904854, guid: c7e276baf969ba749a8c5fcf30fdd573,
+        type: 3}
+      propertyPath: _achievements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1613912432899904854, guid: c7e276baf969ba749a8c5fcf30fdd573,
+        type: 3}
+      propertyPath: _achievements.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: b48d34e009e3cea45953a20b04161e42,
+        type: 2}
+    - target: {fileID: 1613912432899904854, guid: c7e276baf969ba749a8c5fcf30fdd573,
+        type: 3}
+      propertyPath: _resetOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1785106431430494396, guid: c7e276baf969ba749a8c5fcf30fdd573,
         type: 3}
       propertyPath: m_Name
