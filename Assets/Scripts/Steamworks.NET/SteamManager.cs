@@ -6,7 +6,7 @@
 // Version: 1.0.9
 
 #if UNITY_ANDROID || UNITY_IOS || UNITY_TIZEN || UNITY_TVOS || UNITY_WEBGL || UNITY_WSA || UNITY_PS4 || UNITY_WII || UNITY_XBOXONE || UNITY_SWITCH
-#define DISABLESTEAMWORKS
+
 #endif
 
 using UnityEngine;
@@ -22,6 +22,8 @@ using Steamworks;
 [DisallowMultipleComponent]
 public class SteamManager : MonoBehaviour {
 #if !DISABLESTEAMWORKS
+	[SerializeField] private bool _isSteamEnabled;
+
 	protected static bool s_EverInitialized = false;
 
 	protected static SteamManager s_instance;
@@ -49,6 +51,9 @@ public class SteamManager : MonoBehaviour {
 	}
 
 	protected virtual void Awake() {
+		if (!_isSteamEnabled)
+			gameObject.SetActive(false);
+
 		// Only one instance of SteamManager at a time!
 		if (s_instance != null) {
 			Destroy(gameObject);
