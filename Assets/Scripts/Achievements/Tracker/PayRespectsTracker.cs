@@ -20,7 +20,7 @@ namespace Achievements {
 
                 if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance)) {
                     if (hit.transform.TryGetComponent(out Interactables.DecayedSoul decayedSoul)) {
-                        decayedSoul.Respect();
+                        decayedSoul.Interact();
                         AchievementManager.Instance.RewardAchievement(_achievement);
                         Destroy(this);
                     }
