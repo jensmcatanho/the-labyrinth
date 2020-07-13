@@ -29,9 +29,7 @@ namespace Achievements {
 #if UNITY_EDITOR
         [SerializeField] private bool _resetOnStart;
 #endif
-
-
-#endregion
+        #endregion
 
         #region public methods
         public void RewardAchievement(Achievement achievement) {

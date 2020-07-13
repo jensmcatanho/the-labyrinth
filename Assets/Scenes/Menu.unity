@@ -923,6 +923,75 @@ Light:
     type: 3}
   m_PrefabInstance: {fileID: 2882793159755833702}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4715187737559228575
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 51.314724
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.3020804
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 78.566284
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979377, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715187736809979382, guid: 15f235dba9ee9fc4abd33de12664e2af,
+        type: 3}
+      propertyPath: m_Name
+      value: Decayed Soul
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 15f235dba9ee9fc4abd33de12664e2af, type: 3}
 --- !u!1001 &5099772076690052463
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,13 +6,25 @@ namespace Achievements {
 
         #region private fields
         [SerializeReference] private Achievement _achievement;
+
+        private Camera _playerCamera;
+
+        private float _maxDistance = 3.0f;
         #endregion
 
         #region public methods
         public void Track() {
             if (Input.GetKeyDown(KeyCode.F)) {
-                AchievementManager.Instance.RewardAchievement(_achievement);
-                Destroy(this);
+                var camera = transform.parent.GetComponentInChildren<Camera>();
+                var ray = camera.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(ray, out RaycastHit hit, _maxDistance)) {
+                    if (hit.transform.TryGetComponent(out Interactables.DecayedSoul decayedSoul)) {
+                        decayedSoul.Respect();
+                        AchievementManager.Instance.RewardAchievement(_achievement);
+                        Destroy(this);
+                    }
+                }
             }
         }
         #endregion
