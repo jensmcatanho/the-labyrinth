@@ -33,12 +33,24 @@ namespace Maze {
 
         #region private methods
         private void SpawnFloor() {
-            GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
-
-            floor.name = "Floor";
+            var floor = new GameObject("Floor");
             floor.transform.parent = _parent;
-            floor.transform.localScale = new Vector3(_maze.Length * 0.2f * _maze.CellSize, 1, _maze.Width * 0.2f * _maze.CellSize);
-            floor.transform.position = new Vector3(_maze.Length * _maze.CellSize, 0, _maze.Width * _maze.CellSize);
+
+            for (int i = 0; i < _maze.Length; i++) {
+                for (int j = 0; j < _maze.Width; j++) {
+                    var floorCell = GameObject.CreatePrimitive(PrimitiveType.Plane);
+
+                    floorCell.name = GetFloorName(i, j);
+                    floorCell.transform.parent = floor.transform;
+                    floorCell.transform.localScale = new Vector3(_maze.CellSize / 5.0f, 1, _maze.CellSize / 5.0f);
+                    floorCell.transform.position = new Vector3((2 * i + 1) * _maze.CellSize, 0.0f, (2 * j + 1) * _maze.CellSize);
+                }
+            }
+        }
+
+        private string GetFloorName(int i, int j) {
+            var stringBuilder = new StringBuilder();
+            return stringBuilder.Append(" (").Append(i).Append(", ").Append(j).Append(")").ToString();
         }
 
         private void SpawnWalls() {
