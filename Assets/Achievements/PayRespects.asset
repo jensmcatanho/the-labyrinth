@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Pay Respects
   _description: Press F to pay respects near a decayed soul
-  _steamID: ACH_WIN_ONE_GAME
+  _steamID: PAY_RESPECTS

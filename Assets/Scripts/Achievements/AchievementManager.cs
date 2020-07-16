@@ -27,7 +27,7 @@ namespace Achievements {
         [SerializeReference] private List<Achievement> _achievements;
 
 #if UNITY_EDITOR
-        [SerializeField] private bool _resetOnStart;
+        [SerializeField] private bool _resetOnStart = false;
 #endif
         #endregion
 
@@ -57,8 +57,10 @@ namespace Achievements {
                 DontDestroyOnLoad(gameObject);
             }
 
+#if UNITY_EDITOR
             if (_resetOnStart)
                 ResetAchievements();
+#endif
 
             FilterCompletedAchievements();
         }
