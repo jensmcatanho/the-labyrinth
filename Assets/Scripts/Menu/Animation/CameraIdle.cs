@@ -1,44 +1,29 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 namespace Menu.Animation {
 
-    public class CameraIdle : MonoBehaviour, Core.IEventListener {
+    public class CameraIdle : MonoBehaviour, IAnimation {
 
         #region private fields
-        [SerializeField] private float _heightDelta;
+        [SerializeField] private float _heightFluctuation;
 
         [SerializeField] private float _duration;
 
-        private Hashtable _args;
+        [SerializeField] private int _loopCount;
+
+        [SerializeField] private Ease _easing;
         #endregion
 
         #region public methods
-        public void AddListeners() {
-            Core.EventManager.Instance.AddListenerOnce<Events.MenuCameraPositioned>(StartAnimation);
-        }
-
-        public void RemoveListeners() {
-            return;
-        }
-        #endregion
-
-        #region private methods
-        private void Awake() {
-            _args = new Hashtable {
-                { "easetype", iTween.EaseType.easeInOutSine },
-                { "looptype", iTween.LoopType.pingPong },
-                { "time", _duration }
-            };
-
-            AddListeners();
-        }
-
-        private void StartAnimation(Events.MenuCameraPositioned e) {
-            _args.Add("position", new Vector3(e.Position.x, e.Position.y + _heightDelta, e.Position.z));
-            iTween.MoveTo(gameObject, _args);
+        public void Play() {
+            var parent = transform.parent;
+            parent.DOMoveY(parent.position.y + _heightFluctuation, _duration)
+                .SetEase(_easing)
+                .SetLoops(_loopCount, LoopType.Yoyo);
         }
         #endregion
+
     }
-
 }

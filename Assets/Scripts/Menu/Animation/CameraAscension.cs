@@ -1,51 +1,34 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
 using UnityEngine;
 
 namespace Menu.Animation {
 
-    public class CameraAscension : MonoBehaviour, Core.IEventListener {
+    public class CameraAscension : MonoBehaviour, IAnimation {
 
         #region private fields
         [SerializeField] private float _delay;
 
         [SerializeField] private float _duration;
 
-        [SerializeField] private float _height;
+        [SerializeField] private float _targetHeight;
 
-        private Hashtable _args;
+        [SerializeField] private Ease _easing;
         #endregion
 
         #region public methods
-        public void AddListeners() {
-            Core.EventManager.Instance.AddListenerOnce<Events.MazeInstanced>(StartAnimation);
-        }
+        public void Play() {
+            var parent = transform.parent;
 
-        public void RemoveListeners() {
-            return;
-        }
-        #endregion
-
-        #region private methods
-        private void Awake() {
-            _args = new Hashtable {
-                { "position", new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + _height, gameObject.transform.position.z) },
-                { "easetype", iTween.EaseType.easeOutExpo },
-                { "delay", _delay },
-                { "time", _duration },
-                { "oncomplete", "OnCameraAscensionCompleted" }
-            };
-
-            AddListeners();
-        }
-
-        private void StartAnimation(Events.MazeInstanced e) {
-            Core.EventManager.Instance.TriggerEvent(new Events.MenuCameraAscensionStarted());
-            iTween.MoveTo(gameObject, _args);
-        }
-
-        private void OnCameraAscensionCompleted() {
-            Core.EventManager.Instance.TriggerEvent(new Events.MenuCameraPositioned(gameObject.transform.position));
-            Destroy(this);
+            parent.DOMoveY(_targetHeight, _duration)
+                .SetDelay(_delay)
+                .SetEase(_easing)
+                .OnStart(() => {
+                    Core.EventManager.Instance.TriggerEvent(new Events.MenuCameraAscensionStarted());
+                })
+                .OnComplete(() => {
+                    Core.EventManager.Instance.TriggerEvent(new Events.MenuCameraPositioned());
+                    Destroy(this);
+                });
         }
         #endregion
     }
