@@ -421,6 +421,36 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2477019170751174880, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477019170822795109, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477019170822795163, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477019170822795163, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477019170822795163, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477019170822795163, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2477019170898206186, guid: 390ad3d412bb49d40be5622341a031cc,
         type: 3}
       propertyPath: m_LocalPosition.x
