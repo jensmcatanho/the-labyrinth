@@ -25,7 +25,7 @@ namespace Menu {
         }
 
         private void OnClicked() {
-            Core.EventManager.Instance.QueueEvent(new Events.StartButtonClicked());
+            Core.EventManager.Instance.QueueEvent(new Events.Menu.StartButtonClicked());
         }
         #endregion
     }

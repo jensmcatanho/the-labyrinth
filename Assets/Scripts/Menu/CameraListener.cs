@@ -1,5 +1,6 @@
 ﻿using Menu.Animation;
 using UnityEngine;
+using Labyrinth.Menu;
 
 namespace Menu {
 
@@ -8,12 +9,13 @@ namespace Menu {
         #region public methods
         public void AddListeners() {
             Core.EventManager.Instance.AddListenerOnce<Events.MazeInstanced>(OnMazeInstanced);
-            Core.EventManager.Instance.AddListenerOnce<Events.MenuCameraAscensionStarted>(OnCameraAscensionStarted);
-            Core.EventManager.Instance.AddListenerOnce<Events.MenuCameraPositioned>(OnCameraPositioned);
+            Core.EventManager.Instance.AddListenerOnce<Events.Menu.CameraAscensionStarted>(OnCameraAscensionStarted);
+            Core.EventManager.Instance.AddListenerOnce<Events.Menu.CameraMoved>(OnCameraMoved);
+            Core.EventManager.Instance.AddListenerOnce<Events.Menu.AnyButtonClicked>(OnAnyButtonClicked);
         }
 
         public void RemoveListeners() {
-            return;
+            Core.EventManager.Instance.RemoveListener<Events.Menu.CameraMoved>(OnCameraMoved);
         }
         #endregion
 
@@ -27,13 +29,20 @@ namespace Menu {
             animation.Play();
         }
 
-        private void OnCameraAscensionStarted(Events.MenuCameraAscensionStarted e) {
+        private void OnCameraAscensionStarted(Events.Menu.CameraAscensionStarted e) {
             var animation = GetComponentInChildren<CameraFadeIn>();
             animation.Play();
         }
 
-        private void OnCameraPositioned(Events.MenuCameraPositioned e) {
-            var animation = GetComponentInChildren<CameraIdle>();
+        private void OnCameraMoved(Events.Menu.CameraMoved e) {
+            if (e.NewState == MenuState.StartScreen) {
+                var animation = GetComponentInChildren<CameraIdle>();
+                animation.Play();
+            }
+        }
+
+        private void OnAnyButtonClicked(Events.Menu.AnyButtonClicked e) {
+            var animation = GetComponentInChildren<CameraGoToMenu>();
             animation.Play();
         }
         #endregion

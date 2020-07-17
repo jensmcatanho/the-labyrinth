@@ -8,11 +8,5 @@ namespace Tests {
             var evt = new Events.MazeFinished();
             Assert.NotNull(evt);
         }
-
-        [Test]
-        public void Test_GameEvent_StartButtonClicked() {
-            var evt = new Events.StartButtonClicked();
-            Assert.NotNull(evt);
-        }
     }
 }

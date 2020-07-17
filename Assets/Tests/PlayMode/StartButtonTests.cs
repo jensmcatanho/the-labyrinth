@@ -31,7 +31,7 @@ namespace Tests {
             gameObject.AddComponent<Menu.StartButton>();
             var isStartButtonClicked = false;
 
-            Core.EventManager.Instance.AddListenerOnce((Events.StartButtonClicked e) => {
+            Core.EventManager.Instance.AddListenerOnce((Events.Menu.StartButtonClicked e) => {
                 isStartButtonClicked = true;
             });
 
@@ -49,7 +49,7 @@ namespace Tests {
             gameObject.AddComponent<Menu.StartButton>();
             var isStartButtonClicked = false;
 
-            Core.EventManager.Instance.AddListenerOnce((Events.StartButtonClicked e) => {
+            Core.EventManager.Instance.AddListenerOnce((Events.Menu.StartButtonClicked e) => {
                 isStartButtonClicked = true;
             });
 

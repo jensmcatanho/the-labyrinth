@@ -31,7 +31,7 @@ namespace Core {
 
         #region public methods
         public void AddListeners() {
-            EventManager.Instance.AddListener<Events.StartButtonClicked>(LoadGame);
+            EventManager.Instance.AddListener<Events.Menu.StartButtonClicked>(LoadGame);
             EventManager.Instance.AddListener<Events.MazeFinished>(LoadMenu);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -58,7 +58,7 @@ namespace Core {
             RemoveListeners();
         }
 
-        private void LoadGame(Events.StartButtonClicked e) {
+        private void LoadGame(Events.Menu.StartButtonClicked e) {
             SceneManager.LoadScene((int)GameScene.Game);
         }
 
