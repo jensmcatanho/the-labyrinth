@@ -446,6 +446,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Progress Tracker
       objectReference: {fileID: 0}
+    - target: {fileID: 5092672924117244322, guid: 967dc446b4206f449beff8e4014dae72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5092672924117244323, guid: 967dc446b4206f449beff8e4014dae72,
         type: 3}
       propertyPath: _target
@@ -471,6 +476,11 @@ PrefabInstance:
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 8400000, guid: 650715da3fce58744bcf3118b1533823, type: 2}
+    - target: {fileID: 5092672924770357245, guid: 967dc446b4206f449beff8e4014dae72,
+        type: 3}
+      propertyPath: m_RenderingPath
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5092672924770357247, guid: 967dc446b4206f449beff8e4014dae72,
         type: 3}
       propertyPath: clearColorMode
@@ -491,5 +501,6 @@ PrefabInstance:
       propertyPath: backgroundColorHDR.b
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5092672924770357247, guid: 967dc446b4206f449beff8e4014dae72, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 967dc446b4206f449beff8e4014dae72, type: 3}
