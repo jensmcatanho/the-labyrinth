@@ -8,17 +8,21 @@ namespace Labyrinth.Menu {
         private TitleText _titleText;
 
         private PressToContinueText _pressToContinueText;
+
+        private bool _canPressToContinue = false;
         #endregion
 
         #region public methods
         public void EnableUIElements() {
             _titleText.gameObject.SetActive(true);
             _pressToContinueText.gameObject.SetActive(true);
+            _canPressToContinue = true;
         }
 
         public void DisableUIElements() {
             _titleText.gameObject.SetActive(false);
             _pressToContinueText.gameObject.SetActive(false);
+            _canPressToContinue = false;
         }
         #endregion
 
@@ -31,7 +35,7 @@ namespace Labyrinth.Menu {
         }
 
         private void Update() {
-            if (Input.anyKeyDown) {
+            if (Input.anyKeyDown && _canPressToContinue) {
                 Core.EventManager.Instance.TriggerEvent(new Events.Menu.AnyButtonClicked());
                 Destroy(gameObject);
             }

@@ -10,6 +10,7 @@ namespace Labyrinth.Menu {
         #region public methods
         public void AddListeners() {
             _button.onClick.AddListener(() => {
+                Core.EventManager.Instance.QueueEvent(new Events.Menu.ExitButtonClicked());
                 Application.Quit();
             });
         }

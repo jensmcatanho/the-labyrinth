@@ -2,7 +2,9 @@
 
     public enum MenuState {
         StartScreen,
-        MainMenu
+        MainMenu,
+        Settings,
+        Exit
     }
 
 }
