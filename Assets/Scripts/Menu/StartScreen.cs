@@ -13,16 +13,19 @@ namespace Labyrinth.Menu {
         #region public methods
         public void EnableUIElements() {
             _titleText.gameObject.SetActive(true);
+            _pressToContinueText.gameObject.SetActive(true);
         }
 
         public void DisableUIElements() {
             _titleText.gameObject.SetActive(false);
+            _pressToContinueText.gameObject.SetActive(false);
         }
         #endregion
 
         #region private methods
         private void Awake() {
             _titleText = GetComponentInChildren<TitleText>();
+            _pressToContinueText = GetComponentInChildren<PressToContinueText>();
 
             DisableUIElements();
         }
