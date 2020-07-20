@@ -28,7 +28,9 @@ namespace Labyrinth.Menu.Animation {
                 .OnComplete(() => {
                     Core.EventManager.Instance.TriggerEvent(new Events.Menu.CameraMoved(MenuState.StartScreen));
                     Destroy(this);
-                });
+                })
+                .SetAutoKill(true)
+            ;
         }
         #endregion
     }

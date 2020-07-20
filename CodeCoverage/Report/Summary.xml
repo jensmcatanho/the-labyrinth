@@ -1,64 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>09/07/2020 - 01:38:17</Generatedon>
+    <Generatedon>19/07/2020 - 23:37:13</Generatedon>
     <Parser>MultiReportParser (8x OpenCoverParser)</Parser>
     <Assemblies>1</Assemblies>
-    <Classes>43</Classes>
-    <Files>43</Files>
-    <Coveredlines>519</Coveredlines>
-    <Uncoveredlines>675</Uncoveredlines>
-    <Coverablelines>1194</Coverablelines>
-    <Totallines>2279</Totallines>
-    <Linecoverage>43.4</Linecoverage>
+    <Classes>91</Classes>
+    <Files>59</Files>
+    <Coveredlines>594</Coveredlines>
+    <Uncoveredlines>1752</Uncoveredlines>
+    <Coverablelines>2346</Coverablelines>
+    <Totallines>2702</Totallines>
+    <Linecoverage>25.3</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
   </Summary>
   <Coverage>
-    <Assembly name="Scripts" classes="43" coverage="43.4" coveredlines="519" coverablelines="1194" totallines="2279" branchcoverage="" coveredbranches="0" totalbranches="0">
-      <Class name="Core.AssetLoader" coverage="4.8" coveredlines="4" coverablelines="82" totallines="120" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.AssetLoaderListener" coverage="0" coveredlines="0" coverablelines="16" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    <Assembly name="Scripts" classes="91" coverage="25.3" coveredlines="594" coverablelines="2346" totallines="4667" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="Core.AssetLoader" coverage="5.2" coveredlines="4" coverablelines="76" totallines="120" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Core.AssetReferenceData" coverage="0" coveredlines="0" coverablelines="12" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.DayCycle" coverage="0" coveredlines="0" coverablelines="43" totallines="77" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.EventManager" coverage="74.7" coveredlines="71" coverablelines="95" totallines="165" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.NotifyOnDestroy" coverage="100" coveredlines="6" coverablelines="6" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Core.SceneLoader" coverage="1.6" coveredlines="1" coverablelines="60" totallines="90" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Events.GameSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.DayCycle" coverage="0" coveredlines="0" coverablelines="43" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.EventManager" coverage="61" coveredlines="58" coverablelines="95" totallines="165" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.NotifyOnDestroy" coverage="0" coveredlines="0" coverablelines="6" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Core.SceneLoader" coverage="2.3" coveredlines="1" coverablelines="43" totallines="89" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.GameSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Events.MazeFinished" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Events.MazeInstanced" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Events.MenuCameraAscensionStarted" coverage="0" coveredlines="0" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Events.MenuCameraPositioned" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Events.MenuSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Events.ObjectDestroyed" coverage="66.6" coveredlines="4" coverablelines="6" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.MenuCameraAscensionStarted" coverage="0" coveredlines="0" coverablelines="2" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.MenuCameraPositioned" coverage="0" coveredlines="0" coverablelines="4" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.MenuSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Events.SpawnCompleted" coverage="0" coveredlines="0" coverablelines="6" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Events.StartButtonClicked" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="FinishTrigger" coverage="100" coveredlines="19" coverablelines="19" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Maze.Cell" coverage="80.5" coveredlines="58" coverablelines="72" totallines="116" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Events.StartButtonClicked" coverage="100" coveredlines="2" coverablelines="2" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="FinishTrigger" coverage="0" coveredlines="0" coverablelines="19" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Achievements.Achievement" coverage="0" coveredlines="0" coverablelines="9" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Achievements.AchievementManager" coverage="0" coveredlines="0" coverablelines="40" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Achievements.Tracker.PayRespectsTracker" coverage="0" coveredlines="0" coverablelines="24" totallines="48" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Core.AssetLoader" coverage="0" coveredlines="0" coverablelines="72" totallines="120" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Core.AssetLoaderListener" coverage="0" coveredlines="0" coverablelines="16" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Core.AssetReferenceData" coverage="0" coveredlines="0" coverablelines="12" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Core.EventManager" coverage="62.1" coveredlines="59" coverablelines="95" totallines="165" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Core.NotifyOnDestroy" coverage="100" coveredlines="6" coverablelines="6" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Core.SceneLoader" coverage="0" coveredlines="0" coverablelines="43" totallines="89" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.GameSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.MazeFinished" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.MazeInstanced" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.Menu.AnyButtonClicked" coverage="0" coveredlines="0" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.Menu.CameraAscensionStarted" coverage="0" coveredlines="0" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.Menu.CameraMoved" coverage="0" coveredlines="0" coverablelines="4" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.Menu.StartButtonClicked" coverage="100" coveredlines="2" coverablelines="2" totallines="9" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.MenuSceneLoaded" coverage="0" coveredlines="0" coverablelines="4" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Events.ObjectDestroyed" coverage="66.6" coveredlines="4" coverablelines="6" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.FinishTrigger" coverage="100" coveredlines="19" coverablelines="19" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Interactables.DecayedSoul" coverage="0" coveredlines="0" coverablelines="3" totallines="13" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.Cell" coverage="30.3" coveredlines="17" coverablelines="56" totallines="116" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.ChestRotation" coverage="0" coveredlines="0" coverablelines="4" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.DFSCell" coverage="0" coveredlines="0" coverablelines="5" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.Factory.DFSFactory" coverage="0" coveredlines="0" coverablelines="101" totallines="168" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.Factory.PrimFactory" coverage="0" coveredlines="0" coverablelines="121" totallines="188" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.Maze[T]" coverage="0" coveredlines="0" coverablelines="37" totallines="82" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.MazeAssets" coverage="0" coveredlines="0" coverablelines="12" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.MazeListener" coverage="0" coveredlines="0" coverablelines="28" totallines="51" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.MazeSettings" coverage="0" coveredlines="0" coverablelines="15" totallines="57" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.MazeSpawner" coverage="0" coveredlines="0" coverablelines="116" totallines="210" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.NotifyOnCreated" coverage="100" coveredlines="8" coverablelines="8" totallines="22" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.PrimCell" coverage="0" coveredlines="0" coverablelines="9" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.Solver.DFSSolver" coverage="0" coveredlines="0" coverablelines="54" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.StandardMaze" coverage="0" coveredlines="0" coverablelines="21" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Maze.WallRotation" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.Animation.CameraAscension" coverage="0" coveredlines="0" coverablelines="11" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.Animation.CameraFadeIn" coverage="0" coveredlines="0" coverablelines="7" totallines="29" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.Animation.CameraGoToMenu" coverage="0" coveredlines="0" coverablelines="8" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.Animation.CameraIdle" coverage="0" coveredlines="0" coverablelines="4" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.CameraListener" coverage="0" coveredlines="0" coverablelines="30" totallines="50" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.MenuBehaviour" coverage="0" coveredlines="0" coverablelines="19" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.PressToContinueText" coverage="0" coveredlines="0" coverablelines="7" totallines="25" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.StartButton" coverage="100" coveredlines="13" coverablelines="13" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.StartScreen" coverage="0" coveredlines="0" coverablelines="16" totallines="39" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.StartScreenListener" coverage="0" coveredlines="0" coverablelines="14" totallines="35" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Menu.TitleText" coverage="0" coveredlines="0" coverablelines="7" totallines="25" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.PlayerBehaviour" coverage="0" coveredlines="0" coverablelines="22" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.ProgressTracker" coverage="0" coveredlines="0" coverablelines="46" totallines="82" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.Steam.SteamManager" coverage="0" coveredlines="0" coverablelines="69" totallines="170" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Labyrinth.WallDestructor" coverage="0" coveredlines="0" coverablelines="12" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Maze.Cell" coverage="100" coveredlines="56" coverablelines="56" totallines="116" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.ChestRotation" coverage="0" coveredlines="0" coverablelines="4" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.DFSCell" coverage="100" coveredlines="5" coverablelines="5" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Factory.DFSFactory" coverage="100" coveredlines="101" coverablelines="101" totallines="168" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Factory.PrimFactory" coverage="100" coveredlines="121" coverablelines="121" totallines="188" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Maze[T]" coverage="100" coveredlines="37" coverablelines="37" totallines="82" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Maze.MazeAssets" coverage="0" coveredlines="0" coverablelines="16" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Maze.MazeAssets" coverage="0" coveredlines="0" coverablelines="12" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.MazeListener" coverage="0" coveredlines="0" coverablelines="28" totallines="51" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.MazeSettings" coverage="0" coveredlines="0" coverablelines="15" totallines="57" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Maze.MazeSpawner" coverage="0" coveredlines="0" coverablelines="106" totallines="198" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Maze.MazeSpawner" coverage="0" coveredlines="0" coverablelines="106" totallines="210" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.NotifyOnCreated" coverage="100" coveredlines="8" coverablelines="8" totallines="22" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.PrimCell" coverage="88.8" coveredlines="8" coverablelines="9" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.Solver.DFSSolver" coverage="100" coveredlines="54" coverablelines="54" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Maze.StandardMaze" coverage="0" coveredlines="0" coverablelines="31" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Maze.StandardMaze" coverage="0" coveredlines="0" coverablelines="21" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="Maze.WallRotation" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.Animation.CameraAscension" coverage="0" coveredlines="0" coverablelines="18" totallines="53" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.Animation.CameraFadeIn" coverage="0" coveredlines="0" coverablelines="25" totallines="63" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.Animation.CameraIdle" coverage="0" coveredlines="0" coverablelines="14" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.MenuBehaviour" coverage="0" coveredlines="0" coverablelines="21" totallines="46" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.StartButton" coverage="100" coveredlines="13" coverablelines="13" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="Menu.TitleText" coverage="0" coveredlines="0" coverablelines="6" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="PlayerBehaviour" coverage="0" coveredlines="0" coverablelines="22" totallines="40" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="ProgressTracker" coverage="0" coveredlines="0" coverablelines="61" totallines="78" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Menu.Animation.CameraAscension" coverage="0" coveredlines="0" coverablelines="18" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Menu.Animation.CameraFadeIn" coverage="0" coveredlines="0" coverablelines="25" totallines="29" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Menu.Animation.CameraIdle" coverage="0" coveredlines="0" coverablelines="14" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Menu.MenuBehaviour" coverage="0" coveredlines="0" coverablelines="21" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Menu.StartButton" coverage="0" coveredlines="0" coverablelines="13" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Menu.TitleText" coverage="0" coveredlines="0" coverablelines="6" totallines="0" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="PlayerBehaviour" coverage="0" coveredlines="0" coverablelines="21" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="ProgressTracker" coverage="0" coveredlines="0" coverablelines="46" totallines="82" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="RandomExtensions" coverage="100" coveredlines="3" coverablelines="3" totallines="7" branchcoverage="" coveredbranches="0" totalbranches="0" />
       <Class name="TextureExtensions" coverage="0" coveredlines="0" coverablelines="23" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" />
-      <Class name="WallDestructor" coverage="0" coveredlines="0" coverablelines="12" totallines="23" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="WallDestructor" coverage="0" coveredlines="0" coverablelines="12" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" />
     </Assembly>
   </Coverage>
 </CoverageReport>

@@ -9,11 +9,13 @@ namespace Labyrinth.Menu {
 
         #region public methods
         public void AddListeners() {
-            _button.onClick.AddListener(OnClicked);
+            _button.onClick.AddListener(() => {
+                Core.EventManager.Instance.QueueEvent(new Events.Menu.StartButtonClicked());
+            });
         }
 
         public void RemoveListeners() {
-            _button.onClick.RemoveListener(OnClicked);
+            _button.onClick.RemoveAllListeners();
         }
         #endregion
 
@@ -22,10 +24,6 @@ namespace Labyrinth.Menu {
             _button = GetComponent<Button>();
 
             AddListeners();
-        }
-
-        private void OnClicked() {
-            Core.EventManager.Instance.QueueEvent(new Events.Menu.StartButtonClicked());
         }
         #endregion
     }

@@ -462,6 +462,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2477019170605117327, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477019170605117327, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477019170605117327, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2477019170605117327, guid: 390ad3d412bb49d40be5622341a031cc,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2477019170751174880, guid: 390ad3d412bb49d40be5622341a031cc,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

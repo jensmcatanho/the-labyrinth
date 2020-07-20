@@ -2,10 +2,14 @@
 
 namespace Labyrinth.Menu {
 
-    public class MenuBehaviour : MonoBehaviour, Core.IEventListener {
+    public class MainMenu : MonoBehaviour, Core.IEventListener {
 
         #region private fields
         private StartButton _startButton;
+
+        private SettingsButton _settingsButton;
+
+        private ExitButton _exitButton;
         #endregion
 
         #region public methods
@@ -24,6 +28,12 @@ namespace Labyrinth.Menu {
             _startButton = GetComponentInChildren<StartButton>();
             _startButton.gameObject.SetActive(false);
 
+            _settingsButton = GetComponentInChildren<SettingsButton>();
+            _settingsButton.gameObject.SetActive(false);
+
+            _exitButton = GetComponentInChildren<ExitButton>();
+            _exitButton.gameObject.SetActive(false);
+
             AddListeners();
         }
 
@@ -32,8 +42,11 @@ namespace Labyrinth.Menu {
         }
 
         private void OnCameraMoved(Events.Menu.CameraMoved e) {
-            if (e.NewState == MenuState.MainMenu)
+            if (e.NewState == MenuState.MainMenu) {
                 _startButton.gameObject.SetActive(true);
+                _settingsButton.gameObject.SetActive(true);
+                _exitButton.gameObject.SetActive(true);
+            }
         }
         #endregion
     }
