@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Maze.Factory.Tests {
+namespace Labyrinth.Maze.Factory.Tests {
     public class PrimFactoryTest {
 
         private readonly float _probabilityOfDeadEnds = 0.3f;

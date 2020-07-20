@@ -1,4 +1,4 @@
-﻿namespace Core {
+﻿namespace Labyrinth.Core {
 
     public interface IEventListener {
         void AddListeners();

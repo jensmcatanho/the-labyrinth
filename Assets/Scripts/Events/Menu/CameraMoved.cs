@@ -1,6 +1,6 @@
 ﻿using Labyrinth.Menu;
 
-namespace Events.Menu {
+namespace Labyrinth.Events.Menu {
 
     public class CameraMoved : GameEvent {
 

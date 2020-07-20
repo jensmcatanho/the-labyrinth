@@ -1,8 +1,7 @@
-﻿using Menu.Animation;
+﻿using Labyrinth.Menu.Animation;
 using UnityEngine;
-using Labyrinth.Menu;
 
-namespace Menu {
+namespace Labyrinth.Menu {
 
     public class CameraListener : MonoBehaviour, Core.IEventListener {
 

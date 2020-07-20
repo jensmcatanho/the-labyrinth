@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Events {
+namespace Labyrinth.Events {
 
     public class ObjectDestroyed : GameEvent {
      

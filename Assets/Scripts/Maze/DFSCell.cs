@@ -1,4 +1,4 @@
-﻿namespace Maze {
+﻿namespace Labyrinth.Maze {
 
     public class DFSCell : Cell {
 

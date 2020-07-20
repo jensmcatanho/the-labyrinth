@@ -1,4 +1,4 @@
-﻿namespace Maze.Solver {
+﻿namespace Labyrinth.Maze.Solver {
 
     public interface IMazeSolver {
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tests {
+namespace Labyrinth.Tests {
 
     public class GarbageCollector {
 

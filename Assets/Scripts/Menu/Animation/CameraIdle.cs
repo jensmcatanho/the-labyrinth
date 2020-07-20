@@ -1,8 +1,7 @@
 ﻿using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 
-namespace Menu.Animation {
+namespace Labyrinth.Menu.Animation {
 
     public class CameraIdle : MonoBehaviour, IAnimation {
 

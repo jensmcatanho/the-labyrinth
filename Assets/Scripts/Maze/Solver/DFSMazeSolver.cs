@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace Maze.Solver {
+namespace Labyrinth.Maze.Solver {
 
     public class DFSSolver : IMazeSolver {
 

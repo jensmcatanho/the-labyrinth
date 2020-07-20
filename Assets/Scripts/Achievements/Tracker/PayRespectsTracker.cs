@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Achievements {
+namespace Labyrinth.Achievements.Tracker {
 
     public class PayRespectsTracker : MonoBehaviour, IAchievementTracker {
 

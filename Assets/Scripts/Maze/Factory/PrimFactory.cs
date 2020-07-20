@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Numerics;
 
-namespace Maze.Factory {
+namespace Labyrinth.Maze.Factory {
 
     public class PrimFactory : IMazeFactory {
 

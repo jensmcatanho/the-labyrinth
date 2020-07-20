@@ -1,78 +1,82 @@
-﻿using Maze;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ProgressTracker : MonoBehaviour, Core.IEventListener {
 
-    [SerializeField] private GameObject _target;
+namespace Labyrinth {
 
-    [SerializeField] private RenderTexture _currentProgressTexture;
+    public class ProgressTracker : MonoBehaviour, Core.IEventListener {
 
-    [SerializeField] private Material _targetMaterial;
+        [SerializeField] private GameObject _target;
 
-    private Camera _camera;
+        [SerializeField] private RenderTexture _currentProgressTexture;
 
-    [SerializeField] private Texture2D _currentTextureBlending;
+        [SerializeField] private Material _targetMaterial;
 
-    private bool _tracking = true;
+        private Camera _camera;
 
-    private Queue<Texture> _accumulatedProgress = new Queue<Texture>();
+        [SerializeField] private Texture2D _currentTextureBlending;
 
-    public void AddListeners() {
-        Core.EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnGameSceneLoaded);
-        // Core.EventManager.Instance.AddListener<Events.PlayerMoved>(OnPlayerMoved);
-    }
+        private bool _tracking = true;
 
-    public void RemoveListeners() {
-        return;
-    }
+        private Queue<Texture> _accumulatedProgress = new Queue<Texture>();
 
-    private void Awake() {
-        AddListeners();
-
-        _camera = GetComponentInChildren<Camera>();
-        _currentProgressTexture = new RenderTexture(_camera.pixelWidth, _camera.pixelHeight, 24);
-        _targetMaterial.SetTexture("_MainTex", _currentProgressTexture);
-        _target.GetComponent<MeshRenderer>().material = _targetMaterial;
-    }
-
-    private void FixedUpdate() {
-        if (_tracking) {
-            _camera.Render();
-            _accumulatedProgress.Enqueue(_currentProgressTexture);
+        public void AddListeners() {
+            Core.EventManager.Instance.AddListenerOnce<Events.GameSceneLoaded>(OnGameSceneLoaded);
+            // Core.EventManager.Instance.AddListener<Events.PlayerMoved>(OnPlayerMoved);
         }
 
-        if (Input.GetKeyDown(KeyCode.P)) {
-            UpdateTexture();
+        public void RemoveListeners() {
+            return;
+        }
 
-            _targetMaterial.SetTexture("_MainTex", _currentTextureBlending);
+        private void Awake() {
+            AddListeners();
+
+            _camera = GetComponentInChildren<Camera>();
+            _currentProgressTexture = new RenderTexture(_camera.pixelWidth, _camera.pixelHeight, 24);
+            _targetMaterial.SetTexture("_MainTex", _currentProgressTexture);
             _target.GetComponent<MeshRenderer>().material = _targetMaterial;
         }
-    }
 
-    private void UpdateTexture() {
-        if (_currentTextureBlending == null) {
-            var nextTexture = _accumulatedProgress.Dequeue() as RenderTexture;
-            _currentTextureBlending = nextTexture.ToTexture2D();
+        private void FixedUpdate() {
+            if (_tracking) {
+                _camera.Render();
+                _accumulatedProgress.Enqueue(_currentProgressTexture);
+            }
+
+            if (Input.GetKeyDown(KeyCode.P)) {
+                UpdateTexture();
+
+                _targetMaterial.SetTexture("_MainTex", _currentTextureBlending);
+                _target.GetComponent<MeshRenderer>().material = _targetMaterial;
+            }
         }
 
-        if (_accumulatedProgress.Any()) {
-            var nextTexture = _accumulatedProgress.Dequeue() as RenderTexture;
-            _currentTextureBlending = _currentTextureBlending.Blend(nextTexture.ToTexture2D());
+        private void UpdateTexture() {
+            if (_currentTextureBlending == null) {
+                var nextTexture = _accumulatedProgress.Dequeue() as RenderTexture;
+                _currentTextureBlending = nextTexture.ToTexture2D();
+            }
+
+            if (_accumulatedProgress.Any()) {
+                var nextTexture = _accumulatedProgress.Dequeue() as RenderTexture;
+                _currentTextureBlending = _currentTextureBlending.Blend(nextTexture.ToTexture2D());
+            }
+        }
+
+        private void OnGameSceneLoaded(Events.GameSceneLoaded e) {
+            SetupCamera(e.MazeSettings);
+        }
+
+        private void SetupCamera(Maze.MazeSettings mazeSettings) {
+            int length = mazeSettings.Length;
+            int width = mazeSettings.Width;
+
+            _camera.transform.position = new Vector3(2 * length, _camera.transform.position.y, 2 * width);
+            _camera.orthographicSize = length > width ? 2.1f * length : 2.1f * width;
+            _camera.targetTexture = _currentProgressTexture;
         }
     }
 
-    private void OnGameSceneLoaded(Events.GameSceneLoaded e) {
-        SetupCamera(e.MazeSettings);
-    }
-
-    private void SetupCamera(MazeSettings mazeSettings) {
-        int length = mazeSettings.Length;
-        int width = mazeSettings.Width;
-
-        _camera.transform.position = new Vector3(2 * length, _camera.transform.position.y, 2 * width);
-        _camera.orthographicSize = length > width ? 2.1f * length : 2.1f * width;
-        _camera.targetTexture = _currentProgressTexture;
-    }
 }

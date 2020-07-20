@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Maze {
+namespace Labyrinth.Maze {
 
     #region enums
     [System.Flags]

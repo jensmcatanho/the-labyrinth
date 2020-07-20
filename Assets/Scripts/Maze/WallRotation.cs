@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Maze {
+namespace Labyrinth.Maze {
 
     public class WallRotation {
 

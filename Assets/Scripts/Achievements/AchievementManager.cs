@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Labyrinth.Steam;
 
 #if !DISABLESTEAMWORKS
 using Steamworks;
 #endif
 
-namespace Achievements {
+namespace Labyrinth.Achievements {
 
     public class AchievementManager : MonoBehaviour {
 

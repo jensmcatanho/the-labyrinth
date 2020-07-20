@@ -1,4 +1,4 @@
-﻿namespace Achievements {
+﻿namespace Labyrinth.Achievements {
 
     public interface IAchievement {
 

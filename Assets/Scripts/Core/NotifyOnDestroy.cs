@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Core {
+namespace Labyrinth.Core {
 
     public class NotifyOnDestroy : MonoBehaviour {
 

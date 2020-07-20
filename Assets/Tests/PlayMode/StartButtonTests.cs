@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
-namespace Tests {
+namespace Labyrinth.Tests {
 
     public class StartButtonTests {
 

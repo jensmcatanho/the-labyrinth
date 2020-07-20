@@ -1,5 +1,5 @@
 ﻿
-namespace Maze {
+namespace Labyrinth.Maze {
 
     /*
      * This status specifies if the cell was already visited by the algorithm,

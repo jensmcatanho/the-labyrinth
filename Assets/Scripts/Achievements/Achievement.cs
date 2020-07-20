@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Achievements {
+namespace Labyrinth.Achievements {
 
     [CreateAssetMenu(menuName = "Maze/Achievement")]
     [Serializable]

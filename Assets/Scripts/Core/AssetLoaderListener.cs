@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core {
+namespace Labyrinth.Core {
 
     public class AssetLoaderListener : MonoBehaviour, IEventListener {
 

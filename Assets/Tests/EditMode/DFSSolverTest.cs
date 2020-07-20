@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Maze.Solver.Tests {
+namespace Labyrinth.Maze.Solver.Tests {
     public class DFSMazeSolverTest {
 
         [Test]

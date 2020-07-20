@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Maze {
+namespace Labyrinth.Maze {
 
     [Serializable]
     public class MazeAssets {

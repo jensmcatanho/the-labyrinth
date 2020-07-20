@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Tests {
+namespace Labyrinth.Tests {
     public class GameEventsTest {
 
         [Test]

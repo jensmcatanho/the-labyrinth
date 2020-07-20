@@ -2,7 +2,7 @@
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Core {
+namespace Labyrinth.Core {
 
     public class AssetReferenceData {
 

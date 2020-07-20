@@ -1,9 +1,8 @@
 ﻿using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Menu.Animation {
+namespace Labyrinth.Menu.Animation {
 
     public class CameraFadeIn : MonoBehaviour, IAnimation {
 

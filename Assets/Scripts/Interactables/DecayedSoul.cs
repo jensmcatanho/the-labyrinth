@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Interactables {
+namespace Labyrinth.Interactables {
 
     public class DecayedSoul : MonoBehaviour, IInteractable {
 

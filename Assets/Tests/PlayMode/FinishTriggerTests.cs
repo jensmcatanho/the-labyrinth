@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Tests {
+namespace Labyrinth.Tests {
 
     public class FinishTriggerTests {
         private GarbageCollector _garbageCollector = null;

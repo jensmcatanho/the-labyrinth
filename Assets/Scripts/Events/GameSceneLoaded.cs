@@ -1,14 +1,12 @@
-﻿using Maze;
-
-namespace Events {
+﻿namespace Labyrinth.Events {
 
     public class GameSceneLoaded : GameEvent {
 
-        public MazeSettings MazeSettings {
+        public Maze.MazeSettings MazeSettings {
             get;
         }
 
-        public GameSceneLoaded(MazeSettings mazeSettings) {
+        public GameSceneLoaded(Maze.MazeSettings mazeSettings) {
             MazeSettings = mazeSettings;
         }
     }

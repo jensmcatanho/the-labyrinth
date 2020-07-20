@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Menu {
+namespace Labyrinth.Menu {
 
     public class StartButton : MonoBehaviour, Core.IEventListener {
 

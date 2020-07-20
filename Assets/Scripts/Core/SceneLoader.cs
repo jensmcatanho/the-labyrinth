@@ -1,8 +1,7 @@
-﻿using Maze;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Core {
+namespace Labyrinth.Core {
 
     enum GameScene {
         Menu,
@@ -25,8 +24,8 @@ namespace Core {
         #endregion
 
         #region private fields
-        [SerializeField] private MazeSettings _mazeSettings;
-        [SerializeField] private MazeSettings _menuSettings;
+        [SerializeField] private Maze.MazeSettings _mazeSettings;
+        [SerializeField] private Maze.MazeSettings _menuSettings;
         #endregion
 
         #region public methods

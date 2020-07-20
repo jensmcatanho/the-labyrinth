@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Core;
+using Labyrinth.Core;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Tests {
+namespace Labyrinth.Tests {
 
     public class NotifyOnDestroyTests {
 
@@ -15,7 +15,7 @@ namespace Tests {
         [SetUp]
         public void SetUp() {
             var eventManager = new GameObject("Event Manager");
-            eventManager.AddComponent<Core.EventManager>();
+            eventManager.AddComponent<EventManager>();
 
             _garbageCollector = new GarbageCollector();
             _garbageCollector.Enqueue(eventManager);

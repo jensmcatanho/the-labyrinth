@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Menu {
+namespace Labyrinth.Menu {
 
     public class StartScreen : MonoBehaviour {
 

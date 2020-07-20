@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class Wall : MonoBehaviour {
+namespace Labyrinth {
 
+    public class Wall : MonoBehaviour {
+
+    }
 
 }

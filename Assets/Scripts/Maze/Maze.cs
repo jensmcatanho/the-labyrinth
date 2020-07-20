@@ -1,4 +1,4 @@
-﻿namespace Maze {
+﻿namespace Labyrinth.Maze {
 
     [System.Serializable]
     public class Maze<T> where T : Cell {
