@@ -16,8 +16,10 @@ namespace Labyrinth.Menu {
         }
 
         public void RemoveListeners() {
-            if (Core.EventManager.Instance)
+            if (Core.EventManager.Instance) {
                 Core.EventManager.Instance.RemoveListener<Events.Menu.CameraMoved>(OnCameraMoved);
+                Core.EventManager.Instance.RemoveListener<Events.Menu.SettingsButtonClicked>(OnSettingsButtonClicked);
+            }
         }
         #endregion
 

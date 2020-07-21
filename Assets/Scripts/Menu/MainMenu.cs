@@ -6,6 +6,8 @@ namespace Labyrinth.Menu {
     public class MainMenu : MonoBehaviour {
 
         #region private fields
+        private Canvas _canvas;
+
         private StartButton _startButton;
 
         private SettingsButton _settingsButton;
@@ -15,17 +17,16 @@ namespace Labyrinth.Menu {
 
         #region public methods
         public void SetActive(bool target) {
-            _startButton.gameObject.SetActive(target);
-            _settingsButton.gameObject.SetActive(target);
-            _exitButton.gameObject.SetActive(target);
+            _canvas.gameObject.SetActive(target);
         }
         #endregion
 
         #region private methods
         private void Awake() {
-            _startButton = GetComponentInChildren<StartButton>();
-            _settingsButton = GetComponentInChildren<SettingsButton>();
-            _exitButton = GetComponentInChildren<ExitButton>();
+            _canvas = GetComponentInChildren<Canvas>(true);
+            _startButton = GetComponentInChildren<StartButton>(true);
+            _settingsButton = GetComponentInChildren<SettingsButton>(true);
+            _exitButton = GetComponentInChildren<ExitButton>(true);
 
             SetActive(false);
         }

@@ -29,8 +29,8 @@ namespace Labyrinth.Menu {
 
         #region private methods
         private void Awake() {
-            _titleText = GetComponentInChildren<TitleText>();
-            _pressToContinueText = GetComponentInChildren<PressToContinueText>();
+            _titleText = GetComponentInChildren<TitleText>(true);
+            _pressToContinueText = GetComponentInChildren<PressToContinueText>(true);
 
             DisableUIElements();
         }
