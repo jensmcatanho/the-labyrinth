@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Labyrinth.Menu.UIElements {
 
-    public class SettingsButton : MonoBehaviour, Core.IEventListener {
+	public class AudioButton : MonoBehaviour, Core.IEventListener {
 
         private Button _button;
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Labyrinth.Menu {
+namespace Labyrinth.Menu.UIElements {
 
     public class PressToContinueText : MonoBehaviour {
 

@@ -9,6 +9,7 @@ namespace Labyrinth.Menu {
         #region public methods
         public void AddListeners() {
             Core.EventManager.Instance.AddListener<Events.Menu.CameraMoved>(OnCameraMoved);
+            Core.EventManager.Instance.AddListener<Events.Menu.SettingsButtonClicked>(OnSettingsButtonClicked);
             Core.EventManager.Instance.AddListenerOnce((Events.Menu.ExitButtonClicked e) => {
                 Application.Quit();
             });
@@ -33,6 +34,10 @@ namespace Labyrinth.Menu {
         private void OnCameraMoved(Events.Menu.CameraMoved e) {
             if (e.NewState == MenuState.MainMenu)
                 _mainMenu.SetActive(true);
+        }
+
+        private void OnSettingsButtonClicked(Events.Menu.SettingsButtonClicked e) {
+            _mainMenu.SetActive(false);
         }
         #endregion
 

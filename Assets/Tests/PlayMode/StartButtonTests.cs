@@ -3,8 +3,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
+using Labyrinth.Tests;
 
-namespace Labyrinth.Tests {
+namespace Labyrinth.Menu.UIElements.Tests {
 
     public class StartButtonTests {
 
@@ -28,7 +29,7 @@ namespace Labyrinth.Tests {
         public IEnumerator Test_StartButton_Should_Queue_A_StartButtonClicked_Event_When_Clicked() {
             var gameObject = new GameObject("Start Button");
             var button = gameObject.AddComponent<Button>();
-            gameObject.AddComponent<Menu.StartButton>();
+            gameObject.AddComponent<StartButton>();
             var isStartButtonClicked = false;
 
             Core.EventManager.Instance.AddListenerOnce((Events.Menu.StartButtonClicked e) => {
@@ -46,7 +47,7 @@ namespace Labyrinth.Tests {
         public IEnumerator Test_StartButton_Should_Not_Queue_A_StartButtonClicked_Event_When_Its_Not_Clicked() {
             var gameObject = new GameObject("Start Button");
             var button = gameObject.AddComponent<Button>();
-            gameObject.AddComponent<Menu.StartButton>();
+            gameObject.AddComponent<StartButton>();
             var isStartButtonClicked = false;
 
             Core.EventManager.Instance.AddListenerOnce((Events.Menu.StartButtonClicked e) => {
@@ -64,7 +65,7 @@ namespace Labyrinth.Tests {
         public IEnumerator Test_StartButton_RemoveListeners_Should_Remove_OnClick_Callback() {
             var gameObject = new GameObject("Start Button");
             var button = gameObject.AddComponent<Button>();
-            var startButton = gameObject.AddComponent<Menu.StartButton>();
+            var startButton = gameObject.AddComponent<StartButton>();
 
             startButton.RemoveListeners();
             yield return new WaitForSeconds(.5f);

@@ -11,6 +11,7 @@ namespace Labyrinth.Menu {
             Core.EventManager.Instance.AddListenerOnce<Events.Menu.CameraAscensionStarted>(OnCameraAscensionStarted);
             Core.EventManager.Instance.AddListenerOnce<Events.Menu.CameraMoved>(OnCameraMoved);
             Core.EventManager.Instance.AddListenerOnce<Events.Menu.AnyButtonClicked>(OnAnyButtonClicked);
+            Core.EventManager.Instance.AddListenerOnce<Events.Menu.SettingsButtonClicked>(OnSettingsButtonClicked);
         }
 
         public void RemoveListeners() {
@@ -42,6 +43,11 @@ namespace Labyrinth.Menu {
 
         private void OnAnyButtonClicked(Events.Menu.AnyButtonClicked e) {
             var animation = GetComponentInChildren<CameraGoToMenu>();
+            animation.Play();
+        }
+        
+        private void OnSettingsButtonClicked(Events.Menu.SettingsButtonClicked e) {
+            var animation = GetComponentInChildren<CameraGoToSettings>();
             animation.Play();
         }
         #endregion

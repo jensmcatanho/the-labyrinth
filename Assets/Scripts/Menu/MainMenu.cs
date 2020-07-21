@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Labyrinth.Menu.UIElements;
 
 namespace Labyrinth.Menu {
 
