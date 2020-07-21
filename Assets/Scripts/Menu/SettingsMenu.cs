@@ -34,7 +34,8 @@ namespace Labyrinth.Menu {
 
         private void SetupBackButton() {
             _backButton.onClick.AddListener(() => {
-                SetActive(false);
+                Core.EventManager.Instance.TriggerEvent(new Events.Menu.BackToMenuClicked());
+                Close();
             });
         }
 

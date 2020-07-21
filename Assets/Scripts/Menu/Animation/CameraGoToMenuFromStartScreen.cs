@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Labyrinth.Menu.Animation {
 
-    public class CameraGoToMenu : MonoBehaviour, IAnimation {
+    public class CameraGoToMenuFromStartScreen : MonoBehaviour, IAnimation {
 
         #region private fields
         [SerializeField] private float _distance;

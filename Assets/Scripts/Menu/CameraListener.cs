@@ -9,13 +9,19 @@ namespace Labyrinth.Menu {
         public void AddListeners() {
             Core.EventManager.Instance.AddListenerOnce<Events.MazeInstanced>(OnMazeInstanced);
             Core.EventManager.Instance.AddListenerOnce<Events.Menu.CameraAscensionStarted>(OnCameraAscensionStarted);
-            Core.EventManager.Instance.AddListenerOnce<Events.Menu.CameraMoved>(OnCameraMoved);
             Core.EventManager.Instance.AddListenerOnce<Events.Menu.AnyButtonClicked>(OnAnyButtonClicked);
-            Core.EventManager.Instance.AddListenerOnce<Events.Menu.SettingsButtonClicked>(OnSettingsButtonClicked);
+
+            Core.EventManager.Instance.AddListener<Events.Menu.CameraMoved>(OnCameraMoved);
+            Core.EventManager.Instance.AddListener<Events.Menu.SettingsButtonClicked>(OnSettingsButtonClicked);
+            Core.EventManager.Instance.AddListener<Events.Menu.BackToMenuClicked>(OnBackToMenuClicked);
         }
 
         public void RemoveListeners() {
-            Core.EventManager.Instance.RemoveListener<Events.Menu.CameraMoved>(OnCameraMoved);
+            if (Core.EventManager.Instance) {
+                Core.EventManager.Instance.RemoveListener<Events.Menu.CameraMoved>(OnCameraMoved);
+                Core.EventManager.Instance.RemoveListener<Events.Menu.SettingsButtonClicked>(OnSettingsButtonClicked);
+                Core.EventManager.Instance.RemoveListener<Events.Menu.BackToMenuClicked>(OnBackToMenuClicked);
+            }
         }
         #endregion
 
@@ -42,12 +48,17 @@ namespace Labyrinth.Menu {
         }
 
         private void OnAnyButtonClicked(Events.Menu.AnyButtonClicked e) {
-            var animation = GetComponentInChildren<CameraGoToMenu>();
+            var animation = GetComponentInChildren<CameraGoToMenuFromStartScreen>();
             animation.Play();
         }
         
         private void OnSettingsButtonClicked(Events.Menu.SettingsButtonClicked e) {
             var animation = GetComponentInChildren<CameraGoToSettings>();
+            animation.Play();
+        }
+
+        private void OnBackToMenuClicked(Events.Menu.BackToMenuClicked e) {
+            var animation = GetComponentInChildren<CameraGoToMenuFromSettings>();
             animation.Play();
         }
         #endregion
