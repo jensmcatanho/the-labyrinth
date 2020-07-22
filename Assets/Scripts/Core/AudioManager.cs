@@ -18,16 +18,35 @@ namespace Labyrinth.Core {
         }
         #endregion
 
-        #region public fields
-        public void SetMasterVolume(float volume) {
-            _masterMixer.SetFloat("volume", volume);
-        }
-        #endregion
-
         #region private fields
         [SerializeField] private AudioMixer _masterMixer;
         #endregion
 
+        #region public fields
+        public float MasterVolume {
+            get {
+                if (_masterMixer.GetFloat("master volume", out float volume)) {
+                    return MapToExternal(volume);
+                }
+
+                return 0.0f;
+            }
+
+            set {
+                _masterMixer.SetFloat("master volume", MapToMixer(value));
+            }
+        }
+        #endregion
+
+        #region private methods
+        private float MapToMixer(float volume) {
+            return 0.8f * volume - 80;
+        }
+
+        private float MapToExternal(float volume) {
+            return 1.25f * volume + 100;
+        }
+        #endregion
 
     }
 
