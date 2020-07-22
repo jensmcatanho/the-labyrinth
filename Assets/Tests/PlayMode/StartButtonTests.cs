@@ -5,7 +5,7 @@ using UnityEngine.TestTools;
 using UnityEngine.UI;
 using Labyrinth.Tests;
 
-namespace Labyrinth.Menu.UIElements.Tests {
+namespace Labyrinth.Menu.Main.UIElements.Tests {
 
     public class StartButtonTests {
 

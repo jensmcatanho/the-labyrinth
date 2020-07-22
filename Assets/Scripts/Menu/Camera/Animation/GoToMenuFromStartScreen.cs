@@ -1,9 +1,9 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Labyrinth.Menu.Animation {
+namespace Labyrinth.Menu.Camera.Animation {
 
-    public class CameraGoToMenuFromStartScreen : MonoBehaviour, IAnimation {
+    public class GoToMenuFromStartScreen : MonoBehaviour, Core.IAnimation {
 
         #region private fields
         [SerializeField] private float _distance;

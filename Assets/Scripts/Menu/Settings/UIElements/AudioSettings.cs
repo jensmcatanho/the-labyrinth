@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 
-namespace Labyrinth.Menu.UIElements {
+namespace Labyrinth.Menu.Settings.UIElements {
 
 	public class AudioSettings : MonoBehaviour {
 

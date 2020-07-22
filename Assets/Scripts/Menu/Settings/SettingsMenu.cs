@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Labyrinth.Menu {
+namespace Labyrinth.Menu.Settings {
+
+    using UIElements;
 
     public class SettingsMenu : MonoBehaviour {
 

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Labyrinth.Menu.UIElements {
+namespace Labyrinth.Menu.Start.UIElements {
 
-    public class PressToContinueText : MonoBehaviour {
+    public class TitleText : MonoBehaviour {
 
         private Text _text;
 

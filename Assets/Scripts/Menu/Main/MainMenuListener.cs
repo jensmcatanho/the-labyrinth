@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Labyrinth.Menu {
+namespace Labyrinth.Menu.Main {
 
     public class MainMenuListener : MonoBehaviour, Core.IEventListener {
 

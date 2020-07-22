@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Labyrinth.Menu.UIElements {
+﻿namespace Labyrinth.Menu.Settings.UIElements {
 
 	public class MasterVolumeSettings : VolumeSettings {
 
@@ -11,6 +9,7 @@ namespace Labyrinth.Menu.UIElements {
 		private void Awake() {
 			_slider.value = Core.AudioManager.Instance.MasterVolume;
 		}
+
 	}
 
 }

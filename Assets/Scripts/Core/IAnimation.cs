@@ -1,4 +1,4 @@
-﻿namespace Labyrinth.Menu.Animation {
+﻿namespace Labyrinth.Core {
 
     public interface IAnimation {
 

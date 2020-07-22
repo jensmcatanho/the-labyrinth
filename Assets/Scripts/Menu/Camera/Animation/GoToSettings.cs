@@ -1,9 +1,9 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Labyrinth.Menu.Animation {
+namespace Labyrinth.Menu.Camera.Animation {
 
-    public class CameraGoToMenuFromSettings : MonoBehaviour, IAnimation {
+    public class GoToSettings : MonoBehaviour, Core.IAnimation {
 
         #region private fields
         [SerializeField] private Vector3 _rotation;
@@ -20,7 +20,7 @@ namespace Labyrinth.Menu.Animation {
             parent.DORotate(_rotation, _duration)
                 .SetEase(_easing)
                 .OnComplete(() => {
-                    Core.EventManager.Instance.TriggerEvent(new Events.Menu.CameraMoved(MenuState.MainMenu));
+                    Core.EventManager.Instance.TriggerEvent(new Events.Menu.CameraMoved(MenuState.Settings));
                 });
         }
         #endregion

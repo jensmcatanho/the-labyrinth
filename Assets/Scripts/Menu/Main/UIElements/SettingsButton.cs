@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Labyrinth.Menu.UIElements {
+namespace Labyrinth.Menu.Main.UIElements {
 
-    public class ExitButton : MonoBehaviour, Core.IEventListener {
+    public class SettingsButton : MonoBehaviour, Core.IEventListener {
 
         private Button _button;
 
         #region public methods
         public void AddListeners() {
             _button.onClick.AddListener(() => {
-                Core.EventManager.Instance.QueueEvent(new Events.Menu.ExitButtonClicked());
-                Application.Quit();
+                Core.EventManager.Instance.QueueEvent(new Events.Menu.SettingsButtonClicked());
             });
         }
 

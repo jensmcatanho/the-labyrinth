@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
-using Labyrinth.Menu.UIElements;
 
-namespace Labyrinth.Menu {
+namespace Labyrinth.Menu.Start {
+
+    using UIElements;
 
     public class StartScreen : MonoBehaviour {
 

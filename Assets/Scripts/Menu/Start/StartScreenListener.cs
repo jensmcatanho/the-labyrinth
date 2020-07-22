@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using Labyrinth.Menu;
 
-namespace Labyrinth.Menu {
+namespace Labyrinth.Menu.Start {
 
     public class StartScreenListener : MonoBehaviour, Core.IEventListener {
 

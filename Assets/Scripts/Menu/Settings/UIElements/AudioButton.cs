@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Labyrinth.Menu.UIElements {
+namespace Labyrinth.Menu.Settings.UIElements {
 
-    public class StartButton : MonoBehaviour, Core.IEventListener {
+	public class AudioButton : MonoBehaviour, Core.IEventListener {
 
         private Button _button;
 
         #region public methods
         public void AddListeners() {
             _button.onClick.AddListener(() => {
-                Core.EventManager.Instance.QueueEvent(new Events.Menu.StartButtonClicked());
+                Core.EventManager.Instance.QueueEvent(new Events.Menu.SettingsButtonClicked());
             });
         }
 

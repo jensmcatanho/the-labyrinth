@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Labyrinth.Menu.Animation {
+namespace Labyrinth.Menu.Camera.Animation {
 
-    public class CameraFadeIn : MonoBehaviour, IAnimation {
+    public class FadeIn : MonoBehaviour, Core.IAnimation {
 
         #region private fields
         [SerializeField] private Image _fadeInOverlay;

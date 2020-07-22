@@ -1,7 +1,8 @@
-﻿using Labyrinth.Menu.Animation;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Labyrinth.Menu {
+namespace Labyrinth.Menu.Camera {
+
+    using Animation;
 
     public class CameraListener : MonoBehaviour, Core.IEventListener {
 
@@ -31,34 +32,34 @@ namespace Labyrinth.Menu {
         }
 
         private void OnMazeInstanced(Events.MazeInstanced e) {
-            var animation = GetComponentInChildren<CameraAscension>();
+            var animation = GetComponentInChildren<Ascension>();
             animation.Play();
         }
 
         private void OnCameraAscensionStarted(Events.Menu.CameraAscensionStarted e) {
-            var animation = GetComponentInChildren<CameraFadeIn>();
+            var animation = GetComponentInChildren<FadeIn>();
             animation.Play();
         }
 
         private void OnCameraMoved(Events.Menu.CameraMoved e) {
             if (e.NewState == MenuState.StartScreen) {
-                var animation = GetComponentInChildren<CameraIdle>();
+                var animation = GetComponentInChildren<Idle>();
                 animation.Play();
             }
         }
 
         private void OnAnyButtonClicked(Events.Menu.AnyButtonClicked e) {
-            var animation = GetComponentInChildren<CameraGoToMenuFromStartScreen>();
+            var animation = GetComponentInChildren<GoToMenuFromStartScreen>();
             animation.Play();
         }
         
         private void OnSettingsButtonClicked(Events.Menu.SettingsButtonClicked e) {
-            var animation = GetComponentInChildren<CameraGoToSettings>();
+            var animation = GetComponentInChildren<GoToSettings>();
             animation.Play();
         }
 
         private void OnBackToMenuClicked(Events.Menu.BackToMenuClicked e) {
-            var animation = GetComponentInChildren<CameraGoToMenuFromSettings>();
+            var animation = GetComponentInChildren<GoToMenuFromSettings>();
             animation.Play();
         }
         #endregion
