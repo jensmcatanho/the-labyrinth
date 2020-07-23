@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth.Menu.Settings.UIElements {
 
-	public class MasterVolumeSettings : VolumeSettings {
+	public class MasterVolume : VolumeSettings {
 
 		protected override void UpdateSetting(float volume) {
 			Core.AudioManager.Instance.MasterVolume = volume;

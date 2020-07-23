@@ -11,15 +11,19 @@ namespace Labyrinth.Menu.Settings {
 
         [SerializeField] private Button _audioButton;
 
-        private UIElements.AudioSettings _audioSettings;
+        [SerializeField] private GameObject _panel;
+
+        private AudioSettings _audioSettings;
 
         #region public fields
         public void SetActive(bool target) {
+            _panel.SetActive(target);
             _backButton.gameObject.SetActive(target);
             _audioButton.gameObject.SetActive(target);
         }
 
         public void Close() {
+            _panel.SetActive(false);
             _backButton.gameObject.SetActive(false);
             _audioButton.gameObject.SetActive(false);
             _audioSettings.gameObject.SetActive(false);
