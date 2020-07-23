@@ -17,7 +17,7 @@ namespace Labyrinth.Menu.Camera.Animation {
         public void Play() {
             var parent = transform.parent;
 
-            parent.DORotate(_rotation, _duration)
+            parent.DORotate(parent.rotation.eulerAngles + _rotation, _duration)
                 .SetEase(_easing)
                 .OnComplete(() => {
                     Core.EventManager.Instance.TriggerEvent(new Events.Menu.CameraMoved(MenuState.Settings));
