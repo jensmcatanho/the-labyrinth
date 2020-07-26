@@ -1,39 +1,42 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Labyrinth.Menu.Settings {
-
-    using UIElements;
 
     public class SettingsMenu : MonoBehaviour {
 
         [SerializeField] private Button _backButton;
 
-        [SerializeField] private Button _audioButton;
-
         [SerializeField] private GameObject _panel;
 
-        private AudioSettings _audioSettings;
+        [SerializeField] private GenericDictionary<Button, SettingsGroup> _settings;
+
+        private SettingsGroup _currentSettings = null;
 
         #region public fields
         public void SetActive(bool target) {
-            _panel.SetActive(target);
             _backButton.gameObject.SetActive(target);
-            _audioButton.gameObject.SetActive(target);
+
+            foreach (var key in _settings.Keys)
+                key.gameObject.SetActive(target);
         }
 
         public void Close() {
             _panel.SetActive(false);
             _backButton.gameObject.SetActive(false);
-            _audioButton.gameObject.SetActive(false);
-            _audioSettings.gameObject.SetActive(false);
+
+            foreach (var pair in _settings) {
+                pair.Key.gameObject.SetActive(false);
+                pair.Value.gameObject.SetActive(false);
+            }
         }
         #endregion
 
         #region private fields
         private void Awake() {
             SetupBackButton();
-            SetupAudioSettings();
+            SetupSettingsButtons();
 
             Close();
         }
@@ -45,11 +48,34 @@ namespace Labyrinth.Menu.Settings {
             });
         }
 
-        private void SetupAudioSettings() {
-            _audioSettings = GetComponentInChildren<UIElements.AudioSettings>();
-            _audioButton.onClick.AddListener(() => {
-                _audioSettings.gameObject.SetActive(!_audioSettings.gameObject.activeSelf);
-            });
+        private void SetupSettingsButtons() {
+            foreach (var entry in _settings) {
+                var button = entry.Key;
+                var settings = entry.Value;
+
+                button.onClick.AddListener(() => {
+                    
+                    if (_panel.activeSelf) {
+                        if (_currentSettings == settings) {
+                            _currentSettings.gameObject.SetActive(false);
+                            _currentSettings = null;
+
+                            _panel.SetActive(false);
+
+                        } else {
+                            _currentSettings.gameObject.SetActive(false);
+                            settings.gameObject.SetActive(true);
+                            _currentSettings = settings;
+                        }
+
+                    } else {
+                        _panel.SetActive(true);
+                        settings.gameObject.SetActive(true);
+                        _currentSettings = settings;
+                    }
+
+                });
+            }
         }
         #endregion
 
