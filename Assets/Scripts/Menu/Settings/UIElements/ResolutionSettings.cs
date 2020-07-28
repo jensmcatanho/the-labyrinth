@@ -8,18 +8,18 @@ namespace Labyrinth.Menu.Settings.UIElements {
 
         [SerializeField] private TMP_Dropdown _dropdown;
 
-        #region public methods
-        public void SetResolution(int resolutionIndex) {
-            Core.DisplayManager.Instance.CurrentResolution = _dropdown.captionText.text;
-        }
-        #endregion
 
         #region private methods
         private void Awake() {
             _dropdown.ClearOptions();
 
+            _dropdown.onValueChanged.AddListener((int _) => {
+                Core.DisplayManager.Instance.CurrentResolution = _dropdown.captionText.text;
+            });
+
             var availableResolutions = Core.DisplayManager.Instance.AvailableResolutions;
             _dropdown.AddOptions(availableResolutions);
+
             _dropdown.value = GetCurrentResolutionIndex(availableResolutions);
             _dropdown.RefreshShownValue();
         }

@@ -8,19 +8,18 @@ namespace Labyrinth.Menu.Settings.UIElements {
 
         [SerializeField] private TMP_Dropdown _dropdown;
 
-        #region public methods
-        public void SetRefreshRate(int refreshRateIndex) {
-            Core.DisplayManager.Instance.CurrentResolution = _dropdown.captionText.text;
-            _dropdown.Hide();
-        }
-        #endregion
-
         #region private methods
         private void Awake() {
             _dropdown.ClearOptions();
 
+            _dropdown.onValueChanged.AddListener((int _) => {
+                Core.DisplayManager.Instance.CurrentResolution = _dropdown.captionText.text;
+                _dropdown.Hide();
+            });
+
             var availableRefreshRates = Core.DisplayManager.Instance.AvailableRefreshRates;
             _dropdown.AddOptions(availableRefreshRates);
+
             _dropdown.value = GetCurrentRefreshRateIndex(availableRefreshRates);
             _dropdown.RefreshShownValue();
         }
