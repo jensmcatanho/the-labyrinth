@@ -23,6 +23,10 @@ namespace Labyrinth.Core {
 
         private readonly Dictionary<string, List<string>> _resolutionRefreshRatesMapping = new Dictionary<string, List<string>>();
 
+        [SerializeField] private int _vSync = 0;
+
+
+
         #region public fields
         public bool Fullscreen {
             get {
@@ -70,6 +74,16 @@ namespace Labyrinth.Core {
                 Screen.SetResolution(currentResolution.width, currentResolution.height, Instance.Fullscreen, value);
             }
         }
+        
+        public int VSyncCount {
+            get {
+                return QualitySettings.vSyncCount;
+            }
+
+            set {
+                QualitySettings.vSyncCount = value;
+            }
+        }
         #endregion
 
         #region private methods
@@ -83,6 +97,10 @@ namespace Labyrinth.Core {
 
                 _resolutionRefreshRatesMapping[resolutionString].Add(resolution.refreshRate.ToString());
             }
+        }
+
+        private void Update() {
+            _vSync = QualitySettings.vSyncCount;
         }
 
         private string ResolutionToString(Resolution resolution) {
