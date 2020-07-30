@@ -22,25 +22,20 @@ namespace Labyrinth.Core {
         #endregion
 
         #region public fields
-        public bool Fullscreen {
+        public FullScreenMode FullscreenMode {
             get {
-                return Screen.fullScreen;
+                return Screen.fullScreenMode;
             }
 
             set {
-                Screen.fullScreen = value;
+                var currentResolution = Screen.currentResolution;
+                Screen.SetResolution(currentResolution.width, currentResolution.height, value, Instance.CurrentRefreshRate);
             }
         }
 
         public List<string> AvailableResolutions {
             get {
                 return _resolutionRefreshRatesMapping.Keys.ToList();
-            }
-        }
-
-        public List<string> AvailableRefreshRates {
-            get {
-                return _resolutionRefreshRatesMapping[CurrentResolution];
             }
         }
 
@@ -54,7 +49,13 @@ namespace Labyrinth.Core {
                 var width = Convert.ToInt32(resolutionStringSplit[0]);
                 var height = Convert.ToInt32(resolutionStringSplit[1]);
 
-                Screen.SetResolution(width, height, Instance.Fullscreen);
+                Screen.SetResolution(width, height, Instance.FullscreenMode, Instance.CurrentRefreshRate);
+            }
+        }
+
+        public List<string> AvailableRefreshRates {
+            get {
+                return _resolutionRefreshRatesMapping[CurrentResolution];
             }
         }
 
@@ -65,7 +66,7 @@ namespace Labyrinth.Core {
 
             set {
                 var currentResolution = Screen.currentResolution;
-                Screen.SetResolution(currentResolution.width, currentResolution.height, Instance.Fullscreen, value);
+                Screen.SetResolution(currentResolution.width, currentResolution.height, Instance.FullscreenMode, value);
             }
         }
         

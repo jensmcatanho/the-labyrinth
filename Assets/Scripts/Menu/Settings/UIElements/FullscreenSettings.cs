@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 namespace Labyrinth.Menu.Settings.UIElements {
 
     public class FullscreenSettings : MonoBehaviour {
 
-        [SerializeField] private Toggle _toggle;
+        [SerializeField] private TMP_Dropdown _dropdown;
 
         #region private methods
         private void Awake() {
-            _toggle.isOn = Core.DisplayManager.Instance.Fullscreen;
-            _toggle.onValueChanged.AddListener((bool target) => {
-                Core.DisplayManager.Instance.Fullscreen = target;
+            _dropdown.onValueChanged.AddListener((int fullscreenMode) => {
+                Core.DisplayManager.Instance.FullscreenMode = (FullScreenMode)fullscreenMode;
             });
         }
         #endregion
